@@ -20,7 +20,7 @@
     <![endif]-->
 
       <!-- Add your site or application content here -->
-      <div ng-view=""></div>
+      <div ng-view="" class="container"></div>
     </div>
 
 
@@ -59,11 +59,29 @@
     <!-- endbower -->
     <!-- endbuild -->
 
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/about.js"></script>
-        <script src="scripts/controllers/trends.js"></script>
-        <!-- endbuild -->
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/about.js"></script>
+    <script src="scripts/controllers/trends.js"></script>
+    <script src="scripts/controllers/landing.js"></script>
+    <!-- endbuild -->
+
+    <script>
+
+      'use strict';
+
+      var layout={};
+
+      layout.body=document.getElementsByTagName('body')[0];
+
+      layout.setHeightFull = function() {
+        var windowHeight = window.innerHeight;
+        layout.body.style.height = windowHeight + 'px';
+      };
+
+      window.addEventListener('load',layout.setHeightFull,false);
+    
+    </script>
 </body>
 </html>
