@@ -15,6 +15,7 @@ angular.module('newYorkTimesApp')
       'Karma'
     ];
 
+  	//Manage animations on landing page 
   	function animate() {
   		var animation={};
 
@@ -22,10 +23,14 @@ angular.module('newYorkTimesApp')
   		animation.secTitle=document.getElementsByClassName('landing-title')[0].getElementsByTagName('h2')[0];
   		animation.discoverBtn=document.getElementsByClassName('landing-discover')[0];
 
-	   	animation.mainTitle.classList.add('fadeInUp');
+	   	animation.mainTitle.style.opacity = '0';
 	   	animation.secTitle.style.opacity = '0';
 	   	animation.discoverBtn.style.opacity = '0';
 	   	
+	   	setTimeout(function() { 
+	   		animation.mainTitle.classList.add('fadeInUp');
+	   	},300);
+
 	   	setTimeout(function() { 
 	   		animation.secTitle.classList.add('fadeInUp');
 	   	},500);
