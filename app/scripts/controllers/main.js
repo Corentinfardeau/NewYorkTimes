@@ -9,7 +9,7 @@
  */
 angular
     .module('newYorkTimesApp')
-    .controller('MainCtrl', ['NYTapi', function ($rootScope, $scope, $NYTapi) {
+    .controller('MainCtrl', function ($rootScope, $scope) {
 
         $rootScope.map = {
             control: {},
@@ -29,4 +29,4 @@ angular
 
         // Set fullscreen for map
         document.getElementsByClassName('angular-google-map-container')[0].style.height = window.innerHeight+'px';
-    }]);
+    });
