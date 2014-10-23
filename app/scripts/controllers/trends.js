@@ -7,7 +7,8 @@
  * # TrendsCtrl
  * Controller of the newYorkTimesApp
  */
-angular.module('newYorkTimesApp')
-  .controller('TrendsCtrl', function () {
+angular
+	.module('newYorkTimesApp')
+	.controller('TrendsCtrl', function () {
 
-  });
+	});

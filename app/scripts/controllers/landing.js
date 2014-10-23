@@ -7,21 +7,22 @@
  * # LandingCtrl
  * Controller of the newYorkTimesApp
  */
-angular.module('newYorkTimesApp')
-  .controller('LandingCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+angular
+	.module('newYorkTimesApp')
+	.controller('LandingCtrl', function ($scope) {
+	$scope.awesomeThings = [
+	  'HTML5 Boilerplate',
+	  'AngularJS',
+	  'Karma'
+	];
 
-  	//Manage animations on landing page 
-  	function animate() {
-  		var animation={};
+		//Manage animations on landing page 
+		function animate() {
+			var animation={};
 
-  		animation.mainTitle=document.getElementsByClassName('landing-title')[0].getElementsByTagName('h1')[0];
-  		animation.secTitle=document.getElementsByClassName('landing-title')[0].getElementsByTagName('h2')[0];
-  		animation.discoverBtn=document.getElementsByClassName('landing-discover')[0];
+			animation.mainTitle=document.getElementsByClassName('landing-title')[0].getElementsByTagName('h1')[0];
+			animation.secTitle=document.getElementsByClassName('landing-title')[0].getElementsByTagName('h2')[0];
+			animation.discoverBtn=document.getElementsByClassName('landing-discover')[0];
 
 	   	animation.mainTitle.style.opacity = '0';
 	   	animation.secTitle.style.opacity = '0';

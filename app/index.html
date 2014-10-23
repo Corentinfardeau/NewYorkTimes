@@ -48,6 +48,7 @@
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
@@ -56,6 +57,7 @@
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/lodash/dist/lodash.compat.js"></script>
+    <script src="bower_components/bluebird/js/browser/bluebird.js"></script>
     <script src="bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
@@ -66,7 +68,6 @@
     <script src="scripts/controllers/about.js"></script>
     <script src="scripts/controllers/trends.js"></script>
     <script src="scripts/services/user.js"></script>
-    <script src="scripts/services/nytapi.js"></script>
     <script src="scripts/services/appconfig.js"></script>
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/main.js"></script>
@@ -74,6 +75,8 @@
     <script src="scripts/controllers/trends.js"></script>
     <script src="scripts/controllers/landing.js"></script>
 
+    <script src="scripts/services/apinyt.js"></script>
+    <script src="scripts/services/googlemapsapi.js"></script>
     <!-- endbuild -->
 
     <script>

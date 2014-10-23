@@ -7,6 +7,8 @@
  * # AboutCtrl
  * Controller of the newYorkTimesApp
  */
-angular.module('newYorkTimesApp')
-  .controller('AboutCtrl', function () {
-  });
+angular
+	.module('newYorkTimesApp')
+	.controller('AboutCtrl', function () {
+		
+	});
