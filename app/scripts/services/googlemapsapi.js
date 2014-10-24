@@ -8,7 +8,7 @@
  * Service in the newYorkTimesApp.
  */
 angular.module('newYorkTimesApp')
-  .service('googlemapsapi', function googlemapsapi($http, $q) {
+  .service('googlemapsapi', function googlemapsapi($rootScope, $http) {
 	     
 	     /**
          * @ngdoc function
@@ -16,23 +16,33 @@ angular.module('newYorkTimesApp')
          * @methodOf core.Services.googlemapsapi
          * @return {object} Returns a promise object
          */
-  		this.geocode = function(adress) {
+  		this.geocode = function(address, articleId) {
 	        
-	        var deferred = $q.defer();
-
-	        $http.get('https://maps.googleapis.com/maps/api/geocode/json?address='+adress)
+	        $http.get('https://maps.googleapis.com/maps/api/geocode/json?address='+address)
 	            .success(function (data, status) {
 
-	                deferred.resolve(data, status);
+	                if(data.status === 'OK') {
+	                    //articles[key].locationCoordonates = data.results[0].geometry.location;
+
+	                    // MapMarker
+	                    var marker = {  
+	                        id : articleId,
+	                        latitude: data.results[0].geometry.location.lat,
+	                        longitude: data.results[0].geometry.location.lng,
+	                        //title: articles[key].headline.main,
+	                        icon: {
+						      path: google.maps.SymbolPath.CIRCLE,
+						      scale: 3
+						    }
+	                    };
+
+	                    $rootScope.markers.push(marker);
+	                }
 
 	            })
 	            .error(function (data, status) {
 
-	                deferred.resolve(data, status);
-
 	            });
-
-	        return deferred.promise;
 
 	 };
 

@@ -7,8 +7,9 @@
  * # apinyt
  * Service in the newYorkTimesApp.
  */
-angular.module('newYorkTimesApp')
-  .service('apinyt', function apinyt($rootScope, $http, $q) {
+angular
+    .module('newYorkTimesApp')
+    .service('apinyt', function apinyt($rootScope, $http, $q) {
 	 
 	 /**
      * @ngdoc function
@@ -18,25 +19,25 @@ angular.module('newYorkTimesApp')
      */
 	this.getArticles = function(keyword, page) {
 	        
-	        var deferred = $q.defer();
+        var deferred = $q.defer();
 
-	        var key = keyword ? ('fq='+keyword+'&') : '';
-	        var p = page ? ('&page='+page) : '';
-	        var url = 'http://api.nytimes.com/svc/search/v2/articlesearch.json?'+key+'api-key=sample-key'+p;
+        var key = keyword ? ('fq='+keyword+'&') : '';
+        var p = page ? ('&page='+page) : '';
+        var url = 'http://api.nytimes.com/svc/search/v2/articlesearch.json?'+key+'api-key=sample-key'+p;
 
-	        $http.get(url)
-	            .success(function (data, status) {
+        $http.get(url)
+            .success(function (data, status) {
 
-	                deferred.resolve(data, status);
+                deferred.resolve(data, status);
 
-	            })
-	            .error(function (data, status) {
+            })
+            .error(function (data, status) {
 
-	                deferred.resolve(data, status);
+                deferred.resolve(data, status);
 
-	            });
+            });
 
-	        return deferred.promise;
+        return deferred.promise;
 
 	 };
 
