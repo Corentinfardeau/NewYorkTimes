@@ -32,7 +32,7 @@ angular.module('newYorkTimesApp')
 	                        //title: articles[key].headline.main,
 	                        icon: {
 						      path: google.maps.SymbolPath.CIRCLE,
-						      scale: 3
+						      scale: 4
 						    }
 	                    };
 

@@ -22,14 +22,14 @@
 				c34.002,0,65.596-10.492,91.729-28.398L426.558,467.17L465.914,427.814z M61.658,174.687c0-63.399,51.579-114.979,114.978-114.979
 				c63.401,0,114.98,51.579,114.98,114.979c0,63.399-51.579,114.979-114.98,114.979C113.236,289.666,61.658,238.086,61.658,174.687z"/>
 		</svg>
-		<input type="search" placeholder="Keywords..." name="search_keyword">
+		<input ng-model='keywords' type="search" placeholder="Keywords..." name="search_keyword">
 	</div>
 </div>
 
-<div class="sidebar-right">
-	<a href="#" id="btn-close" class="btn-close"><span>×</span></a>
-	<div class="img-container">
-		<img src="../images/photo.jpg" alt="une photo">
+<div ng-show="currentArticle" class="sidebar-right">
+	<a  href='#' ng-click="hideArticle" id="btn-close" class="btn-close"><span>×</span></a>
+	<div ng-show="currentArticle.multimedia" class="img-container">
+		<img src="http://www.nytimes.com/{{currentArticle.multimedia[1].url}}" alt="une photo">
 		<div>
 			<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 				 viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
@@ -39,20 +39,19 @@
 					L255.05,7z M255.05,107.848c-30.123,0-54.543,24.42-54.543,54.541s24.42,54.541,54.543,54.541s54.541-24.418,54.541-54.541
 					S285.173,107.848,255.05,107.848L255.05,107.848z"/>
 			</svg>
-			<span>Jersey city, United States</span>
+			<span>{{currentArticle.location}}</span>
 		</div>
 	</div>
 	<article>
 		<header>
-			<span class="article-category">Health</span>
-			<span class="article-date">OCT. 23, 2014</span>
-			<span class="article-hour">8:36 pm</span>
-			<h2>Doctor in New York City Is Sick With Ebola</h2>
+			<span class="article-category">{{currentArticle.news_desk}}</span>
+			<span class="article-date">{{currentArticle.pub_date}}</span>
+			<h2>{{currentArticle.headline.main}}</h2>
 		</header>
 		<p>
-			A doctor in New York City who recently returned from treating Ebola patients in Guinea became the first person in the city to test positive for the virus Thursday, setting off a search for anyone who might have come into contact with him.
+			{{currentArticle.lead_paragraph}}
 		</p>
-		<a href="#" class="btn">Read more</a>
+		<a href="{{currentArticle.web_url}}" class="btn">Read more</a>
 		<a href="#" class="btn">
 			Save to mobile
 			<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -68,19 +67,11 @@
 	</article>
 </div>
 
-<div class="popup">
-	<div>
-		<img src="../images/photo.jpg" alt="une photo">
-	</div>
-	<div>
-		<span>3 Minutes ago</span>
-		<h2>Doctor in New York City Is Sick With Ebola</h2>
-	</div>
-</div>
+
 
 <ui-gmap-google-map center="map.center" zoom="map.zoom" control="map.control" options="map.options" bounds="map.bounds">
 	<ui-gmap-markers models="markers" coords="'self'" icon="'icon'" click="showArticle">
-        </ui-gmap-markers>
+    </ui-gmap-markers>
 </ui-gmap-google-map>
 
 <div class="infobar-bottom">

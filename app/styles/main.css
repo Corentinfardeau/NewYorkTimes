@@ -59,14 +59,18 @@ Global
 
 \* ------------------------------------------------------------------ */
 
+@import url(http://fonts.googleapis.com/css?family=Domine:400,700|Open+Sans:400,600,300);
+
 body {
-    font-family: 'DIN Alternate';
+    font-family: 'Open Sans', sans-serif;
     height: 100%;
     position:relative;
     height: 100%;
     max-height: 100%;
     min-width: 960px;
     overflow: hidden;
+    font-size:.8rem;
+    -webkit-font-smoothing: subpixel-antialiased;
 }
 
 .container {
@@ -159,7 +163,7 @@ a {
 
 .img-container div {
   position: absolute;
-  bottom: 3px;
+  bottom: 2px;
   left: 0;
   right: 0;
   padding: 10px 20px;
@@ -264,10 +268,6 @@ Home
   position: relative;
   z-index: 999;
   background: #fff;
-  -moz-box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.2);
-  -webkit-box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.2);
-  filter:progid:DXImageTransform.Microsoft.Shadow(color=rgba(0, 0, 0, 0.2), Direction=180, Strength=10);
 }
 
 .searchbar-top-logo {
@@ -344,10 +344,6 @@ Home
   bottom: 0;
   right: 0;
   z-index: 997;
-  -moz-box-shadow: -3px 0px 5px 0px rgba(0, 0, 0, 0.2);
-  -webkit-box-shadow: -3px 0px 5px 0px rgba(0, 0, 0, 0.2);
-  box-shadow: -3px 0px 5px 0px rgba(0, 0, 0, 0.2);
-  filter:progid:DXImageTransform.Microsoft.Shadow(color=rgba(0, 0, 0, 0.2), Direction=180, Strength=5);
 }
 
 .sidebar-right article {
@@ -355,9 +351,15 @@ Home
 }
 
 .sidebar-right article header h2{
-  color: #5e5e5e;
-  font-size: 18px;
+  color: #000;
   margin: 10px 0;
+  font-size: 1.2rem;
+  line-height: 1.3rem;
+  font-weight: 700;
+  font-style: italic;
+  font-family: 'Domine',georgia,times,serif;
+  letter-spacing: .01em;
+  word-spacing: -.1em;
 }
 
 .sidebar-right article header span{
@@ -381,10 +383,6 @@ Home
   left: 400px;
   z-index: 996;
   font-size: 12px;
-  -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.4);
-  -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.4);
-  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.4);
-  filter:progid:DXImageTransform.Microsoft.Shadow(color=rgba(0,0,0,0.4), Direction=NaN, Strength=10);
 }
 
 .popup:after {
@@ -435,21 +433,16 @@ Home
 /*---   Info bar bottom   ---*/
 
 .infobar-bottom {
-  height: 150px;
+  height: 120px;
   width: 100%;
-  padding: 30px;
-  background: #242424;
+  padding: 15px;
+  background: #000;
   color: #fff;
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   z-index: 996;
-  -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.4);
-  -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.4);
-  -o-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.4);
-  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.4);
-  filter:progid:DXImageTransform.Microsoft.Shadow(color=rgba(0,0,0,0.4), Direction=NaN, Strength=10);
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;  
   box-sizing: border-box; 
@@ -463,8 +456,10 @@ Home
 
 .infobar-bottom h3 {
   display: block;
-  text-transform: uppercase;
-  margin-bottom: 20px;
+  font-family: 'Domine';
+  font-weight: 700;
+  font-style: italic;
+  margin-bottom: 10px;
 }
 
 .infobar-bottom h3 a {
