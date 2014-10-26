@@ -66,7 +66,8 @@ Global
 @import url(http://fonts.googleapis.com/css?family=Domine:400,700|Open+Sans:400,600,300);
 
 body {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'DIN alternate', sans-serif;
+    font-weight:100;
 }
 
 .desktop{
@@ -228,6 +229,7 @@ Landing page
 }
 
 .landing .landing-title h2 {
+    text-transform:uppercase;
     color: #818181;
 }
 
@@ -268,7 +270,7 @@ Home
 
 /*---   Search bar top   ---*/
 
-.searchbar-top {
+.topBar {
   height: 50px;
   width: 100%;
   position: relative;
@@ -276,25 +278,25 @@ Home
   background: #fff;
 }
 
-.searchbar-top-logo {
+.topBar .logo {
   height: 100%;
   width: 50px;
   background: #000;
   display: inline-block;
 }
 
-.searchbar-top-logo svg{
+.topBar .logo svg{
   height: 25px;
   margin: 12.5px;
 }
 
-.searchbar-top-search {
+.topBar .search {
   height: 100%;
   display: inline-block;
   vertical-align: top;
 }
 
-.searchbar-top-search input[type='search'] {
+.topBar .search input[type='search'] {
   height: 100%;
   vertical-align: top;
   border: none;
@@ -305,7 +307,7 @@ Home
    -webkit-appearance: none !important;
 }
 
-.searchbar-top-search svg {
+.topBar .search svg {
   height: 20px;
   margin: 15px 5px 15px 15px;
 }
@@ -333,6 +335,7 @@ Home
   -webkit-transition: all .2s; 
   -moz-transition:    all .2s; 
   transition:         all .2s;
+  cursor:pointer;
 }
 
 .btn-close:hover span{
@@ -341,7 +344,7 @@ Home
     -moz-transform: rotate(90deg);
 }
 
-.sidebar-right {
+aside-article {
   height: 100%;
   width: 300px;
   background: #fff;
@@ -350,13 +353,23 @@ Home
   bottom: 0;
   right: 0;
   z-index: 997;
+  -webkit-transform-style: preserve-3d;
+  animation: sidebareffect .5s;
+  -webkit-animation: sidebareffect .5s;
+  -webkit-transform: translateZ(0);
 }
 
-.sidebar-right article {
+aside-article.hidden {
+  animation: sidebareffect2 .5s;
+  -webkit-animation: sidebareffect2 .5s;
+  -webkit-transform: translate(100%, 0);
+}
+
+aside-article article {
   padding: 20px;
 }
 
-.sidebar-right article header h2{
+aside-article article header h2{
   color: #000;
   margin: 10px 0;
   font-size: 1.2rem;
@@ -368,7 +381,7 @@ Home
   word-spacing: -.1em;
 }
 
-.sidebar-right article header span{
+aside-article article header span{
   color: #9a9a9a;
   font-size: 12px;
   text-transform: uppercase;
@@ -462,9 +475,7 @@ Home
 
 .infobar-bottom h3 {
   display: block;
-  font-family: 'Domine';
   font-weight: 700;
-  font-style: italic;
   margin-bottom: 10px;
 }
 
@@ -486,14 +497,14 @@ Home
   width: 10px;
   height: 10px;
   background: none;
-  border: 2px solid #3386a8;
+  border: 1px solid #e4ff00;
   border-radius: 50%;
   margin-right: 2px;
-  margin-bottom: -2px;
+
 }
 
 .section-dot-full {
-  background: #3386a8;
+  background: #e4ff00;
 }
 
 .infobar-bottom-popular {
@@ -690,6 +701,26 @@ Animations
 .fadeOutDown {
   -webkit-animation-name: fadeOutDown;
           animation-name: fadeOutDown;
+}
+
+@-webkit-keyframes sidebareffect {
+  from {
+    -webkit-transform: translate(100%, 0);
+  }
+
+  to {
+    -webkit-transform: translate(0, 0);
+  }
+}
+
+@-webkit-keyframes sidebareffect2 {
+  from {
+    -webkit-transform: translate(0, 0);
+  }
+
+  to {
+    -webkit-transform: translate(100%, 0);
+  }
 }
 
 /* ------------------------------------------------------------------ *\

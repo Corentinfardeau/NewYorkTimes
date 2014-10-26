@@ -32,7 +32,8 @@ angular.module('newYorkTimesApp')
 	                        //title: articles[key].headline.main,
 	                        icon: {
 						      path: google.maps.SymbolPath.CIRCLE,
-						      scale: 4
+						      scale: 4,
+						      strokeColor: '#FFF'
 						    }
 	                    };
 
