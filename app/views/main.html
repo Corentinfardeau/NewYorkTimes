@@ -22,7 +22,9 @@
 				c34.002,0,65.596-10.492,91.729-28.398L426.558,467.17L465.914,427.814z M61.658,174.687c0-63.399,51.579-114.979,114.978-114.979
 				c63.401,0,114.98,51.579,114.98,114.979c0,63.399-51.579,114.979-114.98,114.979C113.236,289.666,61.658,238.086,61.658,174.687z"/>
 		</svg>
-		<input ng-model='keywords' type="search" placeholder="Keywords..." name="search_keyword">
+		<form ng-submit="submit()">
+			<input ng-model='keywords' type="search" placeholder="Keywords..." [name="search_keyword"]>
+		</form>
 	</div>
 </div>
 
