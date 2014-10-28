@@ -10,13 +10,8 @@
 angular
 	.module('newYorkTimesApp')
 	.controller('LandingCtrl', function ($scope) {
-	$scope.awesomeThings = [
-	  'HTML5 Boilerplate',
-	  'AngularJS',
-	  'Karma'
-	];
 
-		//Manage animations on landing page 
+		//Manage animations on landing page
 		function animate() {
 			var animation={};
 
@@ -27,16 +22,16 @@ angular
 	   	animation.mainTitle.style.opacity = '0';
 	   	animation.secTitle.style.opacity = '0';
 	   	animation.discoverBtn.style.opacity = '0';
-	   	
-	   	setTimeout(function() { 
+
+	   	setTimeout(function() {
 	   		animation.mainTitle.classList.add('fadeInUp');
 	   	},300);
 
-	   	setTimeout(function() { 
+	   	setTimeout(function() {
 	   		animation.secTitle.classList.add('fadeInUp');
 	   	},500);
 
-	   	setTimeout(function() { 
+	   	setTimeout(function() {
 	   		animation.discoverBtn.classList.add('fadeIn');
 	   	},1000);
 	}
@@ -44,8 +39,3 @@ angular
 	$scope.$on('$viewContentLoaded', animate);
 
   });
-
-
-
-
-

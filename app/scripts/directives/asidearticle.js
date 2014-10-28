@@ -13,12 +13,10 @@ angular.module('newYorkTimesApp')
       restrict: 'E',
       link: function() {
             document.querySelector('aside-article').classList.add('hidden');
-            var btnClose = document.querySelector('aside-article .btn-close');
-            btnClose.addEventListener('click', function(e){
+            document.querySelector('aside-article .btn-close').addEventListener('click', function(e){
                 e.preventDefault();
                 document.querySelector('aside-article').classList.add('hidden');
             }, false);
-
       }
     };
   });

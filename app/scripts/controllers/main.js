@@ -27,7 +27,7 @@ angular
             zoom: 3,
             minZoom: 3,
             options: {
-                styles:[{'featureType':'water','elementType':'geometry','stylers':[{'color':'#000000'},{'lightness':17}]},{'featureType':'landscape','elementType':'geometry','stylers':[{'color':'#000000'},{'lightness':20}]},{'featureType':'road.highway','elementType':'geometry.fill','stylers':[{'color':'#000000'},{'lightness':17}]},{'featureType':'road.highway','elementType':'geometry.stroke','stylers':[{'color':'#000000'},{'lightness':29},{'weight':0.2}]},{'featureType':'road.arterial','elementType':'geometry','stylers':[{'color':'#000000'},{'lightness':18}]},{'featureType':'road.local','elementType':'geometry','stylers':[{'color':'#000000'},{'lightness':16}]},{'featureType':'poi','elementType':'geometry','stylers':[{'color':'#000000'},{'lightness':21}]},{'elementType':'labels.text.stroke','stylers':[{'visibility':'on'},{'color':'#000000'},{'lightness':16}]},{'elementType':'labels.text.fill','stylers':[{'saturation':36},{'color':'#000000'},{'lightness':40}]},{'elementType':'labels.icon','stylers':[{'visibility':'off'}]},{'featureType':'transit','elementType':'geometry','stylers':[{'color':'#000000'},{'lightness':19}]},{'featureType':'administrative','elementType':'geometry.fill','stylers':[{'color':'#000000'},{'lightness':20}]},{'featureType':'administrative','elementType':'geometry.stroke','stylers':[{'color':'#000000'},{'lightness':17},{'weight':1.2}]}],
+                styles:[{'featureType':'water','elementType':'all','stylers':[{'hue':'#e9ebed'},{'saturation':-78},{'lightness':67},{'visibility':'simplified'}]},{'featureType':'landscape','elementType':'all','stylers':[{'hue':'#ffffff'},{'saturation':-100},{'lightness':100},{'visibility':'simplified'}]},{'featureType':'road','elementType':'geometry','stylers':[{'hue':'#bbc0c4'},{'saturation':-93},{'lightness':31},{'visibility':'simplified'}]},{'featureType':'poi','elementType':'all','stylers':[{'hue':'#ffffff'},{'saturation':-100},{'lightness':100},{'visibility':'off'}]},{'featureType':'road.local','elementType':'geometry','stylers':[{'hue':'#e9ebed'},{'saturation':-90},{'lightness':-8},{'visibility':'simplified'}]},{'featureType':'transit','elementType':'all','stylers':[{'hue':'#e9ebed'},{'saturation':10},{'lightness':69},{'visibility':'on'}]},{'featureType':'administrative.locality','elementType':'all','stylers':[{'hue':'#2c2e33'},{'saturation':7},{'lightness':19},{'visibility':'on'}]},{'featureType':'road','elementType':'labels','stylers':[{'hue':'#bbc0c4'},{'saturation':-93},{'lightness':31},{'visibility':'on'}]},{'featureType':'road.arterial','elementType':'labels','stylers':[{'hue':'#bbc0c4'},{'saturation':-93},{'lightness':-2},{'visibility':'simplified'}]}],
                 panControl:false,
                 scaleControl:false,
                 zoomControl:false,
@@ -75,14 +75,15 @@ angular
                                                 if( v.name==='glocations' ) {
                                                     if(c === 0) {
                                                         value.location = v.value;
+                                                        value.pub_date = value.pub_date.split('T')[0];
                                                         $scope.articles[value._id] = value;
                                                         googlemapsapi.geocode(value.location, value._id);
                                                     }
                                                     else {
                                                         var clone = value.slice();
                                                         clone.location = v.value;
+                                                        clone.pub_date = clone.pub_date.split('T')[0];
                                                         googlemapsapi.geocode(clone.location, clone._id);
-
                                                     }
                                                     c++;
                                                 }
@@ -107,7 +108,7 @@ angular
                             });
                     page++;
 
-                    }, 150, count);
+                    }, 200, count);
 
 
 
@@ -117,6 +118,13 @@ angular
         }); 
         };
 
-        search('Ebola');
+        search('');
+
+        $scope.searchArticles = function(){
+            document.querySelector('aside-article').classList.add('hidden');
+            $scope.articles = [];
+            $rootScope.markers = [];
+            search($scope.keywords);
+        };
 
 });

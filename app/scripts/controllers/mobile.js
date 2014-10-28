@@ -8,5 +8,6 @@
  * Controller of the newYorkTimesApp
  */
 angular.module('newYorkTimesApp')
-  .controller('MobileCtrl', function ($scope) {
+  .controller('MobileCtrl', function () {
+	  
   });

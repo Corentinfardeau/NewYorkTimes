@@ -19,29 +19,21 @@ angular.module('newYorkTimesApp')
   		this.geocode = function(address, articleId) {
 	        
 	        $http.get('https://maps.googleapis.com/maps/api/geocode/json?address='+address)
-	            .success(function (data, status) {
+	            .success(function (data) {
 
 	                if(data.status === 'OK') {
-	                    //articles[key].locationCoordonates = data.results[0].geometry.location;
 
-	                    // MapMarker
 	                    var marker = {  
 	                        id : articleId,
 	                        latitude: data.results[0].geometry.location.lat,
 	                        longitude: data.results[0].geometry.location.lng,
-	                        //title: articles[key].headline.main,
-	                        icon: {
-						      path: google.maps.SymbolPath.CIRCLE,
-						      scale: 4,
-						      strokeColor: '#FFF'
-						    }
 	                    };
 
 	                    $rootScope.markers.push(marker);
 	                }
 
 	            })
-	            .error(function (data, status) {
+	            .error(function () {
 
 	            });
 

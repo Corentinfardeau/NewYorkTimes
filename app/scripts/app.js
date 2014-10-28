@@ -48,3 +48,17 @@ angular
         redirectTo: '/'
       });
   });
+
+// UI
+// 
+
+var layout={};
+
+layout.body=document.querySelector('body');
+
+layout.setHeightFull = function() {
+  var windowHeight = window.innerHeight;
+  layout.body.style.height = windowHeight + 'px';
+};
+
+window.addEventListener('load',layout.setHeightFull,false);

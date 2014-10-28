@@ -74,23 +74,5 @@
     <script src="scripts/directives/asidearticle.js"></script>
     <!-- endbuild -->
 
-    <script>
-
-      'use strict';
-
-      var layout={};
-
-      layout.body=document.getElementsByTagName('body')[0];
-
-      layout.setHeightFull = function() {
-        var windowHeight = window.innerHeight;
-        layout.body.style.height = windowHeight + 'px';
-      };
-
-      window.addEventListener('load',layout.setHeightFull,false);
-    
-    </script>
-
-
 </body>
 </html>

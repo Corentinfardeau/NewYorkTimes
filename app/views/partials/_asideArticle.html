@@ -22,7 +22,10 @@
 	<p>
 		{{currentArticle.lead_paragraph}}
 	</p>
-	<a href="{{currentArticle.web_url}}" class="btn">Read more</a>
+	<p>
+		{{currentArticle.byline.original}}
+	</p>
+	<a ng-show='currentArticle.web_url' target='_blank' href="{{currentArticle.web_url}}" class="btn">Read more</a>
 	<a href="#" class="btn">
 		Save to mobile
 		<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
