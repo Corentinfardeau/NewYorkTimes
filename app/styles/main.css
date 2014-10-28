@@ -276,6 +276,9 @@ Home
   position: relative;
   z-index: 999;
   background: #fff;
+  -webkit-box-shadow: 1px 1px 8px rgba(102,102,102,.3);
+  -moz-box-shadow: 1px 1px 8px rgba(102,102,102,.3);
+  box-shadow: 1px 1px 8px rgba(102,102,102,.3);
 }
 
 .topBar .logo {
@@ -294,6 +297,12 @@ Home
   height: 100%;
   display: inline-block;
   vertical-align: top;
+}
+
+.topBar form {
+  height: 100%;
+  vertical-align: top;
+  display: inline-block;
 }
 
 .topBar .search input[type='search'] {
@@ -353,10 +362,14 @@ aside-article {
   bottom: 0;
   right: 0;
   z-index: 997;
+  overflow: scroll;
   -webkit-transform-style: preserve-3d;
   animation: sidebareffect .5s;
   -webkit-animation: sidebareffect .5s;
   -webkit-transform: translateZ(0);
+  -webkit-box-shadow: 4px 0 6px 1px rgba(0,0,0,.1);
+  -moz-box-shadow: 4px 0 6px 1px rgba(0,0,0,.1);
+  box-shadow: 4px 0 6px 1px rgba(0,0,0,.1);
 }
 
 aside-article.hidden {
@@ -804,3 +817,6 @@ Mobile
   text-overflow: ellipsis;
 }
 
+#loading-bar .bar {
+  display: none;
+}
