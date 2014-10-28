@@ -12,10 +12,10 @@ angular.module('newYorkTimesApp')
       templateUrl: 'views/partials/_asideArticle.html',
       restrict: 'E',
       link: function() {
-            document.querySelector('aside-article').classList.add('hidden');
+            document.querySelector('aside-article').classList.toggle('hidden');
             document.querySelector('aside-article .btn-close').addEventListener('click', function(e){
                 e.preventDefault();
-                document.querySelector('aside-article').classList.add('hidden');
+                document.querySelector('aside-article').classList.toggle('hidden');
             }, false);
       }
     };
