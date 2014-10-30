@@ -293,16 +293,11 @@ Home
   margin: 12.5px;
 }
 
-.topBar .search {
+.topBar .search,
+.topBar form {
   height: 100%;
   display: inline-block;
   vertical-align: top;
-}
-
-.topBar form {
-  height: 100%;
-  vertical-align: top;
-  display: inline-block;
 }
 
 .topBar .search input[type='search'] {
