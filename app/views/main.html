@@ -37,28 +37,10 @@
 
 <div class="infobar-bottom">
 	<div class="infobar-bottom-sections">
-		<h3>Sections</h3>
-		<ul>
-			<li><a href="#"> <span class="section-dot"></span> Sports </a></li>
-			<li><a href="#"> <span class="section-dot section-dot-full"></span> Healt </a></li>
-			<li><a href="#"> <span class="section-dot"></span> Technology </a></li>
-			<li><a href="#"> <span class="section-dot"></span> Politics </a></li>
-			<li><a href="#"> <span class="section-dot"></span> Economy </a></li>
-			<li><a href="#"> <span class="section-dot"></span> Opinion </a></li>
-		</ul>
+		<h3>Filter by sections :</h3>
+		<form>
+			<span ng-click='sectionsManage()' ng-repeat='section in sections'><input type="checkbox" checked> {{section}}</li>
+		</form>
 	</div>
 
-	<div class="infobar-bottom-popular">
-		<h3>Most popular today <a href="#">View more</a> </h3>
-		<article>
-			A doctor in New York City who recently returned from treating Ebola patients in Guinea became the first person in the city to test positive for the virus Thursday, setting off a search for anyone who might have come into contact with him.
-		</article>
-	</div>
-
-	<div class="infobar-bottom-popular">
-		<h3>Most Shared today <a href="#">View more</a> </h3>
-		<article>
-			A doctor in New York City who recently returned from treating Ebola patients in Guinea became the first person in the city to test positive for the virus Thursday, setting off a search for anyone who might have come into contact with him.
-		</article>
-	</div>
 </div>

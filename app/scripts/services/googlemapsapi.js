@@ -16,7 +16,7 @@ angular.module('newYorkTimesApp')
          * @methodOf core.Services.googlemapsapi
          * @return {object} Returns a promise object
          */
-  		this.geocode = function(address, articleId) {
+  		this.geocode = function(address, section, articleId) {
 	        
 	        $http.get('https://maps.googleapis.com/maps/api/geocode/json?address='+address)
 	            .success(function (data) {
@@ -27,6 +27,7 @@ angular.module('newYorkTimesApp')
 	                        id : articleId,
 	                        latitude: data.results[0].geometry.location.lat,
 	                        longitude: data.results[0].geometry.location.lng,
+	                        section:section
 	                    };
 
 	                    $rootScope.markers.push(marker);
@@ -36,6 +37,7 @@ angular.module('newYorkTimesApp')
 	            .error(function () {
 
 	            });
+
 
 	 };
 

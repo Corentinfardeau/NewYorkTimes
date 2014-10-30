@@ -11,16 +11,11 @@ angular
     .module('newYorkTimesApp')
     .controller('MainCtrl', function ($rootScope, $scope, $http, $interval, googlemapsapi, apinyt) {
 
-        var keyword = 'ebola';
-
         // Search submit by hit enter key
         $scope.submit = function() { 
-
-            keyword = $scope.keywords;
             $scope.articles = [];
             $rootScope.markers = [];
-
-            search(keyword);
+            search($scope.keywords);
         };
 
         // Error message
@@ -28,6 +23,7 @@ angular
 
         $scope.articles = [];
         $rootScope.markers = [];
+        $scope.sections = [];
 
         // Set the map
         $rootScope.map = {
@@ -42,23 +38,23 @@ angular
                 styles:[{'featureType':'water','elementType':'all','stylers':[{'hue':'#e9ebed'},{'saturation':-78},{'lightness':67},{'visibility':'simplified'}]},{'featureType':'landscape','elementType':'all','stylers':[{'hue':'#ffffff'},{'saturation':-100},{'lightness':100},{'visibility':'simplified'}]},{'featureType':'road','elementType':'geometry','stylers':[{'hue':'#bbc0c4'},{'saturation':-93},{'lightness':31},{'visibility':'simplified'}]},{'featureType':'poi','elementType':'all','stylers':[{'hue':'#ffffff'},{'saturation':-100},{'lightness':100},{'visibility':'off'}]},{'featureType':'road.local','elementType':'geometry','stylers':[{'hue':'#e9ebed'},{'saturation':-90},{'lightness':-8},{'visibility':'simplified'}]},{'featureType':'transit','elementType':'all','stylers':[{'hue':'#e9ebed'},{'saturation':10},{'lightness':69},{'visibility':'on'}]},{'featureType':'administrative.locality','elementType':'all','stylers':[{'hue':'#2c2e33'},{'saturation':7},{'lightness':19},{'visibility':'on'}]},{'featureType':'road','elementType':'labels','stylers':[{'hue':'#bbc0c4'},{'saturation':-93},{'lightness':31},{'visibility':'on'}]},{'featureType':'road.arterial','elementType':'labels','stylers':[{'hue':'#bbc0c4'},{'saturation':-93},{'lightness':-2},{'visibility':'simplified'}]}],
                 scaleControl:false,
                 zoomControl:false,
-                streetViewControl:false
+                streetViewControl:false,
+                panControl:false,
+                disableDefaultUI: true
             }
         };
-
 
         $scope.showArticle = function(e){
             $scope.currentArticle = $scope.articles[e.key];
             document.querySelector('aside-article').classList.remove('hidden');
-        };
-
+        };      
         // Set fullscreen for map
         document.getElementsByClassName('angular-google-map-container')[0].style.height = window.innerHeight+'px';
         
         var search = function(keywords) {
 
         var search = keywords ? keywords : '';
-        var requestsLimit = 30;
+        var requestsLimit = 15;
 
         apinyt
         .getNbArticles(search)
@@ -81,6 +77,10 @@ angular
                                         
                                         angular.forEach(data.response.docs, function(value){
 
+                                            if($scope.sections.indexOf(value.section_name) === -1) {
+                                                $scope.sections.push(value.section_name);
+                                            }
+
                                             angular.forEach(value.keywords, function(v){
                                                 var c = 0;
                                                 if( v.name==='glocations' ) {
@@ -88,13 +88,13 @@ angular
                                                         value.location = v.value;
                                                         value.pub_date = value.pub_date.split('T')[0];
                                                         $scope.articles[value._id] = value;
-                                                        googlemapsapi.geocode(value.location, value._id);
+                                                        googlemapsapi.geocode(value.location, value.section_name, value._id);
                                                     }
                                                     else {
                                                         var clone = value.slice();
                                                         clone.location = v.value;
                                                         clone.pub_date = clone.pub_date.split('T')[0];
-                                                        googlemapsapi.geocode(clone.location, clone._id);
+                                                        googlemapsapi.geocode(clone.location, value.section_name, clone._id);
                                                     }
                                                     c++;
                                                 }
@@ -121,8 +121,6 @@ angular
 
                     }, 300, count);
 
-
-
             } else {
                 $rootScope.errorMessage = 'Sorry, the server doesnt respond.';
             }
@@ -134,7 +132,12 @@ angular
         $scope.searchArticles = function(){
             document.querySelector('aside-article').classList.add('hidden');
             $scope.articles = [];
+            $scope.sections.length = 0;
             $rootScope.markers = [];
             search($scope.keywords);
         };
+
+        $scope.sectionsManage = function() {
+        };
+
 });
