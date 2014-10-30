@@ -11,8 +11,6 @@ angular
     .module('newYorkTimesApp')
     .controller('MainCtrl', function ($rootScope, $scope, $http, $interval, googlemapsapi, apinyt) {
 
-        var keyword = 'ebola';
-
         // Search submit by hit enter key
         $scope.submit = function() { 
 
@@ -49,7 +47,16 @@ angular
 
         $scope.showArticle = function(e){
             $scope.currentArticle = $scope.articles[e.key];
-            document.querySelector('aside-article').classList.remove('hidden');
+            document.querySelector('aside-article').classList.toggle('hidden');
+            
+        };
+
+        $scope.showPopUp = function(e){
+            $scope.currentArticle = $scope.articles[e.key];
+            document.querySelector('.popup').classList.remove('hidden');
+            document.querySelector('.popup').style.left = '0px';
+            document.querySelector('.popup').style.top = '0px';
+            console.log(e);
         };
 
         // Set fullscreen for map
@@ -137,4 +144,5 @@ angular
             $rootScope.markers = [];
             search($scope.keywords);
         };
+
 });

@@ -403,6 +403,10 @@ aside-article article header span{
 
 /*---   Popup   ---*/
 
+.popup.hidden{
+  display: none;
+}
+
 .popup {
   position: relative;
   width: 200px;
@@ -743,8 +747,8 @@ Mobile
 \* ------------------------------------------------------------------ */
 
 #mobile{
-  width: 100%;
   background-color: #ebebeb;
+  overflow-x: hidden;
 }
 
 #mobile-header{
@@ -783,11 +787,18 @@ Mobile
   bottom: 1px;
 }
 
+.card-container{
+  position: relative;
+  overflow-x :hidden;
+  margin: 20px 0;
+  -webkit-transition: all 0.2s ease-out; 
+  transition: all 0.2s ease-out;
+}
+
 .card{
   width: 100%;
   height: 100px;
   background-color:#fff; 
-  margin: 20px 0;
 }
 
 .card h1{
@@ -815,6 +826,33 @@ Mobile
   padding: 10px;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.remove-card{
+  width:100%;
+  height:100px;
+  background-color: #2D2D2D;
+  position: absolute;
+  top: 0px;
+  left: 100%;
+  margin-left: 20px;
+  line-height: 100px;
+}
+
+.remove-card svg{
+  position: relative;
+  left: 20px;
+  opacity: 0;
+}
+
+.remove-card--effect{
+    -webkit-transition-duration: 0.2s; /* Safari */
+    transition-duration: 0.2s;
+}
+
+.smoothEffect{
+    -webkit-transition-duration: 0.3s; /* Safari */
+    transition-duration: 0.3s;
 }
 
 #loading-bar .bar {
