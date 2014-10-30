@@ -349,7 +349,8 @@ Home
 }
 
 aside-article {
-  height: 100%;
+  height: calc(100%-50px);
+  overflow-x: scroll;
   width: 300px;
   background: #fff;
   position: absolute;
@@ -357,7 +358,6 @@ aside-article {
   bottom: 0;
   right: 0;
   z-index: 997;
-  overflow: scroll;
   -webkit-transform-style: preserve-3d;
   animation: sidebareffect .5s;
   -webkit-animation: sidebareffect .5s;
@@ -461,8 +461,9 @@ aside-article article header span{
 
 .infobar-bottom {
   height: 120px;
-  width: 100%;
-  padding: 15px;
+  max-height: 120px;
+  min-width: 100%;
+  overflow-y: hidden;
   background: #000;
   color: #fff;
   position: absolute;
@@ -477,7 +478,6 @@ aside-article article header span{
 
 .infobar-bottom > div {
   display: inline-block;
-  width: 33%;
   vertical-align: top;
 }
 
@@ -492,6 +492,11 @@ aside-article article header span{
   color: #e4ff00;
   font-size: 11px;
   margin-left: 5px;
+}
+
+.infobar-bottom-sections {
+  padding: 15px;
+  width: 50%;
 }
 
 .infobar-bottom-sections ul li {
@@ -515,7 +520,70 @@ aside-article article header span{
   background: #e4ff00;
 }
 
-.infobar-bottom-popular {
+.infobar-bottom-articles {
+  width: 50%;
+  height: 120px;
+  float: right;
+}
+
+.infobar-bottom-articles .scroll-view {
+  height: 100%;
+  overflow-x: scroll;
+}
+
+.infobar-bottom-articles .scroll-view ul {
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  list-style: none;
+  margin: 0;
+}
+
+.infobar-bottom-articles .scroll-view ul li {
+  -webkit-flex: 0 0 120px;
+  -ms-flex: 0 0 120px;
+  flex: 0 0 120px;
+  display: block;
+  overflow: hidden;
+}
+
+.infobar-bottom-articles .scroll-view ul li a {
+  display: block;
+  position: relative;
+  height: 120px;
+  background-size: cover;
+  transition: all 1s ease;
+}
+
+.infobar-bottom-articles .scroll-view ul li a:hover {
+  -ms-transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+.infobar-bottom-articles .scroll-view ul li a:hover span{
+  opacity: 1;
+}
+
+
+.infobar-bottom-articles .scroll-view ul li a span{
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px 5px;
+  opacity: 0;
+  transition: all 0.5s ease;
+  background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65)));
+  background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
+  background: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); 
+  background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); 
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=0 ); 
+}
+
+/*.infobar-bottom-popular {
   padding: 0 10px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;  
@@ -524,7 +592,7 @@ aside-article article header span{
 
 .infobar-bottom-popular article {
   font-size: 14px;
-}
+}*/
 
 /* ------------------------------------------------------------------ *\
 

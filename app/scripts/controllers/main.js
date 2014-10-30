@@ -53,7 +53,7 @@ angular
         };
 
         // Set fullscreen for map
-        document.getElementsByClassName('angular-google-map-container')[0].style.height = window.innerHeight+'px';
+        document.getElementsByClassName('angular-google-map-container')[0].style.height = (window.innerHeight-50)+'px';
         
         var search = function(keywords) {
 

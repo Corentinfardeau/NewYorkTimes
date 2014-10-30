@@ -1,6 +1,9 @@
 <a class="btn-close"><span>×</span></a>
-<div ng-show="currentArticle.multimedia" class="img-container">
-	<img src="http://www.nytimes.com/{{currentArticle.multimedia[1].url}}" alt="une photo">
+<div class="img-container">
+
+	<img ng-show="currentArticle.multimedia" src="http://www.nytimes.com/{{currentArticle.multimedia[1].url}}" alt="une photo">
+	<img ng-hide="currentArticle.multimedia" src="../images/defaut.jpg" alt="une photo">
+
 	<div>
 		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 			 viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
