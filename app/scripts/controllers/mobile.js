@@ -9,5 +9,5 @@
  */
 angular.module('newYorkTimesApp')
   .controller('MobileCtrl', function () {
-	  
+
   });
