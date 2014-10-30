@@ -45,9 +45,11 @@ angular
         };
 
         $scope.showArticle = function(e){
-            $scope.currentArticle = $scope.articles[e.key];
+            $scope.currentArticle = $scope.articles[e.key];  
             document.querySelector('aside-article').classList.remove('hidden');
-        };      
+            
+        };
+
         // Set fullscreen for map
         document.getElementsByClassName('angular-google-map-container')[0].style.height = window.innerHeight+'px';
         
@@ -137,7 +139,7 @@ angular
             search($scope.keywords);
         };
 
+
         $scope.sectionsManage = function() {
         };
-
 });
