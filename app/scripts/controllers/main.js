@@ -21,7 +21,7 @@ angular
         // Error message
         $rootScope.errorMessage = '';
 
-        $scope.articles = [];
+        $scope.articles = {};
         $rootScope.markers = [];
         $scope.sections = [];
 
@@ -44,10 +44,9 @@ angular
             }
         };
 
-        $scope.showArticle = function(e){
-            $scope.currentArticle = $scope.articles[e.key];  
-            document.querySelector('aside-article').classList.remove('hidden');
-            
+        $scope.showArticle = function(e, id){
+            $scope.currentArticle = $scope.articles[e!==''?e.key:id];  
+            document.querySelector('aside-article').classList.remove('hidden');    
         };
 
         // Set fullscreen for map
@@ -88,6 +87,8 @@ angular
                                                 if( v.name==='glocations' ) {
                                                     if(c === 0) {
                                                         value.location = v.value;
+                                                        value.headline.main = decodeURI(value.headline.main);
+                                                        value.snippet = decodeURI(value.snippet);
                                                         value.pub_date = value.pub_date.split('T')[0];
                                                         $scope.articles[value._id] = value;
                                                         googlemapsapi.geocode(value.location, value.section_name, value._id);
@@ -132,8 +133,9 @@ angular
         search('');
 
         $scope.searchArticles = function(){
+
             document.querySelector('aside-article').classList.add('hidden');
-            $scope.articles = [];
+            $scope.articles = {};
             $scope.sections.length = 0;
             $rootScope.markers = [];
             search($scope.keywords);

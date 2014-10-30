@@ -31,6 +31,8 @@ angular.module('newYorkTimesApp')
 	                    };
 
 	                    $rootScope.markers.push(marker);
+
+	                    
 	                }
 
 	            })

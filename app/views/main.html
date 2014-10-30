@@ -22,8 +22,7 @@
 				c34.002,0,65.596-10.492,91.729-28.398L426.558,467.17L465.914,427.814z M61.658,174.687c0-63.399,51.579-114.979,114.978-114.979
 				c63.401,0,114.98,51.579,114.98,114.979c0,63.399-51.579,114.979-114.98,114.979C113.236,289.666,61.658,238.086,61.658,174.687z"/>
 		</svg>
-
-		<form ng-submit="searchArticles()" ng-controller="MainCtrl">
+		<form ng-submit="searchArticles()">
 			<input ng-model='keywords' type="search" placeholder="Keywords..." name="search_keyword">
 		</form>
 	</div>
@@ -32,7 +31,7 @@
 <aside-article ng-show="currentArticle"></aside-article>
 
 <ui-gmap-google-map center="map.center" zoom="map.zoom" control="map.control" options="map.options" bounds="map.bounds">
-	<ui-gmap-markers models="markers" coords="'self'" icon="'icon'" click="showArticle"></ui-gmap-markers>
+	<ui-gmap-markers models="markers" coords="'self'" icon="'icon'" options="'options'"  click="showArticle"></ui-gmap-markers>
 </ui-gmap-google-map>
 
 <div class="infobar-bottom">
@@ -46,17 +45,12 @@
 	<div class="infobar-bottom-articles">
 		<div class="scroll-view">
 			<ul>
-				<li><a href="#" style="background-image: url('../images/photo.jpg');"> <span>Titre</span> </a></li>
-				<li><a href="#" style="background-image: url('../images/photo.jpg');"> <span>Titre</span> </a></li>
-				<li><a href="#" style="background-image: url('../images/photo.jpg');"> <span>Titre</span> </a></li>
-				<li><a href="#" style="background-image: url('../images/photo.jpg');"> <span>Titre</span> </a></li>
-				<li><a href="#" style="background-image: url('../images/photo.jpg');"> <span>Titre</span> </a></li>
-				<li><a href="#" style="background-image: url('../images/photo.jpg');"> <span>Titre</span> </a></li>
-				<li><a href="#" style="background-image: url('../images/photo.jpg');"> <span>Titre</span> </a></li>
-				<li><a href="#" style="background-image: url('../images/photo.jpg');"> <span>Titre</span> </a></li>
-				<li><a href="#" style="background-image: url('../images/photo.jpg');"> <span>Titre</span> </a></li>
-				<li><a href="#" style="background-image: url('../images/photo.jpg');"> <span>Titre</span> </a></li>
-				<li><a href="#" style="background-image: url('../images/photo.jpg');"> <span>Titre</span> </a></li>
+				<li ng-repeat="article in articles">
+					<a ng-show='article.multimedia' ng-click="showArticle('', article._id )" style="background-image: url('http://www.nytimes.com/{{ article.multimedia[1].url }}');"><span>{{ article.headline.main }}</span>
+					</a>
+					<a ng-hide='article.multimedia' ng-click="showArticle('', article._id )" style="background-image: url('/images/defaut.jpg');"><span>{{ article.headline.main }}</span>
+					</a>
+				</li>
 			</ul>
 		</div>
 	</div>
