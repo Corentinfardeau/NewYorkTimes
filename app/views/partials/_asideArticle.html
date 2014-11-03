@@ -18,15 +18,12 @@
 </div>
 <article>
 	<header>
-		<span class="article-category">{{currentArticle.news_desk}}</span>
-		<span class="article-date">{{currentArticle.pub_date}}</span>
+		<span ng-if='currentArticle.news_desk' class="article-category">{{currentArticle.news_desk}}</span>
+		<span ng-if='currentArticle.pub_date' class="article-date">{{currentArticle.pub_date}}</span>
 		<h2>{{currentArticle.headline.main}}</h2>
 	</header>
 	<p>
 		{{currentArticle.snippet}}
-	</p>
-	<p>
-		{{currentArticle.byline.original}}
 	</p>
 	<a ng-show='currentArticle.web_url' target='_blank' href="{{currentArticle.web_url}}" class="btn">Read more</a>
 	<a href="#" class="btn">
