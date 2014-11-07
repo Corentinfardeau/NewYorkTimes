@@ -7,8 +7,9 @@
  * # googlemapsapi
  * Service in the newYorkTimesApp.
  */
-angular.module('newYorkTimesApp')
-  .service('googlemapsapi', function googlemapsapi($rootScope, $http) {
+angular
+	.module('newYorkTimesApp')
+	.service('googlemapsapi', function googlemapsapi($rootScope, $http) {
 	     
 	     /**
          * @ngdoc function
@@ -18,7 +19,8 @@ angular.module('newYorkTimesApp')
          */
   		this.geocode = function(address, section, articleId) {
 	        
-	        $http.get('https://maps.googleapis.com/maps/api/geocode/json?address='+address)
+	        $http
+                .get('https://maps.googleapis.com/maps/api/geocode/json?address='+address)
 	            .success(function (data) {
 
 	                if(data.status === 'OK') {
@@ -31,16 +33,12 @@ angular.module('newYorkTimesApp')
 	                    };
 
 	                    $rootScope.markers.push(marker);
-
-	                    
 	                }
 
 	            })
 	            .error(function () {
 
 	            });
-
-
 	 };
 
   });

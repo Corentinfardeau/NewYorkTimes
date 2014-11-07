@@ -6,8 +6,9 @@
  * @description
  * # card
  */
-angular.module('newYorkTimesApp')
-  .directive('card', function () {
+angular
+    .module('newYorkTimesApp')
+    .directive('card', function () {
     return {
       templateUrl: 'views/partials/_card.html',
       restrict: 'E',
@@ -23,9 +24,9 @@ angular.module('newYorkTimesApp')
 	       			var card = event.target.parentNode;
 
 	       			while(!hasClass(card, 'card'))
-		      			{
-							card = card.parentNode;
-		      			}
+                    {
+                        card = card.parentNode;
+                    }
 
 	      			var removeCard = card.nextSibling.nextSibling;
 	      			var svg = removeCard.querySelector('svg');
@@ -69,8 +70,6 @@ angular.module('newYorkTimesApp')
 
        			if(event.deltaX < -limit)
        			{
-
-
 	      			card.style.webkitTransform = 'translateX(-'+width*2+'px)';
 	      			card.style.MozTransform = 'translateX(-'+width*2+'px)';	
 	      			card.style.msTransform = 'translateX(-'+width*2+'px)';	
@@ -84,13 +83,11 @@ angular.module('newYorkTimesApp')
       				var mobileContainer = document.getElementById('mobile-container');
 	       			var cardDirective = card.parentNode.parentNode;
 
-
 	      			setTimeout(function(){
 		       			
 		       			mobileContainer.removeChild(cardDirective);
 
-	      			},300);
-
+	      			}, 300);
        			}
        			else
        			{
