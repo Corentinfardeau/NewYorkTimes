@@ -850,6 +850,7 @@ Mobile
 #mobile{
   background-color: #ebebeb;
   overflow-x: hidden;
+  height: 100%;
 }
 
 #mobile-header{
@@ -944,11 +945,6 @@ Mobile
   position: relative;
   left: 20px;
   opacity: 0;
-}
-
-.remove-card--effect{
-    -webkit-transition-duration: 0.2s; /* Safari */
-    transition-duration: 0.2s;
 }
 
 .smoothEffect{
