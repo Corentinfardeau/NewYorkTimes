@@ -1,18 +1,18 @@
 'use strict';
 
-describe('Service: appConfig', function () {
+describe('Service: Config', function () {
 
   // load the service's module
   beforeEach(module('newYorkTimesApp'));
 
   // instantiate service
-  var appConfig;
-  beforeEach(inject(function (_appConfig_) {
-    appConfig = _appConfig_;
+  var Config;
+  beforeEach(inject(function (_config_) {
+    config = _config_;
   }));
 
   it('should do something', function () {
-    expect(!!appConfig).toBe(true);
+    expect(!!config).toBe(true);
   });
 
 });

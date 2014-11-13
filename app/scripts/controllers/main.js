@@ -9,7 +9,7 @@
  */
 angular
     .module('newYorkTimesApp')
-    .controller('MainCtrl', function ($rootScope, $scope, $http, $interval, googlemapsapi, apinyt) {
+    .controller('MainCtrl', function ($rootScope, $scope, $http, $interval, googlemapsapi, apinyt, Config) {
 
         // Search submit by hit enter key
         $scope.submit = function() { 
@@ -21,16 +21,16 @@ angular
         // Error message
         $rootScope.errorMessage = '';
 
-        $scope.articles = {};
+        $rootScope.articles = {};
         $rootScope.markers = [];
-        $scope.sections = [];
+        $rootScope.sections = [];
 
         // Set the map
         $rootScope.map = {
             control: {},
             center: {
-            latitude: 34.833703,
-            longitude: -41.768816
+                latitude: 34.833703,
+                longitude: -41.768816
             },
             zoom: 3,
             minZoom: 3,
@@ -54,94 +54,41 @@ angular
         
         var search = function(keywords) {
 
-        var search = keywords ? keywords : '';
-        var requestsLimit = 15;
+            var search = keywords ? keywords : '';
 
-        apinyt
-        .getNbArticles(search)
-        .then(function(data) {
-            if (data.response !== null) {
-                var pages = data.response.meta.hits/10;
-                var count = pages<requestsLimit ? pages : requestsLimit;
+            apinyt
+                .getNbArticles(search)
+                .then(function(nbArticles) {
 
-                var page = 1;
+                    if (nbArticles !== 0) {
+                        var pages = nbArticles/10;
+                        var count = pages<Config.REQUESTS_LIMIT ? pages : Config.REQUESTS_LIMIT;
+                        var page = 1;
 
-                $interval(function(){
+                        $interval( function() { 
 
                             apinyt
-                            .getArticles(search, page)
-                            .then(function (data) {
+                                .getArticles(search, page);
+                            
+                            page++;
 
-                                if (data !== null) {
+                        }, 300, count );
 
-                                    if (data.response !== undefined) {
-                                        
-                                        angular.forEach(data.response.docs, function(value){
-
-                                            if($scope.sections.indexOf(value.section_name) === -1) {
-                                                $scope.sections.push(value.section_name);
-                                            }
-
-                                            angular.forEach(value.keywords, function(v){
-                                                var c = 0;
-                                                if( v.name==='glocations' ) {
-                                                    if(c === 0) {
-                                                        value.location = v.value;
-                                                        value.headline.main = decodeURI(value.headline.main);
-                                                        value.snippet = decodeURI(value.snippet);
-                                                        value.pub_date = value.pub_date.split('T')[0];
-                                                        $scope.articles[value._id] = value;
-                                                        googlemapsapi.geocode(value.location, value.section_name, value._id);
-                                                    }
-                                                    else {
-                                                        var clone = value.slice();
-                                                        clone.location = v.value;
-                                                        clone.pub_date = clone.pub_date.split('T')[0];
-                                                        googlemapsapi.geocode(clone.location, value.section_name, clone._id);
-                                                    }
-                                                    c++;
-                                                }
-
-                                            });
-
-                                        });
-
-
-                                    } else {
-
-                                        $rootScope.errorMessage = 'Sorry, the server respond with a error.';
-
-                                    }
-
-                                } else {
-
-                                        $rootScope.errorMessage = 'Sorry, the server doesnt respond.';
-
-                                }
-
-                            });
-                    page++;
-
-                    }, 300, count);
-
-            } else {
-                $rootScope.errorMessage = 'Sorry, the server doesnt respond.';
-            }
-        }); 
+                    } else {
+                        $rootScope.errorMessage = 'Aucun article ne correspond à votre recherche.';
+                    }
+                }); 
+            
         };
 
         search('');
 
-        $scope.searchArticles = function(){
-
+        $scope.searchArticles = function() {
             document.querySelector('aside-article').classList.add('hidden');
-            $scope.articles = {};
-            $scope.sections.length = 0;
+            $rootScope.articles = {};
+            $rootScope.sections.length = 0;
             $rootScope.markers = [];
             search($scope.keywords);
         };
 
-
-        $scope.sectionsManage = function() {
-        };
 });

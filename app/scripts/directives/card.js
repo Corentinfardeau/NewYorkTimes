@@ -6,8 +6,9 @@
  * @description
  * # card
  */
-angular.module('newYorkTimesApp')
-  .directive('card', function () {
+angular
+    .module('newYorkTimesApp')
+    .directive('card', function () {
     return {
       templateUrl: 'views/partials/_card.html',
       restrict: 'E',
@@ -94,8 +95,7 @@ angular.module('newYorkTimesApp')
 				//if the gesture is more than the middle of any screen
        			if(event.deltaX < -limit)
        			{
-
-       				//Apply style to remove the card
+     				//Apply style to remove the card
 	      			card.style.webkitTransform = 'translateX(-'+width*2+'px)';
 	      			card.style.MozTransform = 'translateX(-'+width*2+'px)';	
 	      			card.style.msTransform = 'translateX(-'+width*2+'px)';	
@@ -116,7 +116,6 @@ angular.module('newYorkTimesApp')
 	      			setTimeout(function(){
 		       			
 		       			mobileContainer.removeChild(cardDirective);
-
 	      			},300);
 
 	      			setTimeout(function(){
