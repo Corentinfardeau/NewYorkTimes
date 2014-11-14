@@ -17,7 +17,7 @@ angular
      * @methodOf core.Services.apinyt
      * @return {object} Returns a promise object
      */
-	this.getArticles = function(keyword, page) {
+	this.getArticles = function (keyword, page) {
 	        
         var deferred = $q.defer();
         var keyword = keyword ? ('fq='+keyword+'&') : '';
@@ -33,9 +33,9 @@ angular
                         $rootScope.sections.push(value.section_name);
                     }
 
-                    angular.forEach(value.keywords, function(v){
+                    angular.forEach(value.keywords, function (v){
                         var count = 0;
-                        if( v.name==='glocations' ) {
+                        if( v.name === 'glocations' ) {
                             
                             if(count === 0) {
                                 value.location = v.value;
@@ -43,13 +43,19 @@ angular
                                 value.snippet = decodeURI(value.snippet);
                                 value.pub_date = value.pub_date.split('T')[0];
                                 $rootScope.articles[value._id] = value;
-                                googlemapsapi.geocode(value.location, value.section_name, value._id);
+                                googlemapsapi.geocode(value.location, value.section_name, value._id)
+                                .then(function(location){
+                                    value.coordinates = location;
+                                });
                             }
                             else {
                                 var clone = value.slice();
                                 clone.location = v.value;
                                 clone.pub_date = clone.pub_date.split('T')[0];
-                                googlemapsapi.geocode(clone.location, value.section_name, clone._id);
+                                googlemapsapi.geocode(clone.location, value.section_name, clone._id)
+                                .then(function(location){
+                                    clone.coordinates = location;
+                                });
                             }
                             
                             count++;
@@ -59,7 +65,7 @@ angular
 
                 });
                 
-                deferred.resolve($rootScope.articles);
+                deferred.resolve();
 
             })
             .error(function (data, status) {
@@ -93,4 +99,64 @@ angular
             return deferred.promise;
         };
 
-    });
+    /**
+     * @ngdoc function
+     * @name core.Services.Castrapi#getArticlesMostShared
+     * @methodOf core.Services.apinyt
+     * @return {object} Returns a promise object
+     */
+    this.getArticlesMostShared = function(section, timePeriod) {
+        
+        var deferred = $q.defer();
+
+        $http
+            .get(Config.API_URL+'/svc/mostpopular/v2/mostshared/'+section+'/'+timePeriod+'.json?api-key=sample-key')
+            .success(function (data) {
+                
+                var mostShared = [];
+                
+                angular
+                    .forEach(data.results, function (value) {
+                        mostShared.push(value);
+                    });
+            
+                deferred.resolve(mostShared);
+            })
+            .error(function (data) {
+                deferred.resolve(data);
+            });
+
+        return deferred.promise;
+    };
+    
+    /**
+     * @ngdoc function
+     * @name core.Services.Castrapi#getArticlesMostViewed
+     * @methodOf core.Services.apinyt
+     * @return {object} Returns a promise object
+     */
+    this.getPopularArticles = function(section, timePeriod, action) {
+        
+        var deferred = $q.defer();
+
+        $http
+            .get(Config.API_URL+'/svc/mostpopular/v2/'+action+'/'+section+'/'+timePeriod+'.json?api-key=sample-key')
+            .success(function (data) {
+                
+                var mostShared = [];
+                
+                angular
+                    .forEach(data.results, function (value) {
+                        mostShared.push(value);
+                    });
+            
+                deferred.resolve(mostShared);
+            })
+            .error(function (data) {
+                deferred.resolve(data);
+            });
+
+        return deferred.promise;
+    };
+
+});

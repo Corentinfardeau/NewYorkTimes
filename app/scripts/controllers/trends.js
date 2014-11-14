@@ -9,6 +9,11 @@
  */
 angular
 	.module('newYorkTimesApp')
-	.controller('TrendsCtrl', function () {
-
+	.controller('TrendsCtrl', function ($scope, apinyt) {
+        
+        apinyt
+            .getPopularArticles('sports','30', 'mostviewed')
+            .then(function (articles) {
+                $scope.articles = articles;
+            });
 	});

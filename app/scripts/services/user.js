@@ -7,8 +7,9 @@
  * # User
  * Service in the newYorkTimesApp.
  */
-angular.module('newYorkTimesApp')
-  .service('User', function User() {
+angular
+	.module('newYorkTimesApp')
+	.service('User', function User() {
   	
   	this.getUserPosition = function() {
 
