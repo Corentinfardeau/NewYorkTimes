@@ -32,6 +32,7 @@ footer, header, hgroup, menu, nav, section {
 
 body {
     line-height: 1;
+    overflow: hidden;
 }
 
 ol, ul {
@@ -249,6 +250,11 @@ a {
   margin-bottom: 3px;
 }
 
+.hidden{
+  display: none;
+  visibility: hidden;
+}
+
 /* ------------------------------------------------------------------ *\
 
 Landing page 
@@ -339,6 +345,10 @@ Home
   -webkit-box-shadow: 1px 1px 8px rgba(102,102,102,.3);
   -moz-box-shadow: 1px 1px 8px rgba(102,102,102,.3);
   box-shadow: 1px 1px 8px rgba(102,102,102,.3);
+  
+  transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
 }
 
 .topBar .logo {
@@ -355,9 +365,12 @@ Home
 
 .topBar .search,
 .topBar form {
-  height: 100%;
+  height: 50px;
   display: inline-block;
   vertical-align: top;
+  transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
 }
 
 .topBar .search input[type='search'] {
@@ -369,27 +382,41 @@ Home
   outline: none;
   font-size: 18px;
    -webkit-appearance: none !important;
+  transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
 }
 
 .topBar .search svg {
   height: 20px;
   margin: 15px 5px 15px 15px;
+  transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
 }
 
-/*---   Sidebar right   ---*/
+.topBar .search.zoomed {
+  margin-top: 70px;
+  margin-left: 70px;
+}
 
-.btn-close {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 998;
+.topBar .search.zoomed input[type='search'] {
+  font-size: 32px;
+}
+
+.topBar .search.zoomed svg {
   height: 30px;
-  width: 30px;
-  background: #fff;
+}
+
+.topBar .btn-close {
+  position: absolute;
+  right: 70px;
+  top: 70px;
+  z-index: 998;
   text-align: center;
 }
 
-.btn-close span {
+.topBar .btn-close span {
   display: block;
   text-align: center;
   height: 20px;
@@ -401,10 +428,56 @@ Home
   cursor:pointer;
 }
 
+.topBar .btn-close svg {
+    width: 100%;
+    height: 100%;
+}
+
 .btn-close:hover span{
     transform: rotate(90deg);
     -webkit-transform: rotate(90deg);
     -moz-transform: rotate(90deg);
+}
+
+/*---   Seach page   ---*/
+
+.search-sections {
+    position: absolute;
+    top: 200px;
+    left: 100px;
+}
+
+.search-section {
+    height: 500px;
+    width: 320px;
+    background: #eee;
+    display: inline-block;
+    margin: 0 50px;
+}
+
+/*---   Sidebar right   ---*/
+
+aside-article .btn-close {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 998;
+  height: 30px;
+  width: 30px;
+  background: #fff;
+  text-align: center;
+}
+
+aside-article .btn-close span {
+  display: block;
+  text-align: center;
+  height: 20px;
+  width: 20px;
+  margin: 5px;
+  -webkit-transition: all .2s; 
+  -moz-transition:    all .2s; 
+  transition:         all .2s;
+  cursor:pointer;
 }
 
 aside-article {
@@ -464,10 +537,6 @@ aside-article article header span.article-date {
 }
 
 /*---   Popup   ---*/
-
-.popup.hidden{
-  display: none;
-}
 
 .popup {
   position: relative;
@@ -975,3 +1044,4 @@ Mobile
 #loading-bar .bar {
   display: none;
 }
+

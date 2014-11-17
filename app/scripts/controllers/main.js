@@ -90,5 +90,24 @@ angular
             $rootScope.markers = [];
             search($scope.keywords);
         };
-
+    
+        $scope.fullSearch = function() {
+            document.querySelector('.topBar').style.height="100%";
+            document.querySelector('.topBar .btn-close').classList.toggle("hidden");
+            document.querySelector(".topBar .search").classList.toggle("zoomed");
+        }
+        
+        $scope.closeFullSearch = function() {
+            document.querySelector('.topBar').style.height="50px";
+            document.querySelector('.topBar .btn-close').classList.toggle("hidden");
+            document.querySelector(".topBar .search").classList.toggle("zoomed");
+        }
+        
+        $scope.checkValue = function() {
+            if(document.querySelector(".topBar .search").classList.contains("zoomed")){
+                return false;
+            }else{
+                return true;
+            }
+        }
 });
