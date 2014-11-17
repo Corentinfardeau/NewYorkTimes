@@ -1,5 +1,3 @@
-{{errorMessage}}
-
 <div class="topBar">
 	<a href="#/main" class="logo">
 		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -44,9 +42,11 @@
     </div>
 </div>
 
+<div ng-show='errorMessage' class='error'>{{errorMessage}}</div>
+
 <aside-article ng-show="currentArticle"></aside-article>
 
-<ui-gmap-google-map center="map.center" zoom="map.zoom" control="map.control" options="map.options" bounds="map.bounds">
+<ui-gmap-google-map center="map.center" pan="true" zoom="map.zoom" control="map.control" options="map.options" bounds="map.bounds">
 	<ui-gmap-markers models="markers" coords="'self'" icon="'icon'" options="'options'"  click="showArticle"></ui-gmap-markers>
 </ui-gmap-google-map>
 
@@ -62,9 +62,9 @@
 		<div class="scroll-view">
 			<ul>
 				<li ng-repeat="article in articles">
-					<a ng-show='article.multimedia' ng-click="showArticle('', article._id )" style="background-image: url('http://www.nytimes.com/{{ article.multimedia[1].url }}');"><span>{{ article.headline.main }}</span>
+					<a ng-show='article.multimedia' ng-click="showArticle('', article )" style="background-image: url('http://www.nytimes.com/{{ article.multimedia[1].url }}');"><span>{{ article.headline.main }}</span>
 					</a>
-					<a ng-hide='article.multimedia' ng-click="showArticle('', article._id )" style="background-image: url('/images/defaut.jpg');"><span>{{ article.headline.main }}</span>
+					<a ng-hide='article.multimedia' ng-click="showArticle('', article )" style="background-image: url('/images/defaut.jpg');"><span>{{ article.headline.main }}</span>
 					</a>
 				</li>
 			</ul>

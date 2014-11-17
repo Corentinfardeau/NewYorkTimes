@@ -9,7 +9,7 @@
  */
 angular
 	.module('newYorkTimesApp')
-	.service('googlemapsapi', function googlemapsapi($rootScope, $http) {
+	.service('googlemapsapi', function googlemapsapi($rootScope, $http, $q) {
 	     
 	     /**
          * @ngdoc function
@@ -19,6 +19,8 @@ angular
          */
   		this.geocode = function(address, section, articleId) {
 	        
+            var deferred = $q.defer();
+            
 	        $http
                 .get('https://maps.googleapis.com/maps/api/geocode/json?address='+address)
 	            .success(function (data) {
@@ -32,13 +34,18 @@ angular
 	                        section:section
 	                    };
 
-	                    $rootScope.markers.push(marker);
+	                    $rootScope.markers.push(marker);                        
+                        deferred.resolve(data.results[0].geometry.location);
+
 	                }
 
 	            })
-	            .error(function () {
-
+	            .error(function (data, status) {
+                    deferred.resolve(data, status);
 	            });
+            
+            return deferred.promise;
+
 	 };
 
   });

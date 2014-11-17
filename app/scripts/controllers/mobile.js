@@ -7,7 +7,8 @@
  * # MobileCtrl
  * Controller of the newYorkTimesApp
  */
-angular.module('newYorkTimesApp')
-  .controller('MobileCtrl', function () {
+angular
+    .module('newYorkTimesApp')
+    .controller('MobileCtrl', function () {
 
-  });
+    });
