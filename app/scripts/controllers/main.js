@@ -13,7 +13,6 @@ angular
 
         // Error message
         $rootScope.errorMessage = '';
-
         $rootScope.articles = {};
         $rootScope.markers = [];
         $rootScope.sections = [];
@@ -27,10 +26,12 @@ angular
             },
             zoom: 4,
             minZoom: 4,
+			noClear:true,
             options: {
                 styles:Config.GMAP_STYLE,
                 scaleControl:false,
                 zoomControl:false,
+				scrollwheel : false,
                 streetViewControl:false,
                 panControl:false,
                 disableDefaultUI: true
@@ -78,7 +79,8 @@ angular
 
         search('');
     
-        //apinyt.getArticlesMostShared('sports', '30');
+        //apinyt
+			//.getArticlesMostShared('sports', '30');
         
         $scope.searchArticles = function() {
             document.querySelector('aside-article').classList.add('hidden');
@@ -90,7 +92,6 @@ angular
         };
     
         var zoomed = false;
-	
         $scope.fullSearch = function(state) {
             if(!state){
                 document.querySelector('.topBar').style.height='100%';
@@ -107,4 +108,13 @@ angular
             document.querySelector('.topBar .btn-close').classList.toggle('hidden');
             document.querySelector('.topBar .search').classList.toggle('zoomed');
         };
+	
+		$scope.zoomIn = function() {
+			$rootScope.map.zoom += 1;
+		};
+
+		$scope.zoomOut = function() {
+			if($rootScope.map.zoom > 4)
+			   $rootScope.map.zoom -= 1;
+		};
 });
