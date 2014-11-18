@@ -641,6 +641,7 @@ aside-article article header span.article-date {
   width: 50%;
 }
 
+/*
 .infobar-bottom-sections ul li {
   display: inline-block;
   font-size: 14px;
@@ -655,12 +656,12 @@ aside-article article header span.article-date {
   border: 1px solid #e4ff00;
   border-radius: 50%;
   margin-right: 2px;
-
 }
 
 .section-dot-full {
   background: #e4ff00;
 }
+*/
 
 .infobar-bottom-articles {
   width: 50%;
@@ -736,6 +737,46 @@ aside-article article header span.article-date {
     transition: opacity .25s ease-in-out;
    -moz-transition: opacity .25s ease-in-out;
    -webkit-transition: opacity .25s ease-in-out;
+}
+
+
+/*---   Info bar bottom checkboxes   ---*/
+
+.infobar-bottom input[type="checkbox"] {
+    display: none;
+}
+
+.infobar-bottom input[type="checkbox"]:checked + label:before {
+    background: #fff;
+}
+
+.checkbox-custom {
+    margin-right: 20px;
+}
+
+.input-helper {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+    
+.input-helper:before {
+    content: '';
+    display: block;
+    position: absolute;
+}
+
+.input-helper--checkbox {
+    padding-left: 20px;
+}
+
+.input-helper--checkbox:before {
+    top: 1px;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid #fff;
 }
 
 /* ------------------------------------------------------------------ *\
