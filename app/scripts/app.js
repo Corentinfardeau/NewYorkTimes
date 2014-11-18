@@ -52,7 +52,6 @@ angular
   });
 
 // UI
-// 
 
 var layout={};
 

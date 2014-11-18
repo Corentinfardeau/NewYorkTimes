@@ -950,7 +950,7 @@ Mobile
 \* ------------------------------------------------------------------ */
 
 #mobile{
-  background-color: #ebebeb;
+  background-color: #f4f4f4;
   overflow-x: hidden;
   height: 100%;
 }
@@ -978,15 +978,21 @@ Mobile
 }
 
 #instruction{
-  color: #5e5e5e;
+  color: #999999;
   margin: 20px 0px;
+	text-transform: uppercase;
+	font-size:11px;
+}
+
+#instruction p {
+	padding-top:5px;
 }
 
 #gesture-icon{
   float: left;
   width: 28px;
-  margin-right: 15px;
-  fill: #5e5e5e;
+  margin-right: 10px;
+  fill: #999999;
   position: relative;
   bottom: 1px;
 }
@@ -997,21 +1003,26 @@ Mobile
   margin: 20px 0;
   -webkit-transition: all 0.2s ease-out; 
   transition: all 0.2s ease-out;
+	box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.1);
 }
 
 .card{
   width: 100%;
   height: 100px;
-  background-color:#fff; 
+  background-color:#fff;
+	
 }
 
 .card h1{
   font-size: 18px;
+	font-family: 'itc_cheltenhamregular';
 }
 
 .card h2{
   font-size: 12px;
   color:  #5e5e5e;
+	margin-bottom:5px;
+	text-transform: uppercase;
 }
 
 .card>div{
@@ -1039,7 +1050,6 @@ Mobile
   position: absolute;
   top: 0px;
   left: 100%;
-  margin-left: 20px;
   line-height: 100px;
 }
 
@@ -1056,4 +1066,34 @@ Mobile
 
 #loading-bar .bar {
   display: none;
+}
+
+.mobile-search {
+	background: #000;
+	width: 100%;
+	position: fixed;
+	bottom:0;
+	left:0;
+	box-shadow: 20px 20px 20px 20px rgba(0, 0, 0, 0.3);
+}
+
+.mobile-search input {
+	width: 100%;
+	background: none;
+	border:0;
+	padding:20px;
+	font-size:16px;
+	outline: none;
+	color:#fff;
+}
+
+.mobile-search ::-webkit-input-placeholder { color:#fff; }
+.mobile-search ::-moz-placeholder { color:#fff; } /* firefox 19+ */
+.mobile-search :-ms-input-placeholder { color:#fff; } /* ie */
+.mobile-search input:-moz-placeholder { color:#fff; }
+
+
+.mobile-search button {
+	float: right;
+	height:40px;
 }

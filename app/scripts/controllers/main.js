@@ -78,7 +78,7 @@ angular
 
         search('');
     
-        apinyt.getArticlesMostShared('sports', '30');
+        //apinyt.getArticlesMostShared('sports', '30');
         
         $scope.searchArticles = function() {
             document.querySelector('aside-article').classList.add('hidden');
@@ -89,21 +89,22 @@ angular
             search($scope.keywords);
         };
     
-        $scope.zoomed = false;
+        var zoomed = false;
+	
         $scope.fullSearch = function(state) {
             if(!state){
-                document.querySelector('.topBar').style.height="100%";
-                document.querySelector('.topBar .btn-close').classList.toggle("hidden");
-                document.querySelector(".topBar .search").classList.toggle("zoomed");
+                document.querySelector('.topBar').style.height='100%';
+                document.querySelector('.topBar .btn-close').classList.toggle('hidden');
+                document.querySelector('.topBar .search').classList.toggle('zoomed');
             }
-            $scope.zoomed = true;
-        }
+            zoomed = true;
+        };
         
         $scope.closeFullSearch = function() {
-            $scope.zoomed = false;
+            zoomed = false;
             
-            document.querySelector('.topBar').style.height="50px";
-            document.querySelector('.topBar .btn-close').classList.toggle("hidden");
-            document.querySelector(".topBar .search").classList.toggle("zoomed");
-        }
+            document.querySelector('.topBar').style.height='50px';
+            document.querySelector('.topBar .btn-close').classList.toggle('hidden');
+            document.querySelector('.topBar .search').classList.toggle('zoomed');
+        };
 });

@@ -25,7 +25,7 @@ angular
 
         $http
             .get(Config.API_URL+'/svc/search/v2/articlesearch.json?'+keyword+'api-key=sample-key'+p)
-            .success(function (data) {
+            .success( function (data) {
             
                 angular.forEach(data.response.docs, function (value) {
 
@@ -33,11 +33,11 @@ angular
                         $rootScope.sections.push(value.section_name);
                     }
 
-                    angular.forEach(value.keywords, function (v){
+                    angular.forEach( value.keywords, function (v) {
                         var count = 0;
                         if( v.name === 'glocations' ) {
                             
-                            if(count === 0) {
+                            if ( count === 0 ) {
                                 value.location = v.value;
                                 value.headline.main = decodeURI(value.headline.main);
                                 value.snippet = decodeURI(value.snippet);
