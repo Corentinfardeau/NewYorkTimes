@@ -16,7 +16,6 @@ angular
             currentArticle = this.currentArticle;
                 this.socket= io.connect('http://macbook-corentinf.local:2000');
                 this.socket.emit('send',currentArticle);
-
         }
   
         // Error message

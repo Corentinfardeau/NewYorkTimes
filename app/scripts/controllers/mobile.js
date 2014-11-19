@@ -15,7 +15,8 @@ angular
       this.socket= io.connect('http://macbook-corentinf.local:2000');
       this.socket.on('added', function(currentArticle){
             alert('Nouvel Article');
-            articles.push(currentArticle);
+            $scope.articles = articles.push(currentArticle);
+            $scope.$apply();
             console.log(articles);
       });
 });
