@@ -12,7 +12,6 @@ angular
     .controller('MobileCtrl', function ($scope, mobile, $routeParams) {
       
       $scope.localStorageArticles = [];
-      refreshList();
  
       this.socket= io.connect('http://macbook-corentinf.local:2000');
       var token = $routeParams.token;       
@@ -28,7 +27,7 @@ angular
         $scope.localStorageArticles = [];
         for(var i=0; i <window.localStorage.length; i++)
         {     
-            if(window.localStorage.key(i) != "debug")
+            if(window.localStorage.key(i) !== 'debug')
             {
                 $scope.localStorageArticles = mobile.getArticleInLocalStorage(i,$scope.localStorageArticles);  
                 if(!$scope.$$phase) {
@@ -37,5 +36,7 @@ angular
             }      
         }   
     }
+
+	refreshList();
       
 });

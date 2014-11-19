@@ -15,8 +15,8 @@ var server={
     //send article and generate token
     socket.on('send',function(currentArticle){
 
-        var token = "";
-        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        var token = '';
+        var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
         for( var i=0; i < 10; i++ ){
           token += possible.charAt(Math.floor(Math.random() * possible.length));
