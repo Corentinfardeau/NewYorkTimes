@@ -7,13 +7,36 @@ var server={
     // écoute un event connection lorsqu'un script ouvre un socket
     this.io.on('connection',this.listen);
     
+    //this.roomList = new Array();
   },
 
   listen : function(socket){ 
     
+    //send article and generate token
     socket.on('send',function(currentArticle){
-      console.log('add');
+
+        var token = "";
+        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        for( var i=0; i < 10; i++ ){
+          token += possible.charAt(Math.floor(Math.random() * possible.length));
+        }
+      
+      //server.roomList.push(token);
+
+      // send the token to desk
+      server.io.emit('send token',token);
+      socket.join(token+'');
+      
+      //send article
       server.io.emit('added',currentArticle);
+      
+    });
+    
+    // Mobile connection
+    socket.on('send mobile token', function(token){
+      console.log('connecté');
+      socket.join(token+'');
     });
   }
 

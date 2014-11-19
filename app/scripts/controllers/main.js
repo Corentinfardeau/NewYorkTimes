@@ -9,13 +9,21 @@
  */
 angular
     .module('newYorkTimesApp')
-    .controller('MainCtrl', function ($rootScope, $scope, $http, $interval, googlemapsapi, apinyt, Config) {
+    .controller('MainCtrl', function ($rootScope, $scope, $http, $interval, googlemapsapi, apinyt, Config, mobile) {
         
+        $scope.popup = false;
+    
         //On ajoute au click l'article courant sur le server
         $scope.sendArticle = function(currentArticle){ 
             currentArticle = this.currentArticle;
-                this.socket= io.connect('http://macbook-corentinf.local:2000');
-                this.socket.emit('send',currentArticle);
+            this.socket= io.connect('http://macbook-corentinf.local:2000');
+            this.socket.emit('send',currentArticle);
+    
+            this.socket.on('send token',function(token){
+              $scope.token = token;
+            });
+            //Show the popup with qrcode
+            $scope.popup = true;
         };
   
         // Error message

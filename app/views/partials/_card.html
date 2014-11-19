@@ -1,8 +1,8 @@
 <div class="card-container">
-	<div class="card" hm-panmove="onHammer" hm-panend="onHammerEnd">
-		<div style="background: url('http://www.nytimes.com/{{article.multimedia[1].url}}');background-position: center center; background-size: cover;">
-
+	<div class="card" data-id="{{article._id}}" hm-panmove="onHammer" hm-panend="onHammerEnd">
+		<div class="cardImage" ng-show="article.multimedia" style="background: url('http://www.nytimes.com/{{article.multimedia[1].url}}');background-position: center center; background-size: cover;">
 		</div>
+		<div class="cardImage" ng-hide="article.multimedia" style="background: url('../images/defaut.jpg');background-position: center center; background-size: cover;"></div>
 		<div>
 			<h2>{{article.news_desk}}</h2>
 			<h1>{{article.headline.main}}</h1>

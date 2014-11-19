@@ -1056,7 +1056,7 @@ Mobile
 
 .card h1{
   font-size: 18px;
-	font-family: 'itc_cheltenhamregular';
+    font-family: 'itc_cheltenhamregular';
 }
 
 .card h2{
@@ -1071,7 +1071,7 @@ Mobile
   float: left;
 }
 
-.card>div:first-child{
+.cardImage{
   width: 40%;
   overflow: hidden;
   position: relative;
@@ -1140,3 +1140,14 @@ Mobile
 }
 
 .map-controls{position:absolute;top:0;left:0;margin:70px 0 0 20px;z-index: 100;}
+
+#qrcode{
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background-color: #FFF;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    z-index: 1000;
+}

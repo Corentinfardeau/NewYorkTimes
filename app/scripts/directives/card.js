@@ -8,7 +8,7 @@
  */
 angular
     .module('newYorkTimesApp')
-    .directive('card', function () {
+.directive('card', function (mobile) {
 		return {
 		  templateUrl: 'views/partials/_card.html',
 		  restrict: 'E',
@@ -114,8 +114,9 @@ angular
 
 						// Remove all the card after the transition (0,3s)
 						setTimeout(function(){
-
 							mobileContainer.removeChild(cardDirective);
+							var id = card.getAttribute('data-id');
+							mobile.deleteArticleInStorage(id);
 						},300);
 
 						setTimeout(function(){
