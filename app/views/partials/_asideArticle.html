@@ -26,7 +26,7 @@
 		{{currentArticle.snippet}}
 	</p>
 	<a ng-show='currentArticle.web_url' target='_blank' href="{{currentArticle.web_url}}" class="button">Read more</a>
-	<a href="#" class="button">
+	<div href="#" class="button" ng-click="sendArticle(currentArticle)">
 		Save to mobile
 		<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 			viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
@@ -37,5 +37,5 @@
 				c-10.93,0-19.786-8.858-19.786-19.786c0-10.928,8.857-19.786,19.786-19.786c10.925,0,19.786,8.858,19.786,19.786
 				C250.56,479.215,241.699,488.073,230.774,488.073z M336.814,427.099H122.258V86.401h214.556V427.099z"/>
 		</svg>
-	</a>
+	</div>
 </article>

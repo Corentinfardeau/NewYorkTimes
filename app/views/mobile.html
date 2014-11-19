@@ -50,11 +50,8 @@
 
 			<p>Swipe left to delete an article</p>
 		</div>
-
-		<card></card>
-		<card></card>
-		<card></card>
-		<card></card>
+		
+		<card ng-repeat="article in articles"></card>
 				
 		<form class="mobile-search">
 			<input ng-model='query' type="text" placeholder="Search an article...">

@@ -20,6 +20,8 @@ module.exports = function (grunt) {
     app: require('./bower.json').appPath || 'app',
     dist: 'dist'
   };
+    
+grunt.loadNpmTasks('grunt-execute');
 
   // Define the configuration for all the tasks
   grunt.initConfig({
@@ -66,7 +68,7 @@ module.exports = function (grunt) {
     // The actual grunt server settings
     connect: {
       options: {
-        port: 9000,
+        port: 3000,
         // Change this to '0.0.0.0' to access the server from outside.
         hostname: '0.0.0.0',
         livereload: 35730
@@ -346,7 +348,14 @@ module.exports = function (grunt) {
         configFile: 'test/karma.conf.js',
         singleRun: true
       }
+    },
+      
+    execute: {
+      target: {
+      src: ['./app/scripts/server.js']
+        }
     }
+  
   });
 
 
@@ -361,7 +370,9 @@ module.exports = function (grunt) {
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
+      'execute',
       'watch'
+      
     ]);
   });
 
