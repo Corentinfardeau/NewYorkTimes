@@ -46,10 +46,22 @@ angular
         };
 
         $scope.showArticle = function(e, article){
-            $rootScope.map.center = {latitude: (e!==''?e.position.k:article.coordinates.lat) - 0.2, longitude: (e!==''?e.position.B:article.coordinates.lng) + 0.7};
-           // $rootScope.map.zoom = 6;
+            
+			if($rootScope.activeMarker)
+				$rootScope.activeMarker.options.animation = 0;
+			
+			$rootScope.map.center = {latitude: (e!==''?e.position.k:article.coordinates.lat) - 0.2, longitude: (e!==''?e.position.B:article.coordinates.lng) + 0.7};
             $scope.currentArticle = $scope.articles[e!==''?e.key:article._id];  
-            document.querySelector('aside-article').classList.remove('hidden');    
+            document.querySelector('aside-article').classList.remove('hidden');
+			
+			for(var i=0 ; i < $rootScope.markers.length ; i++) {
+				var id = (e!==''?e.key:article._id);
+				if($rootScope.markers[i].id === id) {
+					$rootScope.markers[i].options.animation = google.maps.Animation.BOUNCE;
+					$rootScope.activeMarker = $rootScope.markers[i];
+					return;
+				}
+			}
         };
 
         // Set fullscreen for map
