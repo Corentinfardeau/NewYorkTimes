@@ -90,7 +90,8 @@ angular
                         }, 300, count );
                         
                     } else {
-                        $rootScope.errorMessage = 'Aucun article ne correspond à votre recherche.';
+                        $rootScope.markers = [];
+						$rootScope.errorMessage = 'Aucun article ne correspond à votre recherche.';
                     }
                 }); 
             
@@ -107,6 +108,7 @@ angular
             delete $rootScope.errorMessage;
             $rootScope.sections.length = 0;
             $rootScope.markers = [];
+			$rootScope.map.zoom = 3;
             search($scope.keywords);
         };
     
