@@ -9,7 +9,7 @@
  */
 angular
     .module('newYorkTimesApp')
-    .controller('MainCtrl', function ($rootScope, $scope, $http, $interval, googlemapsapi, apinyt, Config, mobile) {
+    .controller('MainCtrl', function ($rootScope, $scope, $http, $interval, googlemapsapi, apinyt, Config) {
         
         $scope.popup = false;
     
@@ -55,8 +55,9 @@ angular
 
         $scope.showArticle = function(e, article){
             
-			if($rootScope.activeMarker)
+			if($rootScope.activeMarker) {
 				$rootScope.activeMarker.options.animation = 0;
+			}
 			
 			$rootScope.map.center = {latitude: (e!==''?e.position.k:article.coordinates.lat), longitude: (e!==''?e.position.B:article.coordinates.lng)};
             $scope.currentArticle = $scope.articles[e!==''?e.key:article._id];  

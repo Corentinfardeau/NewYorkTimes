@@ -24,7 +24,7 @@ angular
         var p = page ? ('&page='+page) : '';
 
         $http
-            .get(Config.API_URL+'/svc/search/v2/articlesearch.json?'+keyword+'api-key=sample-key'+p)
+            .get(Config.API_URL+'/svc/search/v2/articlesearch.json?'+keyword+'api-key='+Config.API_KEY+p)
             .success( function (data) {
             
                 angular.forEach(data.response.docs, function (value) {
@@ -88,7 +88,7 @@ angular
         var key = keyword ? ('fq='+keyword+'&') : '';
 
         $http
-            .get(Config.API_URL+'/svc/search/v2/articlesearch.json?'+key+'api-key=sample-key')
+            .get(Config.API_URL+'/svc/search/v2/articlesearch.json?'+key+'api-key='+Config.API_KEY)
             .success(function (data) {
                 deferred.resolve(data.response.meta.hits);
             })
@@ -110,7 +110,7 @@ angular
         var deferred = $q.defer();
 
         $http
-            .get(Config.API_URL+'/svc/mostpopular/v2/mostshared/'+section+'/'+timePeriod+'.json?api-key=sample-key')
+            .get(Config.API_URL+'/svc/mostpopular/v2/mostshared/'+section+'/'+timePeriod+'.json?api-key='+Config.API_KEY)
             .success(function (data) {
                 
                 var mostShared = [];
@@ -140,7 +140,7 @@ angular
         var deferred = $q.defer();
 
         $http
-            .get(Config.API_URL+'/svc/mostpopular/v2/'+action+'/'+section+'/'+timePeriod+'.json?api-key=sample-key')
+            .get(Config.API_URL+'/svc/mostpopular/v2/'+action+'/'+section+'/'+timePeriod+'.json?api-key='+Config.API_URL)
             .success(function (data) {
                 
                 var mostShared = [];
