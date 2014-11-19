@@ -107,6 +107,33 @@ angular
 
         search('');
     
+        //Manage animations on landing page
+        function animate() {
+            var animation={};
+
+            animation.mainTitle=document.getElementsByClassName('landing-title')[0].getElementsByTagName('h1')[0];
+            animation.secTitle=document.getElementsByClassName('landing-title')[0].getElementsByTagName('h2')[0];
+            animation.discoverBtn=document.getElementsByClassName('landing-discover')[0];
+
+            animation.mainTitle.style.opacity = '0';
+            animation.secTitle.style.opacity = '0';
+            animation.discoverBtn.style.opacity = '0';
+
+            setTimeout(function() {
+                animation.mainTitle.classList.add('fadeInUp');
+            },300);
+
+            setTimeout(function() {
+                animation.secTitle.classList.add('fadeInUp');
+            },500);
+
+            setTimeout(function() {
+                animation.discoverBtn.classList.add('fadeIn');
+            },1000);
+        }
+
+        $scope.$on('$viewContentLoaded', animate);
+    
         //apinyt
         //.getArticlesMostShared('sports', '30');
         
@@ -121,7 +148,7 @@ angular
         };
     
         $scope.toggleFullSearch = function(state) {
-            if(state){
+            if(state == 'zoomed'){
                 document.querySelector('.topBar').style.height='100%';
                 document.querySelector('.topBar .btn-close').classList.remove('hidden');
                 document.querySelector('.topBar .search').classList.add('zoomed');
@@ -133,6 +160,32 @@ angular
                 $scope.zoomed = false;
             }
         };
+    
+        $scope.toggleOverlay = function(state, target) {
+            if(state == 'open'){
+                switch(target) {
+                    case 'landing':
+                        document.querySelector('.landing-page').classList.remove('overlay-slide-down--active');
+                        break;
+                    case 'about':
+                        document.querySelector('.about-page').classList.remove('overlay-slide-down--active');
+                        break;
+                    default:
+                        document.querySelector('.overlay-slide-down').classList.remove('overlay-slide-down--active');
+                }
+            }else{
+                switch(target) {
+                    case 'landing':
+                        document.querySelector('.landing-page').classList.add('overlay-slide-down--active');
+                        break;
+                    case 'about':
+                        document.querySelector('.about-page').classList.add('overlay-slide-down--active');
+                        break;
+                    default:
+                        document.querySelector('.overlay-slide-down').classList.remove('overlay-slide-down--active');
+                }
+            }
+		};
         
 		$scope.zoomIn = function() {
 			$rootScope.map.zoom += 1;

@@ -41,6 +41,10 @@ ol, ul {
     list-style: none;
 }
 
+a {
+    cursor: pointer;
+}
+
 blockquote, q {
     quotes: none;
 }
@@ -409,7 +413,7 @@ Home
   height: 30px;
 }
 
-.topBar .btn-close {
+.btn-close {
   position: absolute;
   right: 70px;
   top: 70px;
@@ -417,7 +421,7 @@ Home
   text-align: center;
 }
 
-.topBar .btn-close span {
+.btn-close span {
   display: block;
   text-align: center;
   height: 20px;
@@ -429,7 +433,7 @@ Home
   cursor:pointer;
 }
 
-.topBar .btn-close svg {
+.btn-close svg {
     width: 100%;
     height: 100%;
 }
@@ -811,17 +815,36 @@ Overlays and popups
 .overlay-slide-down {
     height: 100%;
     width: 100%;
-    z-index: 1004;
+    z-index: 1003;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     transform : translateY(-100%);
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+
+.overlay-slide-down--active {
+    transform : translateY(0%);
 }
 
 .landing-page {
     background: #fff;
+}
+
+.about-page {
+    background: #000;
+}
+
+.about-page .btn-close {
+  position: absolute;
+  left: 30px;
+  top: 30px;
+  z-index: 998;
+  text-align: center;
 }
 
 /* ------------------------------------------------------------------ *\
@@ -1087,7 +1110,8 @@ Mobile
   position: relative;
   overflow-x :hidden;
   margin: 20px 0;
-  -webkit-transition: all 0.2s ease-out; 
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 	box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.1);
 }
@@ -1168,7 +1192,7 @@ Mobile
 #loading-bar-spinner {
   display: block;
   position: fixed;
-  z-index: 1000;
+  z-index: 999;
   top: 15px;
   left: 300px;
 }

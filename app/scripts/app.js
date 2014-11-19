@@ -24,10 +24,6 @@ angular
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/landing.html',
-        controller: 'LandingCtrl'
-      })
-      .when('/main', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
@@ -38,10 +34,6 @@ angular
       .when('/trends', {
         templateUrl: 'views/trends.html',
         controller: 'TrendsCtrl'
-      })
-      .when('/landing', {
-        templateUrl: 'views/landing.html',
-        controller: 'LandingCtrl'
       })
       .when('/mobile/:token', {
         templateUrl: 'views/mobile.html',
