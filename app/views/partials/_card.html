@@ -1,11 +1,11 @@
 <div class="card-container">
 	<div class="card" hm-panmove="onHammer" hm-panend="onHammerEnd">
-		<div style="background: url('../images/photo.jpg');background-position: center center; background-size: cover;">
+		<div style="background: url('http://www.nytimes.com/{{article.multimedia[1].url}}');background-position: center center; background-size: cover;">
 
 		</div>
 		<div>
-			<h2>Politic</h2>
-			<h1>New Ebola Quarantine Protocol Seen as Barrier to Volunteers</h1>
+			<h2>{{article.news_desk}}</h2>
+			<h1>{{article.headline.main}}</h1>
 		</div>
 	</div>
 	<div class="remove-card">

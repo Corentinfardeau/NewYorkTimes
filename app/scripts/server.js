@@ -1,4 +1,4 @@
-'use stricts';
+'use strict';
 
 var server={
   init : function(){

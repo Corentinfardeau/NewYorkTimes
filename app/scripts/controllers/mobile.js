@@ -9,14 +9,14 @@
  */
 angular
     .module('newYorkTimesApp')
-    .controller('MobileCtrl', function ($rootScope, $scope) {
+    .controller('MobileCtrl', function ($scope) {
       
-      var articles = new Array();
+      $scope.articles = [];
+      
       this.socket= io.connect('http://macbook-corentinf.local:2000');
       this.socket.on('added', function(currentArticle){
-            alert('Nouvel Article');
-            $scope.articles = articles.push(currentArticle);
+            $scope.articles.push(currentArticle);
             $scope.$apply();
-            console.log(articles);
+            //console.log(articles);
       });
 });
