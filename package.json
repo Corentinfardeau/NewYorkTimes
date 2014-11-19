@@ -3,9 +3,7 @@
   "version": "0.0.0",
   "dependencies": {
     "express": "^4.10.2",
-    "grunt-execute": "^0.2.2",
-    "socket.io": "^1.2.0",
-    "socket.io-client": "~1.2.0"
+    "grunt-execute": "^0.2.2"
   },
   "devDependencies": {
     "grunt": "^0.4.1",

@@ -16,6 +16,6 @@ var server={
       server.io.emit('added',currentArticle);
     });
   }
-  
+
 };
 server.init();
