@@ -10,7 +10,15 @@
 angular
     .module('newYorkTimesApp')
     .controller('MainCtrl', function ($rootScope, $scope, $http, $interval, googlemapsapi, apinyt, Config) {
+        
+        //On ajoute au click l'article courant sur le server
+        $scope.sendArticle = function(currentArticle){ 
+            currentArticle = this.currentArticle;
+                this.socket= io.connect('http://macbook-corentinf.local:2000');
+                this.socket.emit('send',currentArticle);
 
+        }
+  
         // Error message
         $rootScope.errorMessage = '';
 
