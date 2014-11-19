@@ -51,7 +51,7 @@
 			<p>Swipe left to delete an article</p>
 		</div>
 		
-		<card ng-repeat="article in articles"></card>
+		<card ng-repeat="article in localStorageArticles | filter:query"></card>
 				
 		<form class="mobile-search">
 			<input ng-model='query' type="text" placeholder="Search an article...">

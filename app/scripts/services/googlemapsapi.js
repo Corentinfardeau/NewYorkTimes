@@ -31,7 +31,8 @@ angular
 	                        id : articleId,
 	                        latitude: data.results[0].geometry.location.lat,
 	                        longitude: data.results[0].geometry.location.lng,
-	                        section:section
+	                        section:section,
+							options : {}
 	                    };
 
 	                    $rootScope.markers.push(marker);                        

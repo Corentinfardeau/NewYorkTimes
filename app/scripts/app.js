@@ -18,7 +18,8 @@ angular
     'ngTouch',
     'uiGmapgoogle-maps',
     'angular-loading-bar',
-    'hmTouchEvents'
+    'hmTouchEvents',
+    'monospaced.qrcode'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -42,7 +43,7 @@ angular
         templateUrl: 'views/landing.html',
         controller: 'LandingCtrl'
       })
-      .when('/mobile', {
+      .when('/mobile/:token', {
         templateUrl: 'views/mobile.html',
         controller: 'MobileCtrl'
       })
@@ -50,6 +51,7 @@ angular
         redirectTo: '/'
       });
   });
+
 
 // UI
 

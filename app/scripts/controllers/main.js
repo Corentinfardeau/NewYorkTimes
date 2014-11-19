@@ -9,14 +9,22 @@
  */
 angular
     .module('newYorkTimesApp')
-    .controller('MainCtrl', function ($rootScope, $scope, $http, $interval, googlemapsapi, apinyt, Config) {
+    .controller('MainCtrl', function ($rootScope, $scope, $http, $interval, googlemapsapi, apinyt, Config, mobile) {
         
+        $scope.popup = false;
+    
         //On ajoute au click l'article courant sur le server
         $scope.sendArticle = function(currentArticle){ 
             currentArticle = this.currentArticle;
-                this.socket= io.connect('http://macbook-corentinf.local:2000');
-                this.socket.emit('send',currentArticle);
-        }
+            this.socket= io.connect('http://macbook-corentinf.local:2000');
+            this.socket.emit('send',currentArticle);
+    
+            this.socket.on('send token',function(token){
+              $scope.token = token;
+            });
+            //Show the popup with qrcode
+            $scope.popup = true;
+        };
   
         // Error message
         $rootScope.errorMessage = '';
@@ -28,11 +36,11 @@ angular
         $rootScope.map = {
             control: {},
             center: {
-                latitude: 34.833703,
-                longitude: -41.768816
+                latitude: 0,
+                longitude: 0
             },
-            zoom: 4,
-            minZoom: 4,
+            zoom: 3,
+            minZoom: 3,
 			noClear:true,
             options: {
                 styles:Config.GMAP_STYLE,
@@ -46,10 +54,22 @@ angular
         };
 
         $scope.showArticle = function(e, article){
-            $rootScope.map.center = {latitude: (e!==''?e.position.k:article.coordinates.lat) - 0.2, longitude: (e!==''?e.position.B:article.coordinates.lng) + 0.7};
-           // $rootScope.map.zoom = 6;
+            
+			if($rootScope.activeMarker)
+				$rootScope.activeMarker.options.animation = 0;
+			
+			$rootScope.map.center = {latitude: (e!==''?e.position.k:article.coordinates.lat), longitude: (e!==''?e.position.B:article.coordinates.lng)};
             $scope.currentArticle = $scope.articles[e!==''?e.key:article._id];  
-            document.querySelector('aside-article').classList.remove('hidden');    
+            document.querySelector('aside-article').classList.remove('hidden');
+			
+			for(var i=0 ; i < $rootScope.markers.length ; i++) {
+				var id = (e!==''?e.key:article._id);
+				if($rootScope.markers[i].id === id) {
+					$rootScope.markers[i].options.animation = google.maps.Animation.BOUNCE;
+					$rootScope.activeMarker = $rootScope.markers[i];
+					return;
+				}
+			}
         };
 
         // Set fullscreen for map
@@ -78,7 +98,8 @@ angular
                         }, 300, count );
                         
                     } else {
-                        $rootScope.errorMessage = 'Aucun article ne correspond à votre recherche.';
+                        $rootScope.markers = [];
+						$rootScope.errorMessage = 'Aucun article ne correspond à votre recherche.';
                     }
                 }); 
             
@@ -95,6 +116,7 @@ angular
             delete $rootScope.errorMessage;
             $rootScope.sections.length = 0;
             $rootScope.markers = [];
+			$rootScope.map.zoom = 3;
             search($scope.keywords);
         };
     
@@ -117,7 +139,8 @@ angular
 		};
 
 		$scope.zoomOut = function() {
-			if($rootScope.map.zoom > 4)
+			if($rootScope.map.zoom > 2){
 			   $rootScope.map.zoom -= 1;
+            }
 		};
 });

@@ -68,14 +68,14 @@
 </div>
 
 <ui-gmap-google-map center="map.center" pan="true" zoom="map.zoom" control="map.control" options="map.options" bounds="map.bounds">
-	<ui-gmap-markers models="markers" coords="'self'" icon="'icon'" options="'options'"  click="showArticle"></ui-gmap-markers>
+	<ui-gmap-markers models="markers" coords="'self'" icon="'icon'" options="'options'" click="showArticle"></ui-gmap-markers>
 </ui-gmap-google-map>
 
 <div class="infobar-bottom">
 	<div class="infobar-bottom-sections">
 		<h3>Filter by sections :</h3>
 		<form>
-			<span class="checkbox-custom" ng-click='sectionsManage()' ng-repeat='section in sections'>
+			<span class="checkbox-custom {{section | lowercase }}" ng-click='sectionsManage()' ng-repeat='section in sections'>
 			    <input type="checkbox" id="{{section}}" value="{{section}}" checked> 
 			    <label for="{{section}}" class="input-helper input-helper--checkbox"> {{section}} </label>
 			</span>
@@ -94,4 +94,8 @@
 			</ul>
 		</div>
 	</div>
+</div>
+<div ng-show='popup' id="qrcode">
+	<qrcode data="http://10.30.1.131:3000/#/mobile/{{token}}" size="100"></qrcode>
+	<p>Flasher ce code</p>
 </div>
