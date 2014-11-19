@@ -742,6 +742,10 @@ aside-article article header span.article-date {
 
 /*---   Info bar bottom checkboxes   ---*/
 
+.infobar-bottom h3 {
+	text-transform: uppercase;
+}
+
 .infobar-bottom input[type="checkbox"] {
     display: none;
 }
@@ -778,6 +782,25 @@ aside-article article header span.article-date {
     border-radius: 50%;
     border: 2px solid #fff;
 }
+
+/* Sections colors */
+
+.sports input[type="checkbox"]:checked + label:before {
+	background: green;
+}
+
+.sports .input-helper--checkbox:before {
+	border-color: green;
+}
+
+.technology input[type="checkbox"]:checked + label:before {
+	background: gray;
+}
+
+.technology .input-helper--checkbox:before {
+	border-color: gray;
+}
+
 
 /* ------------------------------------------------------------------ *\
 

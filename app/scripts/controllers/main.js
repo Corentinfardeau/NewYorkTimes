@@ -28,11 +28,11 @@ angular
         $rootScope.map = {
             control: {},
             center: {
-                latitude: 34.833703,
-                longitude: -41.768816
+                latitude: 0,
+                longitude: 0
             },
-            zoom: 4,
-            minZoom: 4,
+            zoom: 3,
+            minZoom: 3,
 			noClear:true,
             options: {
                 styles:Config.GMAP_STYLE,
@@ -50,7 +50,7 @@ angular
 			if($rootScope.activeMarker)
 				$rootScope.activeMarker.options.animation = 0;
 			
-			$rootScope.map.center = {latitude: (e!==''?e.position.k:article.coordinates.lat) - 0.2, longitude: (e!==''?e.position.B:article.coordinates.lng) + 0.7};
+			$rootScope.map.center = {latitude: (e!==''?e.position.k:article.coordinates.lat), longitude: (e!==''?e.position.B:article.coordinates.lng)};
             $scope.currentArticle = $scope.articles[e!==''?e.key:article._id];  
             document.querySelector('aside-article').classList.remove('hidden');
 			
@@ -133,7 +133,7 @@ angular
 		};
 
 		$scope.zoomOut = function() {
-			if($rootScope.map.zoom > 4){
+			if($rootScope.map.zoom > 2){
 			   $rootScope.map.zoom -= 1;
             }
 		};
