@@ -20,8 +20,6 @@ module.exports = function (grunt) {
     app: require('./bower.json').appPath || 'app',
     dist: 'dist'
   };
-    
-grunt.loadNpmTasks('grunt-execute');
 
   // Define the configuration for all the tasks
   grunt.initConfig({
@@ -348,14 +346,7 @@ grunt.loadNpmTasks('grunt-execute');
         configFile: 'test/karma.conf.js',
         singleRun: true
       }
-    },
-      
-    execute: {
-      target: {
-      src: ['./app/scripts/server.js']
-        }
     }
-  
   });
 
 
@@ -370,7 +361,6 @@ grunt.loadNpmTasks('grunt-execute');
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
-      'execute',
       'watch'
       
     ]);
