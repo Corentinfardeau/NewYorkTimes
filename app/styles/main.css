@@ -1138,3 +1138,5 @@ Mobile
 	float: right;
 	height:40px;
 }
+
+.map-controls{position:absolute;top:0;left:0;margin:70px 0 0 20px;z-index: 100;}

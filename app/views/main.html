@@ -47,6 +47,22 @@
 
 <aside-article ng-show="currentArticle"></aside-article>
 
+<div class="map-controls">
+	<div class='map-control--in' ng-click='zoomIn()'>
+		<svg width="30px" height="30px">
+			<rect fill="none" stroke-width="2" stroke="#000" x="0.5" y="0.5" width="29" height="29"></rect>
+			<rect fill="#000" stroke="none" x="10" y="14" width="11" height="1"></rect>
+			<rect fill="#000" stroke="none" x="15" y="9" width="1" height="11"></rect>
+		</svg>
+	</div>
+	<div class='map-control--out' ng-click='zoomOut()'>
+		<svg width="30px" height="30px">
+			<rect fill="none" stroke-width="2" stroke="#000" x="0.5" y="0.5" width="29" height="29"></rect>
+			<rect fill="#000" stroke="none" x="10" y="14" width="11" height="1"></rect>
+		</svg>
+	</div>
+</div>
+
 <ui-gmap-google-map center="map.center" pan="true" zoom="map.zoom" control="map.control" options="map.options" bounds="map.bounds">
 	<ui-gmap-markers models="markers" coords="'self'" icon="'icon'" options="'options'"  click="showArticle"></ui-gmap-markers>
 </ui-gmap-google-map>
