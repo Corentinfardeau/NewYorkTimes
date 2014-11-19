@@ -87,7 +87,7 @@ angular
         search('');
     
         //apinyt
-			//.getArticlesMostShared('sports', '30');
+        //.getArticlesMostShared('sports', '30');
         
         $scope.searchArticles = function() {
             document.querySelector('aside-article').classList.add('hidden');
@@ -98,24 +98,20 @@ angular
             search($scope.keywords);
         };
     
-        var zoomed = false;
-        $scope.fullSearch = function(state) {
-            if(!state){
+        $scope.toggleFullSearch = function(state) {
+            if(state){
                 document.querySelector('.topBar').style.height='100%';
-                document.querySelector('.topBar .btn-close').classList.toggle('hidden');
-                document.querySelector('.topBar .search').classList.toggle('zoomed');
+                document.querySelector('.topBar .btn-close').classList.remove('hidden');
+                document.querySelector('.topBar .search').classList.add('zoomed');
+                $scope.zoomed = true;
+            }else{
+                document.querySelector('.topBar').style.height='50px';
+                document.querySelector('.topBar .btn-close').classList.add('hidden');
+                document.querySelector('.topBar .search').classList.remove('zoomed');
+                $scope.zoomed = false;
             }
-            zoomed = true;
         };
         
-        $scope.closeFullSearch = function() {
-            zoomed = false;
-            
-            document.querySelector('.topBar').style.height='50px';
-            document.querySelector('.topBar .btn-close').classList.toggle('hidden');
-            document.querySelector('.topBar .search').classList.toggle('zoomed');
-        };
-	
 		$scope.zoomIn = function() {
 			$rootScope.map.zoom += 1;
 		};
