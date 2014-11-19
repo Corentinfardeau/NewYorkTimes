@@ -811,12 +811,13 @@ Overlays and popups
 .overlay-slide-down {
     height: 100%;
     width: 100%;
-    z-index: 1001;
+    z-index: 1004;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
+    transform : translateY(-100%);
 }
 
 .landing-page {
@@ -1167,7 +1168,7 @@ Mobile
 #loading-bar-spinner {
   display: block;
   position: fixed;
-  z-index: 10002;
+  z-index: 1000;
   top: 15px;
   left: 300px;
 }
