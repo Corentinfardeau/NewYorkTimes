@@ -10,7 +10,7 @@
 angular
 	.module('newYorkTimesApp')
     .service('mobile', function mobile ($rootScope) {
-    
+
 		// Add the article to the device localStorage
 		this.AddToLocalStorage = function (article) {
 			if(window.localStorage.getItem(article._id)){
@@ -21,7 +21,7 @@ angular
 		};
 
 		// Get the list of articles stocked in the localstorage
-		this.getArticleInLocalStorage = function (i, listArticle) {
+	this.getArticleInLocalStorage = function (i, listArticle) {
 			listArticle.push(JSON.parse(window.localStorage.getItem(window.localStorage.key(i))));
 			return listArticle;
 		};
@@ -30,5 +30,16 @@ angular
 		this.deleteArticleInStorage = function (id) {
 			window.localStorage.removeItem(id);
 		};
+        
+        // generate random token
+        this.generateToken = function () {
+          var token = '';
+          var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+          for( var i=0; i < 5; i++ ){
+            token += possible.charAt(Math.floor(Math.random() * possible.length));
+          }
+          return token;
+        };
     
 	});

@@ -5,40 +5,77 @@ var server={
     // create socket
     this.io = require('socket.io').listen(2000);
     // écoute un event connection lorsqu'un script ouvre un socket
-    this.io.on('connection',this.listen);
+    this.io.on('connection',this.connection);
     
-    //this.roomList = new Array();
+    this.roomList = [];
+
   },
 
-  listen : function(socket){ 
+  connection : function(socket){ 
     
-    //send article and generate token
-    socket.on('send',function(currentArticle){
-
-        var token = '';
-        var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-
-        for( var i=0; i < 10; i++ ){
-          token += possible.charAt(Math.floor(Math.random() * possible.length));
-        }
+    //create room
+    socket.on('create room', function(roomID) {
       
-      //server.roomList.push(token);
+      socket.join(roomID+'');
+      console.log('room '+roomID+ ' crée');
+      server.roomList.push(roomID);
 
-      // send the token to desk
-      server.io.emit('send token',token);
-      socket.join(token+'');
+    });
+    
+    //mobile join room
+    socket.on('join room', function(roomID) {
       
-      //send article
-      server.io.emit('added',currentArticle);
+      //watch if the room exist
+      console.log(server.roomList.indexOf(roomID));
+      if(server.roomList.indexOf(roomID) != -1){
+        socket.join(roomID+'');
+        console.log('room '+roomID+ ' jointe'); 
+
+        //callback success
+        server.io.in(roomID).emit('success joined', '');
+      }
+      else
+      {
+        console.log('error');
+        socket.emit('error joined', ''); 
+      }
       
     });
     
-    // Mobile connection
-    socket.on('send mobile token', function(token){
-      console.log('connecté');
-      socket.join(token+'');
+    /*
+    
+    For the first connection
+    
+    */
+    
+    //mobile ask for article when the mobile is joined
+    socket.on('get firstArticle', function(roomID){
+      
+      //callback to desktop to give the last article
+      server.io.in(roomID).emit('get firstCurrentArticle', '');
     });
+    
+    //Desk send article to mobile
+    socket.on('send firstCurrentArticle', function(roomID, article){
+
+      //send to mobile the last article
+      server.io.in(roomID).emit('add firstArticle', article);
+    });
+    
+    /*
+
+    For the next connections
+
+    */
+    
+    //Send article for the next connexion
+    socket.on('send currentArticle', function(roomID, article){
+      console.log('sending '+ roomID);
+      //Send to mobile the article
+      server.io.in(roomID).emit('add article', article);
+    });
+    
+    
   }
-
 };
 server.init();

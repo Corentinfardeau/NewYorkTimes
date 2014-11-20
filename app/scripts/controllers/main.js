@@ -9,21 +9,39 @@
  */
 angular
     .module('newYorkTimesApp')
-    .controller('MainCtrl', function ($rootScope, $scope, $http, $interval, googlemapsapi, apinyt, Config) {
+    .controller('MainCtrl', function ($rootScope, $scope, $http, $interval, googlemapsapi, apinyt, Config, mobile) {
         
         $scope.popup = false;
+        this.socket = io.connect('http://macbook-corentinf.local:2000');
+        $scope.socket = this.socket;
     
         //On ajoute au click l'article courant sur le server
         $scope.sendArticle = function(currentArticle){ 
-            currentArticle = this.currentArticle;
-            this.socket= io.connect('http://macbook-corentinf.local:2000');
-            this.socket.emit('send',currentArticle);
-    
-            this.socket.on('send token',function(token){
-              $scope.token = token;
-            });
-            //Show the popup with qrcode
-            $scope.popup = true;
+            
+            //first connect
+            if(!window.localStorage.getItem('token'))
+            {
+              
+			  $scope.token = mobile.generateToken();
+				window.localStorage.setItem('token', $scope.token);
+              //create room
+			  $scope.socket.emit('create room', $scope.token);
+                
+              //When the mobile join the room, send the currentArticle
+			  $scope.socket.on('get firstCurrentArticle', function(data){
+                  $scope.socket.emit('send firstCurrentArticle', $scope.token, currentArticle);
+				  $scope.popup = false;
+              });
+              
+              //Show the popup with qrcode
+              $scope.popup = true;
+            }
+            else
+            {
+				$scope.socket.emit('send currentArticle', window.localStorage.getItem('token'), currentArticle);
+            }
+            
+            
         };
   
         // Error message

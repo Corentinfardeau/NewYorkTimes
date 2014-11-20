@@ -35,7 +35,7 @@ angular
         templateUrl: 'views/trends.html',
         controller: 'TrendsCtrl'
       })
-      .when('/mobile/:token', {
+      .when('/mobile', {
         templateUrl: 'views/mobile.html',
         controller: 'MobileCtrl'
       })
