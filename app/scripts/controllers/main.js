@@ -162,7 +162,7 @@ angular
             }
         };
     
-        $scope.toggleOverlay = function(state, target) {
+        $rootScope.toggleOverlay = function(state, target) {
             if(state == 'open'){
                 switch(target) {
                     case 'landing':
@@ -170,6 +170,9 @@ angular
                         break;
                     case 'about':
                         document.querySelector('.about-page').classList.remove('overlay-slide-down--active');
+                        break;
+                    case 'link':
+                        document.querySelector('.link-page').classList.remove('overlay-fade--active');
                         break;
                     default:
                         document.querySelector('.overlay-slide-down').classList.remove('overlay-slide-down--active');
@@ -181,6 +184,9 @@ angular
                         break;
                     case 'about':
                         document.querySelector('.about-page').classList.add('overlay-slide-down--active');
+                        break;
+                    case 'link':
+                        document.querySelector('.link-page').classList.add('overlay-fade--active');
                         break;
                     default:
                         document.querySelector('.overlay-slide-down').classList.remove('overlay-slide-down--active');

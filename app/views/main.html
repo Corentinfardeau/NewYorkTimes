@@ -1,4 +1,4 @@
-<div class="overlay-slide-down overlay-slide-down--active landing-page">
+<div class="overlay overlay-slide-down overlay-slide-down--active landing-page">
 	<span class="plane-img fly"> <!-- Contains image bg --> </span>
 	<div class="landing">
 		<div class="content">
@@ -203,7 +203,7 @@
 	</div>
 </div>
 
-<div class="overlay-slide-down about-page">
+<div class="overlay overlay-slide-down about-page">
     <a class="btn-close" ng-click="toggleOverlay('open', 'about')">
         <span>
             <svg version="1.1" id="cross" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -216,7 +216,20 @@
     <h2>This is about page</h2>
 </div>
 
-<div ng-show='popup' id="qrcode">
+<div class="overlay overlay-fade link-page">
+    <a class="btn-close" ng-click="toggleOverlay('open', 'link')">
+        <span>
+            <svg version="1.1" id="cross" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                  viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+            <line fill="none" stroke="#000" stroke-width="8" stroke-miterlimit="10" x1="0" y1="0" x2="100" y2="100"/>
+            <line fill="none" stroke="#000" stroke-width="8" stroke-miterlimit="10" x1="100" y1="0" x2="0.815" y2="100"/>
+            </svg>
+        </span>
+    </a>
+	<h2>Save article to your mobile reading list</h2>
+	<h3>Please use this personal code : <span>5439</span></h3>
+	<p>Quick tip : Access the website with your favourite mobile browser and enter the code above</p>
+	
+	<p>Or flash this code</p>
 	<qrcode data="http://10.30.1.131:3000/#/mobile/{{token}}" size="100"></qrcode>
-	<p>Flasher ce code</p>
 </div>

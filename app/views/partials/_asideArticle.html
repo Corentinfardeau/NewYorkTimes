@@ -26,7 +26,7 @@
 		{{currentArticle.snippet}}
 	</p>
 	<a ng-show='currentArticle.web_url' target='_blank' href="{{currentArticle.web_url}}" class="button">Read more</a>
-	<div href="#" class="button" ng-click="sendArticle(currentArticle)">
+	<div href="#" class="button" ng-click="sendArticle(currentArticle); toggleOverlay('close', 'link')">
 		Save to mobile
 		<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 			viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
