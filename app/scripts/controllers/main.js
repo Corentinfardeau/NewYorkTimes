@@ -17,11 +17,10 @@ angular
     
         //On ajoute au click l'article courant sur le server
         $scope.sendArticle = function(currentArticle){ 
-            
+			
             //first connect
             if(!window.localStorage.getItem('token'))
-            {
-              
+            {	
 			  $scope.token = mobile.generateToken();
 				window.localStorage.setItem('token', $scope.token);
               //create room
@@ -30,11 +29,11 @@ angular
               //When the mobile join the room, send the currentArticle
 			  $scope.socket.on('get firstCurrentArticle', function(data){
                   $scope.socket.emit('send firstCurrentArticle', $scope.token, currentArticle);
-				  $scope.popup = false;
+				  alert('connect');
+				  $rootScope.toggleOverlay('open', 'link');
+				  $scope.popup = true;
               });
               
-              //Show the popup with qrcode
-              $scope.popup = true;
             }
             else
             {
