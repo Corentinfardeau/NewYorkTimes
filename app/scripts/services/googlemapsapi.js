@@ -32,7 +32,8 @@ angular
 	                        latitude: data.results[0].geometry.location.lat,
 	                        longitude: data.results[0].geometry.location.lng,
 	                        section:section,
-							options : {}
+							options : {},
+//                            icon: new google.maps.MarkerImage('images/location.svg', null, null, null, new google.maps.Size(55,55))
 	                    };
 
 	                    $rootScope.markers.push(marker);                        
