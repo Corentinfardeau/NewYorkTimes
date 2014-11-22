@@ -460,6 +460,7 @@ Home
     width: 320px;
     background: #eee;
     display: inline-block;
+    vertical-align: top;
     margin: 0 50px;
 }
 
