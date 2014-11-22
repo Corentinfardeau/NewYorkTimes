@@ -10,7 +10,7 @@
 angular
     .module('newYorkTimesApp')
     .controller('MainCtrl', function ($rootScope, $scope, $http, $interval, googlemapsapi, apinyt, Config, mobile) {
-        
+ 		
         $scope.popup = false;
         this.socket = io.connect(Config.NODE_SERVER);
         $scope.socket = this.socket;
@@ -19,7 +19,7 @@ angular
 			
 			
 			//Url de la page mobile
-			$scope.url_mobile = "http://192.168.0.11/mobile/";
+			$scope.urlMobile = 'http://192.168.1.11/mobile/';
 			
             //first connect
             if(!window.localStorage.getItem('token'))
@@ -32,7 +32,7 @@ angular
 				$scope.socket.emit('create room', $scope.token);
                 
               //When the mobile join the room, send the currentArticle
-			  $scope.socket.on('get firstCurrentArticle', function(data){
+			  $scope.socket.on('get firstCurrentArticle', function(){
                   $scope.socket.emit('send firstCurrentArticle', $scope.token, currentArticle);
 				  $rootScope.toggleOverlay('open', 'link');
 				  $scope.popup = false;
@@ -44,7 +44,7 @@ angular
             {
 				$scope.socket.emit('send currentArticle', window.localStorage.getItem('token'), currentArticle);
 				$scope.token = window.localStorage.getItem('token');
-				console.log($scope.popup + "Token deja créé");
+				console.log($scope.popup + 'Token deja créé');
             }
             
             
@@ -81,7 +81,7 @@ angular
 			
 			//Sound when opening
 			var audio = new Audio('../sons/opened.mp3');
-			audio.volume=.1;
+			audio.volume=0.1;
 			audio.play();
 			
 			if($rootScope.activeMarker) {
@@ -178,7 +178,7 @@ angular
         };
     
         $scope.toggleFullSearch = function(state) {
-            if(state == 'zoomed'){
+            if(state === 'zoomed'){
                 document.querySelector('.topBar').style.height='100%';
                 document.querySelector('.topBar .btn-close').classList.remove('hidden');
                 document.querySelector('.topBar .search').classList.add('zoomed');
@@ -192,13 +192,14 @@ angular
         };
     
         $rootScope.toggleOverlay = function(state, target) {
-            if(state == 'open'){
+            if(state === 'open'){
                 switch(target) {
                     case 'landing':
                         document.querySelector('.landing-page').classList.remove('overlay-slide-down--active');
+						
 						//Sound when opening
 						var audio = new Audio('../sons/carte.mp3');
-						audio.volume=.2;
+						audio.volume=0.2;
 						audio.play();
 						
                         break;
@@ -237,4 +238,20 @@ angular
 			   $rootScope.map.zoom -= 1;
             }
 		};
+	
+		//get the articles most shared
+		apinyt
+		.getArticlesMostShared('all-sections',1)
+		.then(function(data){
+			console.log(data);
+			$scope.articlesMostShared = data;
+		});
+	
+		//get the articles most shared
+		apinyt
+		.getPopularArticles('all-sections',1,'mostviewed')
+		.then(function(data){
+			console.log(data);
+			$scope.articlesMostViewed = data;
+		});
 });

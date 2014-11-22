@@ -110,22 +110,19 @@ angular
         var deferred = $q.defer();
 
         $http
-            .get(Config.API_URL+'/svc/mostpopular/v2/mostshared/'+section+'/'+timePeriod+'.json?api-key='+Config.API_KEY)
+        .get('http://www.corsproxy.com/api.nytimes.com/svc/mostpopular/v2/mostshared/'+section+'/'+timePeriod+'.json?api-key='+Config.API_KEY)
             .success(function (data) {
-                
                 var mostShared = [];
-                
                 angular
                     .forEach(data.results, function (value) {
                         mostShared.push(value);
                     });
-            
                 deferred.resolve(mostShared);
             })
             .error(function (data) {
                 deferred.resolve(data);
             });
-
+        
         return deferred.promise;
     };
     
@@ -140,17 +137,17 @@ angular
         var deferred = $q.defer();
 
         $http
-            .get(Config.API_URL+'/svc/mostpopular/v2/'+action+'/'+section+'/'+timePeriod+'.json?api-key='+Config.API_URL)
+            .get('http://www.corsproxy.com/api.nytimes.com/svc/mostpopular/v2/'+action+'/'+section+'/'+timePeriod+'.json?api-key='+Config.API_KEY)
             .success(function (data) {
                 
-                var mostShared = [];
+                var mostViewed = [];
                 
                 angular
                     .forEach(data.results, function (value) {
-                        mostShared.push(value);
+                        mostViewed.push(value);
                     });
             
-                deferred.resolve(mostShared);
+                deferred.resolve(mostViewed);
             })
             .error(function (data) {
                 deferred.resolve(data);
