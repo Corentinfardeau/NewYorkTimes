@@ -190,6 +190,47 @@ a {
   height: 10px;
 }
 
+.button-bar {
+    width: 300px;
+    height: 40px;
+    line-height: 40px;
+    background: #e4ff00;
+    color: #000;
+    text-transform: uppercase;
+    text-align: center;
+    
+    transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -webkit-transition: all 0.2s;
+}
+
+.button-bar:hover {
+    background: #000;
+    color: #e4ff00;
+}
+
+.button-bar:hover svg{
+    fill: #e4ff00;
+    stroke: #e4ff00;
+    
+    transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -webkit-transition: all 0.2s;
+}
+
+.button-bar svg {
+    height: 15px;
+    fill: #000;
+    stroke: #000;
+    margin-bottom: -2px;
+}
+
+.button-bar--fixed {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
 .btn-animated {
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -409,7 +450,7 @@ Home
 }
 
 .topBar .search.zoomed input[type='search'] {
-  font-size: 32px;
+  font-size: 2rem;
 }
 
 .topBar .search.zoomed svg {
@@ -468,9 +509,9 @@ Home
 
 aside-article {
     display: table;
-    height: calc(100%-50px);
-    overflow-x: scroll;
     height: 100%;
+    height: calc(100% - 50px);
+    overflow-x: scroll;
     background: #fff;
     position: absolute;
     top: 50px;
@@ -506,6 +547,7 @@ aside-article.aside--fullActive {
 aside-article .article-container {
     width: 300px;
     display: table-cell;
+    position: relative;
 }
 
 aside-article article {
@@ -752,22 +794,30 @@ aside-article .twitter-container .tweet-content {
   display: block;
   position: relative;
   height: 120px;
-  background-size: cover;
-  transition: all 1s ease;
 }
 
-.infobar-bottom-articles .scroll-view ul li a:hover {
+.infobar-bottom-articles .scroll-view ul li a:hover span:first-child{
   -ms-transform: scale(1.1);
+  -moz-transform: scale(1.1);
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
 
-.infobar-bottom-articles .scroll-view ul li a:hover span{
+.infobar-bottom-articles .scroll-view ul li a span:first-child{
+    display: block;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: all 2s ease; 
+}
+
+.infobar-bottom-articles .scroll-view ul li a:hover span:last-child{
   opacity: 1;
 }
 
 
-.infobar-bottom-articles .scroll-view ul li a span{
+.infobar-bottom-articles .scroll-view ul li a span:last-child{
   display: block;
   position: absolute;
   bottom: 0;
@@ -776,7 +826,6 @@ aside-article .twitter-container .tweet-content {
   padding: 1.2rem 1rem;
   opacity: 0;
   font-size:11px;
-  transition: all 2s ease;
   background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 100%);
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65)));
   background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
@@ -881,22 +930,11 @@ Overlays and popups
 }
 
 .overlay h2{
-    font-size: 32px;
+    font-size: 2rem;
     text-transform: capitalize;
     font-family: 'itc_cheltenhamregular';
-    margin: 100px 0 0 0;
+    margin: 50px 0 0 0;
     letter-spacing: 1px;
-}
-
-.overlay h3{
-    font-size: 24px;
-    margin: 10px 0;
-}
-
-.overlay h3 span{
-    display: block;
-    font-size: 62px;
-    margin: 20px 0;
 }
 
 .overlay p{
@@ -948,17 +986,71 @@ Overlays and popups
 .about-page {
     background: #000;
     padding: 3rem;
+    text-align: left;
+}
+
+.about-page p {
+    color: #888;
+    font-size: 1.2rem;
+}
+
+.about-page h2,
+.about-page h3 {
+    color: #fff;
+    font-size: 2rem;
+    text-transform: capitalize;
+    font-family: 'itc_cheltenhamregular';
+    margin: 50px 0 20px;
+    letter-spacing: 1px;
+}
+
+.about-page li {
+    color: #888;
+    font-size: 1.2rem;
+    margin-top: 10px;
 }
 
 .link-page {
-/*    background: rgba(255, 255, 255, 0.9);*/
     background: #fff;
     padding: 3rem;
 }
 
-.link-page qrcode{
-    display: inline-block;
-    margin: 30px 0;
+.link-page .phone-screen {
+    width: 320px;
+    height: 660px;
+    margin: auto;
+    position: relative;
+    background: url('../images/iphone.svg') no-repeat center top;
+    background-size: cover;
+}
+
+.link-page .phone-screen h3{
+    position: absolute;
+    top: 205px;
+    left: 0;
+    text-align: center;
+    width: 100%;
+    font-size: 1rem;
+}
+
+.link-page .phone-screen h3 span{
+    display: block;
+    font-size: 2.5rem;
+    letter-spacing: 0.2rem;
+    margin-top: 10px;
+}
+
+.link-page .phone-screen p{
+    position: absolute;
+    top: 350px;
+    text-align: center;
+    width: 100%;
+}
+
+.link-page .phone-screen qrcode {
+    display: block;
+    position: absolute;
+    top: 370px;
 }
 
 /* ------------------------------------------------------------------ *\

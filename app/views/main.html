@@ -201,9 +201,13 @@
 		<div class="scroll-view">
 			<ul>
 				<li ng-repeat="article in articles">
-					<a ng-show='article.multimedia' ng-click="showArticle('', article )" style="background-image: url('http://www.nytimes.com/{{ article.multimedia[1].url }}');"><span>{{ article.headline.main }}</span>
+					<a ng-show='article.multimedia' ng-click="showArticle('', article )">
+                        <span style="background-image: url('http://www.nytimes.com/{{ article.multimedia[1].url }}');"></span>
+					    <span>{{ article.headline.main }}</span>
 					</a>
-					<a ng-hide='article.multimedia' ng-click="showArticle('', article )" style="background-image: url('/images/defaut.jpg');"><span>{{ article.headline.main }}</span>
+					<a ng-hide='article.multimedia' ng-click="showArticle('', article )">                          
+                         <span style="background-image: url('/images/defaut.jpg');"></span>
+					     <span>{{ article.headline.main }}</span>
 					</a>
 				</li>
 			</ul>
@@ -221,7 +225,18 @@
             </svg>
         </span>
     </a>
-    <h2>This is about page</h2>
+    <h2>About the project</h2>
+    <p>This website is a datavizualisation project made by 5 students from HETIC, a school located in Paris (France). </p>
+    <p>The data and images we use are coming from the official New York Times API</p>
+    
+    <h3>Get to know the team</h3>
+    <ul>
+        <li>Pierre Le Vaillant</li>
+        <li>Corentin Fardeau</li>
+        <li>Maxime Daguet</li>
+        <li>Youna Doh</li>
+        <li>Justine Peyrot</li>
+    </ul>
 </div>
 
 <div class="overlay overlay-fade link-page" ng-show="popup">
@@ -235,9 +250,11 @@
         </span>
     </a>
 	<h2>Save article to your mobile reading list</h2>
-	<h3>Please use this personal code : <span>{{token}}</span></h3>
-	<p>Quick tip : Access the website with your favourite mobile browser and enter the code above</p>
+	<p>Access the website with your favourite mobile browser and enter the code above</p>
 	
-	<p>Or flash this code</p>
-	<qrcode data="{{ url_mobile }}" size="100"></qrcode>
+	<div class="phone-screen">
+	    <h3>Enter your code : <span>{{token}}</span></h3>
+	    <p>Or flash this code</p>
+	    <qrcode data="{{ url_mobile }}" size="100"></qrcode>
+	</div>
 </div>
