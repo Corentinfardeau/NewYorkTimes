@@ -17,19 +17,20 @@ angular
     
         //On ajoute au click l'article courant sur le server
         $scope.sendArticle = function(currentArticle){ 
-			
+
             //first connect
             if(!window.localStorage.getItem('token'))
             {	
-			  $scope.token = mobile.generateToken();
+			
+				$scope.token = mobile.generateToken();
 				window.localStorage.setItem('token', $scope.token);
-              //create room
-			  $scope.socket.emit('create room', $scope.token);
+				
+				//create room
+				$scope.socket.emit('create room', $scope.token);
                 
               //When the mobile join the room, send the currentArticle
 			  $scope.socket.on('get firstCurrentArticle', function(data){
                   $scope.socket.emit('send firstCurrentArticle', $scope.token, currentArticle);
-				  alert('connect');
 				  $rootScope.toggleOverlay('open', 'link');
 				  $scope.popup = true;
               });
@@ -71,7 +72,12 @@ angular
         };
 
         $scope.showArticle = function(e, article){
-            
+			
+			//Sound when opening
+			var audio = new Audio('../sons/opened.mp3');
+			audio.volume=.1;
+			audio.play();
+			
 			if($rootScope.activeMarker) {
 				$rootScope.activeMarker.options.animation = 0;
 			}
@@ -184,6 +190,11 @@ angular
                 switch(target) {
                     case 'landing':
                         document.querySelector('.landing-page').classList.remove('overlay-slide-down--active');
+						//Sound when opening
+						var audio = new Audio('../sons/carte.mp3');
+						audio.volume=.2;
+						audio.play();
+						
                         break;
                     case 'about':
                         document.querySelector('.about-page').classList.remove('overlay-slide-down--active');

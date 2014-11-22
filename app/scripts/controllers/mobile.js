@@ -57,7 +57,7 @@ angular
 
 		  //callback if room is not joined
 		  this.socket.on('error joined', function(){
-			  
+			 alert('error'); 
 		  });
 
 		  //get the last article from desk
