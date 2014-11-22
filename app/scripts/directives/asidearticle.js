@@ -12,20 +12,24 @@ angular.module('newYorkTimesApp')
       templateUrl: 'views/partials/_asideArticle.html',
       restrict: 'E',
       link: function() {
-            document.querySelector('aside-article').classList.toggle('hidden');
             document.querySelector('aside-article .btn-close').addEventListener('click', function(e){
                 e.preventDefault();
                 //Sound when opening
                 var audio = new Audio('../sons/closed.mp3');
                 audio.volume=.1;
                 audio.play();
-                document.querySelector('aside-article').classList.toggle('hidden');
+                document.querySelector('aside-article').classList.remove('aside--halfActive', 'aside--fullActive');
                 $rootScope.activeMarker.options.animation = 0;
                 $rootScope.map.center = {latitude: 34.833703,longitude: -41.768816};
                 $rootScope.map.zoom = 3;
 				
                 $rootScope.$apply();
                 
+            }, false);
+          
+            document.getElementById('toggleTwitter').addEventListener('click', function(e){  
+                e.preventDefault();
+                document.querySelector('aside-article').classList.toggle('aside--fullActive');
             }, false);
       }
     };

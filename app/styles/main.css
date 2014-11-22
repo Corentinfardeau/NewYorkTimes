@@ -151,13 +151,13 @@ a {
 }
 
 .hightlighted-yellow {
-    padding: 0 2px;
+    padding: 0 0.125rem;
     background: #e4ff00;
 }
 
 .button {
   display: inline-block;
-  padding: 7px 20px;
+  padding: 0.4rem 1.2rem;
   margin: 1em 0;
   position: relative;
   text-decoration: none;
@@ -174,7 +174,7 @@ a {
   top: 0;
   right: 0;
   bottom: 0;
-  border: dotted 1px #000;
+  border: 1px solid #000;
   -webkit-transform: perspective(350px) rotateX(0deg);
           transform: perspective(350px) rotateX(0deg);
 }
@@ -236,10 +236,10 @@ a {
 .img-container div {
   position: absolute;
   bottom: 2px;
-  font-size:.8em;
+  font-size:.8rem;
   left: 0;
   right: 0;
-  padding: 10px 10px;
+  padding: 0.6rem;
   color: #fff;
   background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 100%);
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65)));
@@ -465,6 +465,79 @@ Home
 
 /*---   Sidebar right   ---*/
 
+aside-article {
+    display: table;
+    height: calc(100%-50px);
+    overflow-x: scroll;
+    height: 100%;
+    background: #fff;
+    position: absolute;
+    top: 50px;
+    bottom: 0;
+    right: 0;
+    z-index: 997;
+   
+    -webkit-box-shadow: 4px 0 6px 1px rgba(0,0,0,.1);
+    -moz-box-shadow: 4px 0 6px 1px rgba(0,0,0,.1);
+    box-shadow: 4px 0 6px 1px rgba(0,0,0,.1);
+    
+    -webkit-transition: all .2s; 
+    -moz-transition:    all .2s; 
+    transition:         all .2s;
+    
+    transform : translateX(100%);
+    -moz-transform : translateX(100%);
+    -webkit-transform : translateX(100%);
+}
+
+aside-article.aside--halfActive {
+    transform : translateX(400px);
+    -moz-transform : translateX(400px);
+    -webkit-transform : translateX(400px);
+}
+
+aside-article.aside--fullActive {
+    transform : translateX(0%);
+    -moz-transform : translateX(0%);
+    -webkit-transform : translateX(0%);
+}
+
+aside-article .article-container {
+    width: 300px;
+    display: table-cell;
+}
+
+aside-article article {
+  padding: 1rem;
+}
+
+aside-article article p {
+  text-align: justify;
+  font-family: sans-serif;
+  font-size:.8em;
+  line-height: 1.3em;
+  margin-top: 10px;
+}
+
+aside-article article header h2{
+  margin: 10px 0;
+  font-size: 1.5em;
+  line-height: 28px;
+  font-family: 'itc_cheltenhamregular',georgia,times,serif;
+  letter-spacing:.1px;
+}
+
+aside-article article header span{
+  color: #888;
+  font-size: .9rem;
+  text-transform: capitalize;
+  margin-right:5px;
+}
+
+aside-article article header span.article-date {
+  color:#aaa;
+}
+
 aside-article .btn-close {
   position: absolute;
   top: 0;
@@ -488,60 +561,59 @@ aside-article .btn-close span {
   cursor:pointer;
 }
 
-aside-article {
-  height: calc(100%-50px);
-  overflow-x: scroll;
-  width: 300px;
-  background: #fff;
-  position: absolute;
-  top: 50px;
-  bottom: 0;
-  right: 0;
-  z-index: 997;
-  -webkit-transform-style: preserve-3d;
-  animation: sidebareffect .5s;
-  -webkit-animation: sidebareffect .5s;
-  -webkit-transform: translateZ(0);
-  -webkit-box-shadow: 4px 0 6px 1px rgba(0,0,0,.1);
-  -moz-box-shadow: 4px 0 6px 1px rgba(0,0,0,.1);
-  box-shadow: 4px 0 6px 1px rgba(0,0,0,.1);
+aside-article .twitter-container {
+    width: 400px;
+    height: 100%;
+    display: table-cell;
+    vertical-align: top;
+    border-left: 1px solid #ddd;
 }
 
-aside-article.hidden {
-    animation: sidebareffect2 .5s;
-    -webkit-animation: sidebareffect2 .5s;
-    -webkit-transform: translate(100%, 0);
+aside-article .twitter-container h2 {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    height: 50px;
+    line-height: 50px;
+    border-bottom: 1px solid #ddd;
 }
 
-aside-article article {
-  padding: 1em;
+aside-article .twitter-container ul {
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    overflow-y: scroll;
+    padding-bottom: 2rem;
 }
 
-aside-article article p {
-  text-align: justify;
-  font-family: sans-serif;
-  font-size:.8em;
-  line-height: 1.3em;
-  margin-top: 10px;
+aside-article .twitter-container ul li{
+    display: table;
+    margin-bottom: 30px;
 }
 
-aside-article article header h2{
-  margin: 10px 0;
-  font-size: 1.5em;
-  line-height: 28px;
-  font-family: 'itc_cheltenhamregular',georgia,times,serif;
-  letter-spacing:.1px;
+aside-article .twitter-container ul li img {
+    display: table-cell;
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
 }
 
-aside-article article header span{
-  color: #888;
-  font-size: .9em;
-  text-transform: capitalize;
-  margin-right:5px;
+aside-article .twitter-container .tweet-container {
+    display: table-cell;
+    vertical-align: top;
+    padding-left: 1rem;
 }
 
-aside-article article header span.article-date {
-  color:#aaa;
+aside-article .twitter-container .tweet-username {
+    color: #888;
+    font-size: 0.8rem;
+}
+
+aside-article .twitter-container .tweet-content {
+    line-height: 150%;
+    font-family: sans-serif;
+    font-size: 0.8rem;
+    margin-top: 3px;
 }
 
 /*---   Popup   ---*/
@@ -587,7 +659,7 @@ aside-article article header span.article-date {
 }
 
 .popup > div:last-child {
-  padding: 10px 10px 10px 80px;
+  padding: 0.6rem 0.6rem 0.6rem 5rem;
 }
 
 .popup > div:last-child h2 {
@@ -644,7 +716,7 @@ aside-article article header span.article-date {
 }
 
 .infobar-bottom-sections {
-  padding: 15px;
+  padding: 1rem;
   width: 50%;
 }
 
@@ -700,7 +772,7 @@ aside-article article header span.article-date {
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 20px 15px;
+  padding: 1.2rem 1rem;
   opacity: 0;
   font-size:11px;
   transition: all 2s ease;
@@ -718,7 +790,7 @@ aside-article article header span.article-date {
     z-index: 100;
     position:absolute;
     width: 100%;
-    padding:10px;
+    padding:1rem;
     transition: opacity .25s ease-in-out;
    -moz-transition: opacity .25s ease-in-out;
    -webkit-transition: opacity .25s ease-in-out;
@@ -758,7 +830,7 @@ aside-article article header span.article-date {
 }
 
 .input-helper--checkbox {
-    padding-left: 20px;
+    padding-left: 1.3rem;
 }
 
 .input-helper--checkbox:before {
@@ -874,13 +946,13 @@ Overlays and popups
 
 .about-page {
     background: #000;
-    padding: 50px;
+    padding: 3rem;
 }
 
 .link-page {
 /*    background: rgba(255, 255, 255, 0.9);*/
     background: #fff;
-    padding: 50px;
+    padding: 3rem;
 }
 
 .link-page qrcode{
@@ -1073,6 +1145,7 @@ Animations
           animation-name: fadeOutDown;
 }
 
+/*
 @-webkit-keyframes sidebareffect {
   from {
     -webkit-transform: translate(100%, 0);
@@ -1092,6 +1165,7 @@ Animations
     -webkit-transform: translate(100%, 0);
   }
 }
+*/
 
 /* ------------------------------------------------------------------ *\
 
@@ -1122,9 +1196,7 @@ Mobile
 #mobile-container{
   overflow-y: scroll; /* has to be scroll, not auto */
   -webkit-overflow-scrolling: touch;
-  padding: 20px 20px;
-  padding-top: 70px;
-
+  padding: 4.4rem 1.5rem 1.5rem 1.5rem;
 }
 
 #instruction{
@@ -1189,7 +1261,7 @@ Mobile
 
 .card>div:last-child{
   width: 60%;
-  padding: 10px;
+  padding: 0.6rem;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -1287,7 +1359,7 @@ Mobile
 	width: 100%;
 	background: none;
 	border:0;
-	padding:20px;
+	padding:1.2rem;
 	font-size:16px;
 	outline: none;
 	color:#fff;

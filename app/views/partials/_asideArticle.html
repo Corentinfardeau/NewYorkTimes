@@ -1,41 +1,139 @@
-<a class="btn-close"><span>×</span></a>
-<div class="img-container">
+<div class="article-container">
+    <a class="btn-close"><span>×</span></a>
+    <div class="img-container">
 
-	<img ng-show="currentArticle.multimedia" src="http://www.nytimes.com/{{currentArticle.multimedia[1].url}}" alt="une photo">
-	<img ng-hide="currentArticle.multimedia" src="../images/defaut.jpg" alt="une photo">
+        <img ng-show="currentArticle.multimedia" src="http://www.nytimes.com/{{currentArticle.multimedia[1].url}}" alt="une photo">
+        <img ng-hide="currentArticle.multimedia" src="../images/defaut.jpg" alt="une photo">
 
-	<div>
-		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-			 viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
-			<path fill="#FFFFFF"  id="location-2-icon" d="M255.05,55.058c59.955,0,108.732,48.777,108.732,108.732c0,69.179-72.138,182.12-108.732,243.736
-				C193.115,303.24,146.318,223.547,146.318,163.79C146.318,103.835,195.095,55.058,255.05,55.058 M255.05,7
-				C168.458,7,98.26,77.197,98.26,163.79S166.878,351.017,255.05,502c88.171-150.982,156.79-251.617,156.79-338.21S341.644,7,255.05,7
-				L255.05,7z M255.05,107.848c-30.123,0-54.543,24.42-54.543,54.541s24.42,54.541,54.543,54.541s54.541-24.418,54.541-54.541
-				S285.173,107.848,255.05,107.848L255.05,107.848z"/>
-		</svg>
-		<span>{{currentArticle.location}}</span>
-	</div>
+        <div>
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                 viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
+                <path fill="#FFFFFF"  id="location-2-icon" d="M255.05,55.058c59.955,0,108.732,48.777,108.732,108.732c0,69.179-72.138,182.12-108.732,243.736
+                    C193.115,303.24,146.318,223.547,146.318,163.79C146.318,103.835,195.095,55.058,255.05,55.058 M255.05,7
+                    C168.458,7,98.26,77.197,98.26,163.79S166.878,351.017,255.05,502c88.171-150.982,156.79-251.617,156.79-338.21S341.644,7,255.05,7
+                    L255.05,7z M255.05,107.848c-30.123,0-54.543,24.42-54.543,54.541s24.42,54.541,54.543,54.541s54.541-24.418,54.541-54.541
+                    S285.173,107.848,255.05,107.848L255.05,107.848z"/>
+            </svg>
+            <span>{{currentArticle.location}}</span>
+        </div>
+    </div>
+    <article>
+        <header>
+            <span ng-if='currentArticle.news_desk' class="article-category">{{currentArticle.news_desk}}</span>
+            <span ng-if='currentArticle.pub_date' class="article-date">{{currentArticle.pub_date}}</span>
+            <h2>{{currentArticle.headline.main}}</h2>
+        </header>
+        <p>
+            {{currentArticle.snippet}}
+        </p>
+        <a ng-show='currentArticle.web_url' target='_blank' href="{{currentArticle.web_url}}" class="button">Read more</a>
+        <a class="button" id="toggleTwitter">Related tweets</a>
+        <div href="#" class="button" ng-click="sendArticle(currentArticle); toggleOverlay('close', 'link')">
+            Save to mobile
+            <svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
+                <path id="smartphone-4-icon" d="M327.023,2H132.047c-22.54,0-40.809,18.27-40.809,40.809v427.881
+                    c0,22.539,18.269,40.809,40.809,40.809h194.975c22.54,0,40.809-18.27,40.809-40.809V42.809C367.832,20.27,349.563,2,327.023,2z
+                     M207.894,39.374h45.756c2.732,0,4.947,2.215,4.947,4.947c0,2.732-2.215,4.947-4.947,4.947h-45.756
+                    c-2.732,0-4.947-2.215-4.947-4.947C202.947,41.589,205.162,39.374,207.894,39.374z M230.774,488.073
+                    c-10.93,0-19.786-8.858-19.786-19.786c0-10.928,8.857-19.786,19.786-19.786c10.925,0,19.786,8.858,19.786,19.786
+                    C250.56,479.215,241.699,488.073,230.774,488.073z M336.814,427.099H122.258V86.401h214.556V427.099z"/>
+            </svg>
+        </div>
+    </article>
 </div>
-<article>
-	<header>
-		<span ng-if='currentArticle.news_desk' class="article-category">{{currentArticle.news_desk}}</span>
-		<span ng-if='currentArticle.pub_date' class="article-date">{{currentArticle.pub_date}}</span>
-		<h2>{{currentArticle.headline.main}}</h2>
-	</header>
-	<p>
-		{{currentArticle.snippet}}
-	</p>
-	<a ng-show='currentArticle.web_url' target='_blank' href="{{currentArticle.web_url}}" class="button">Read more</a>
-	<div href="#" class="button" ng-click="sendArticle(currentArticle); toggleOverlay('close', 'link')">
-		Save to mobile
-		<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-			viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
-			<path id="smartphone-4-icon" d="M327.023,2H132.047c-22.54,0-40.809,18.27-40.809,40.809v427.881
-				c0,22.539,18.269,40.809,40.809,40.809h194.975c22.54,0,40.809-18.27,40.809-40.809V42.809C367.832,20.27,349.563,2,327.023,2z
-				 M207.894,39.374h45.756c2.732,0,4.947,2.215,4.947,4.947c0,2.732-2.215,4.947-4.947,4.947h-45.756
-				c-2.732,0-4.947-2.215-4.947-4.947C202.947,41.589,205.162,39.374,207.894,39.374z M230.774,488.073
-				c-10.93,0-19.786-8.858-19.786-19.786c0-10.928,8.857-19.786,19.786-19.786c10.925,0,19.786,8.858,19.786,19.786
-				C250.56,479.215,241.699,488.073,230.774,488.073z M336.814,427.099H122.258V86.401h214.556V427.099z"/>
-		</svg>
-	</div>
-</article>
+<div class="twitter-container">
+    <h2>Related tweets</h2>
+    <ul>
+        <li>
+            <img src="./images/damienbg1.jpg" alt="profile pic">
+            <div class="tweet-container">
+                <span class="tweet-name">Damien Laurent</span>
+                <span class="tweet-username">@damlau4</span>
+                <p class="tweet-content"> 
+                    Relou y a plus de Ketchup :/ #VDM #Véner #Faustine 
+                </p>
+            </div>
+        </li>
+        <li>
+            <img src="./images/damienbg2.jpg" alt="profile pic">
+            <div class="tweet-container">
+                <span class="tweet-name">Damien Laurent</span>
+                <span class="tweet-username">@damlau4</span>
+                <p class="tweet-content">
+                    Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis.
+                </p>
+            </div>
+        </li>
+        <li>
+            <img src="./images/damienbg2.jpg" alt="profile pic">
+            <div class="tweet-container">
+                <span class="tweet-name">Damien Laurent</span>
+                <span class="tweet-username">@damlau4</span>
+                <p class="tweet-content">
+                    Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa.
+                </p>
+            </div>
+        </li>
+        <li>
+            <img src="./images/damienbg2.jpg" alt="profile pic">
+            <div class="tweet-container">
+                <span class="tweet-name">Damien Laurent</span>
+                <span class="tweet-username">@damlau4</span>
+                <p class="tweet-content">
+                    Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. 
+                </p>
+            </div>
+        </li>
+        <li>
+            <img src="./images/damienbg2.jpg" alt="profile pic">
+            <div class="tweet-container">
+                <span class="tweet-name">Damien Laurent</span>
+                <span class="tweet-username">@damlau4</span>
+                <p class="tweet-content">
+                    Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Mauris iaculis porttitor posuere. 
+                </p>
+            </div>
+        </li>
+        <li>
+            <img src="./images/damienbg2.jpg" alt="profile pic">
+            <div class="tweet-container">
+                <span class="tweet-name">Damien Laurent</span>
+                <span class="tweet-username">@damlau4</span>
+                <p class="tweet-content">
+                    Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Mauris iaculis porttitor posuere. 
+                </p>
+            </div>
+        </li>
+        <li>
+            <img src="./images/damienbg2.jpg" alt="profile pic">
+            <div class="tweet-container">
+                <span class="tweet-name">Damien Laurent</span>
+                <span class="tweet-username">@damlau4</span>
+                <p class="tweet-content">
+                    Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Mauris iaculis porttitor posuere. 
+                </p>
+            </div>
+        </li>
+        <li>
+            <img src="./images/damienbg1.jpg" alt="profile pic">
+            <div class="tweet-container">
+                <span class="tweet-name">Damien Laurent</span>
+                <span class="tweet-username">@damlau4</span>
+                <p class="tweet-content"> 
+                    Relou y a plus de Ketchup :/ #VDM #Véner #Faustine 
+                </p>
+            </div>
+        </li>
+        <li>
+            <img src="./images/damienbg1.jpg" alt="profile pic">
+            <div class="tweet-container">
+                <span class="tweet-name">Damien Laurent</span>
+                <span class="tweet-username">@damlau4</span>
+                <p class="tweet-content"> 
+                    Relou y a plus de Ketchup :/ #VDM #Véner #Faustine 
+                </p>
+            </div>
+        </li>
+    </ul>
+</div>

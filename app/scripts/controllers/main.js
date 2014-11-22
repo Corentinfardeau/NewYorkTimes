@@ -90,7 +90,8 @@ angular
 			
 			$rootScope.map.center = {latitude: (e!==''?e.position.k:article.coordinates.lat), longitude: (e!==''?e.position.B:article.coordinates.lng)};
             $scope.currentArticle = $scope.articles[e!==''?e.key:article._id];  
-            document.querySelector('aside-article').classList.remove('hidden');
+            
+            document.querySelector('aside-article').classList.add('aside--halfActive');
 			
 			for(var i=0 ; i < $rootScope.markers.length ; i++) {
 				var id = (e!==''?e.key:article._id);
@@ -168,7 +169,6 @@ angular
         //.getArticlesMostShared('sports', '30');
         
         $scope.searchArticles = function() {
-            document.querySelector('aside-article').classList.add('hidden');
             $rootScope.articles = {};
             delete $rootScope.errorMessage;
             $rootScope.sections.length = 0;
