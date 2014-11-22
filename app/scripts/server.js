@@ -27,7 +27,7 @@ var server={
       
       //watch if the room exist
       console.log(server.roomList.indexOf(roomID));
-      if(server.roomList.indexOf(roomID) != -1){
+      if(server.roomList.indexOf(roomID) !== -1){
         socket.join(roomID+'');
         console.log('room '+roomID+ ' jointe'); 
 

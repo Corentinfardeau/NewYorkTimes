@@ -17,7 +17,7 @@ angular.module('newYorkTimesApp')
                 e.preventDefault();
                 //Sound when opening
                 var audio = new Audio('../sons/closed.mp3');
-                audio.volume=.1;
+                audio.volume=0.1;
                 audio.play();
                 document.querySelector('aside-article').classList.toggle('hidden');
                 $rootScope.activeMarker.options.animation = 0;

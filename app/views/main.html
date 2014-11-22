@@ -148,8 +148,16 @@
     </a>
 
     <div ng-if="zoomed" ng-animate class="search-sections">
-        <div class="search-section animated"></div>
-        <div class="search-section animated"></div>
+		<div class="search-section animated">
+			<ul>
+				<li ng-repeat="articleMostShared in articlesMostShared">{{articleMostShared.title}}</li>
+			</ul>
+		</div>
+        <div class="search-section animated">
+			<ul>
+				<li ng-repeat="articleMostViewed in articlesMostViewed">{{articleMostViewed.title}}</li>
+			</ul>
+        </div>
         <div class="search-section animated"></div>
     </div>
 </div>

@@ -39,25 +39,24 @@ angular
 		  
 		  do
 		  {
-			var saisie = prompt('Met ton code', 'code');
+			$scope.saisie = prompt('Met ton code', 'code');
 		  } 
-		  while (saisie == null);
+		  while ($scope.saisie === null);
 
 		  //Join the room
-		  this.socket.emit('join room', saisie);
+		  this.socket.emit('join room', $scope.saisie);
 
 		  //callback if room is joined
 		  this.socket.on('success joined',function(){
-			  alert("vous avez réussi à joindre l'ordi et le telephone");
 			  //stock the token in LS
-			  window.localStorage.setItem('token', saisie);
+			  window.localStorage.setItem('token', $scope.saisie);
 			  //ask for article
-			  $scope.socket.emit('get firstArticle', saisie); 
+			  $scope.socket.emit('get firstArticle', $scope.saisie); 
 		  });
 
 		  //callback if room is not joined
 		  this.socket.on('error joined', function(){
-			 alert('error'); 
+			 console.log('error'); 
 		  });
 
 		  //get the last article from desk
@@ -76,7 +75,7 @@ angular
 			
 			this.socket.on('success joined',function(){
 				//ask for article
-				$scope.socket.emit('get firstArticle', saisie); 
+				$scope.socket.emit('get firstArticle', $scope.saisie); 
 			});
 			
 			//get the last article from desk
@@ -88,7 +87,6 @@ angular
 		}
 		
 		this.socket.on('add article', function(article){
-			console.log('nouvel article');
 			mobile.AddToLocalStorage(article);
 			refreshList();
 		});
