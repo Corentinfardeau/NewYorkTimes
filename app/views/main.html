@@ -216,7 +216,7 @@
     <h2>This is about page</h2>
 </div>
 
-<div class="overlay overlay-fade link-page" ng-hide="popup">
+<div class="overlay overlay-fade link-page" ng-show="popup">
     <a class="btn-close" ng-click="toggleOverlay('open', 'link')">
         <span>
             <svg version="1.1" id="cross" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -231,5 +231,5 @@
 	<p>Quick tip : Access the website with your favourite mobile browser and enter the code above</p>
 	
 	<p>Or flash this code</p>
-	<qrcode data="http://10.30.1.131:3000/#/mobile" size="100"></qrcode>
+	<qrcode data="{{ url_mobile }}" size="100"></qrcode>
 </div>

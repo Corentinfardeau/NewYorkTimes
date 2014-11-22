@@ -9,7 +9,7 @@
  */
 angular
     .module('newYorkTimesApp')
-    .controller('MobileCtrl', function ($rootScope, $scope, mobile) {
+    .controller('MobileCtrl', function ($rootScope, $scope, Config, mobile) {
         
 		$scope.localStorageArticles  = [];
 	
@@ -30,7 +30,7 @@ angular
 			}   
 		}
 	
-      this.socket = io.connect('http://macbook-corentinf.local:2000');
+      this.socket = io.connect(Config.NODE_SERVER);
     
       $scope.socket = this.socket;
   
