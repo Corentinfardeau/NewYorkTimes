@@ -12,17 +12,20 @@ angular
     .controller('MainCtrl', function ($rootScope, $scope, $http, $interval, googlemapsapi, apinyt, Config, mobile) {
         
         $scope.popup = false;
-        this.socket = io.connect('http://macbook-corentinf.local:2000');
+        this.socket = io.connect(Config.NODE_SERVER);
         $scope.socket = this.socket;
     
-        //On ajoute au click l'article courant sur le server
-        $scope.sendArticle = function(currentArticle){ 
-
+        $scope.sendArticle = function(currentArticle){
+			
+			
+			//Url de la page mobile
+			$scope.url_mobile = "http://192.168.0.11/mobile/";
+			
             //first connect
             if(!window.localStorage.getItem('token'))
             {	
-			
-				$scope.token = mobile.generateToken();
+				$scope.popup = true;
+			  	$scope.token = mobile.generateToken();
 				window.localStorage.setItem('token', $scope.token);
 				
 				//create room
@@ -32,13 +35,16 @@ angular
 			  $scope.socket.on('get firstCurrentArticle', function(data){
                   $scope.socket.emit('send firstCurrentArticle', $scope.token, currentArticle);
 				  $rootScope.toggleOverlay('open', 'link');
-				  $scope.popup = true;
+				  $scope.popup = false;
+
               });
               
             }
             else
             {
 				$scope.socket.emit('send currentArticle', window.localStorage.getItem('token'), currentArticle);
+				$scope.token = window.localStorage.getItem('token');
+				console.log($scope.popup + "Token deja créé");
             }
             
             
