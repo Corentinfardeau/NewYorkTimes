@@ -164,7 +164,7 @@ angular
         }
 
         $scope.$on('$viewContentLoaded', animate);
-    
+
         //apinyt
         //.getArticlesMostShared('sports', '30');
         
@@ -177,13 +177,23 @@ angular
             search($scope.keywords);
         };
     
+        $scope.searchPeriods = [
+            { id: 'all',    name: 'All time' },
+            { id: 'week',   name: 'Last week' },
+            { id: 'month',  name: 'Last month' },
+            { id: 'year',   name: 'Last year' },
+            { id: 'custom', name: 'Custom period' }
+        ];
+    
         $scope.toggleFullSearch = function(state) {
             if(state === 'zoomed'){
+                document.querySelector('.search-period').classList.add('hidden');
                 document.querySelector('.topBar').style.height='100%';
                 document.querySelector('.topBar .btn-close').classList.remove('hidden');
                 document.querySelector('.topBar .search').classList.add('zoomed');
                 $scope.zoomed = true;
             }else{
+                document.querySelector('.search-period').classList.remove('hidden');
                 document.querySelector('.topBar').style.height='50px';
                 document.querySelector('.topBar .btn-close').classList.add('hidden');
                 document.querySelector('.topBar .search').classList.remove('zoomed');

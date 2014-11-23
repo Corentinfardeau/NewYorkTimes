@@ -137,6 +137,19 @@
 			<input ng-click="toggleFullSearch('zoomed')" ng-model='keywords' type="search" placeholder="Keywords..." name="search_keyword">
 		</form>
 	</div>
+	
+	<div class="search-period">
+        <select ng-model="searchPeriod" ng-init="searchPeriod = searchPeriods[0]" ng-options="searchPeriod as searchPeriod.name for searchPeriod in searchPeriods">
+        </select>
+        
+        <div ng-if="searchPeriod.id == 'custom'" class="search-period-custom">
+            <span>From</span>
+            <input type="number" step="1" value="1914" min="1914" max="2014"> 
+            <span>To</span>
+            <input type="number" step="1" value="2014" min="1914" max="2014"> 
+        </div>
+	</div>
+	
 	<a class="btn-close hidden" ng-click="toggleFullSearch('unzoomed')">
         <span>
             <svg version="1.1" id="cross" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
