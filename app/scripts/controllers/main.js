@@ -11,7 +11,11 @@ angular
     .module('newYorkTimesApp')
     .controller('MainCtrl', function ($rootScope, $scope, $http, $interval, googlemapsapi, apinyt, Config, mobile) {
  		
-        $scope.popup = false;
+        $scope.popup   = false;
+		$scope.isCheck = true;
+		$scope.removeArticles = [];
+		$scope.removeMarkers  = [];
+	
         this.socket = io.connect(Config.NODE_SERVER);
         $scope.socket = this.socket;
     
@@ -254,4 +258,105 @@ angular
 			console.log(data);
 			$scope.articlesMostViewed = data;
 		});
+	
+	
+		//manage filter by section
+		$scope.notSelected = function(event, section){
+			
+			$scope.removeArticles = [];
+			$scope.removeMarkers = [];
+			
+			console.log(event);
+			//remove article from articles Object
+			angular.forEach($rootScope.articles, function (article) {
+				if(article.section_name === section){
+					
+					$scope.removeArticles.push(article);
+					delete $rootScope.articles[article._id];
+				}
+			});
+			
+			//remove marker from the markers array
+			angular.forEach($rootScope.markers, function (marker) {
+				if(marker.section === section){
+					$scope.removeMarkers.push(marker);
+					var index = $rootScope.markers.indexOf(marker);
+					if (index > -1) {
+						$rootScope.markers.splice(index, 1);
+					}
+				}
+			});
+			
+		}
+		
+		
+	
+		$scope.manageSection = function(section, isCheck){
+			
+			if(isCheck){
+
+				//remove article from articles Object
+				angular.forEach($rootScope.articles, function (article) {
+					if(article.section_name === section){
+						
+						//push article into a tmp array
+						$scope.removeArticles.push(article);
+						//delete the article into the articles object
+						delete $rootScope.articles[article._id];
+					}
+				});
+
+				//remove marker from the markers array
+				angular.forEach($rootScope.markers, function (marker) {
+					if(marker.section === section){
+						
+						//push marker into a tmp array
+						$scope.removeMarkers.push(marker);
+						
+						//delete the marker into the marker object
+						var index = $rootScope.markers.indexOf(marker);
+						if (index > -1) {
+							$rootScope.markers.splice(index, 1);
+						}
+					}
+				});
+				
+			}else{
+				
+				//remove articles from the markers array
+				angular.forEach($scope.removeArticles, function (article) {
+					
+					if(article.section_name === section){
+						
+						//push the article into the articles object
+						$rootScope.articles[article._id] = article;
+						
+						//remove the article into the tmp array
+						var index = $scope.removeArticles.indexOf(article);
+						if (index > -1) {
+							$scope.removeArticles.splice(index, 1);
+						}
+						
+					}
+				});
+				
+				//remove marker from the markers array
+				angular.forEach($scope.removeMarkers, function (marker) {
+					if(marker.section === section){
+						
+						//Add the marker in the markers array
+						$rootScope.markers.push(marker);
+						
+						//Remove the marker from the array removeMarkers
+						var index = $scope.removeMarkers.indexOf(marker);
+						if (index > -1) {
+							$scope.removeMarkers.splice(index, 1);
+						}
+					}
+				});
+			}
+
+		}
+		
+		
 });
