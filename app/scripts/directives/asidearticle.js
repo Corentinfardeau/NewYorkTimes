@@ -19,7 +19,8 @@ angular.module('newYorkTimesApp')
                 audio.volume=0.1;
                 audio.play();
                 document.querySelector('aside-article').classList.remove('aside--halfActive', 'aside--fullActive');
-                document.getElementById('toggleTwitter').innerHTML = 'Related tweets';
+                document.querySelector('#toggleTwitter span').innerHTML = 'Related tweets';
+                document.getElementById('toggleTwitter').classList.remove('button--active');
                 $rootScope.activeMarker.options.animation = 0;
                 $rootScope.map.center = {latitude: 34.833703,longitude: -41.768816};
                 $rootScope.map.zoom = 3;
