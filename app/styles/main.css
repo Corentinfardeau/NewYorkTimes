@@ -167,6 +167,10 @@ a {
   font-size:.8em;
 }
 
+.button--active {
+    background: #e4ff00;
+}
+
 .button:before {
   content: '';
   position: absolute;
@@ -187,7 +191,8 @@ a {
 }
 
 .button svg {
-  height: 10px;
+    height: 15px;
+    margin-bottom: -4px;
 }
 
 .button-bar {
@@ -406,28 +411,44 @@ Home
 /*---   Search bar top   ---*/
 
 .topBar {
-  height: 50px;
-  width: 100%;
-  position: fixed;
-  z-index: 999;
-  background: #fff;
-  -webkit-box-shadow: 1px 1px 8px rgba(102,102,102,.3);
-  -moz-box-shadow: 1px 1px 8px rgba(102,102,102,.3);
-  box-shadow: 1px 1px 8px rgba(102,102,102,.3);
-  
-  transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  -webkit-transition: all 0.3s ease-in-out;
+    height: 50px;
+    width: 100%;
+    position: fixed;
+    z-index: 999;
+    background: #fff;
+    -webkit-box-shadow: 1px 1px 8px rgba(102,102,102,.3);
+    -moz-box-shadow: 1px 1px 8px rgba(102,102,102,.3);
+    box-shadow: 1px 1px 8px rgba(102,102,102,.3);
+
+    transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
 }
 
 .topBar .logo {
-  height: 100%;
-  width: 50px;
-  background: #000;
-  display: inline-block;
+    height: 50px;
+    width: 50px;
+    background: #000;
+    display: inline-block;
+    overflow: hidden;
 }
 
-.topBar .logo svg{
+.topBar .logo:hover .logo-icons{
+    transform : translateY(-53px);
+    -moz-transform : translateY(-53px);
+    -webkit-transform : translateY(-53px);
+}
+
+.logo-icons {
+    height: 100px;
+    width: 50px;
+    display: block;
+    transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+}
+
+.topBar .logo svg {
   height: 25px;
   margin: 12.5px;
 }
@@ -1516,4 +1537,3 @@ Mobile
 }
 
 .map-controls{position:absolute;top:0;left:0;margin:70px 0 0 20px;z-index: 100;}
-

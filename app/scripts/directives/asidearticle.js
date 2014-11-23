@@ -33,9 +33,11 @@ angular.module('newYorkTimesApp')
                 document.querySelector('aside-article').classList.toggle('aside--fullActive');
                 
                 if (document.querySelector('aside-article').classList.contains('aside--fullActive')) {
-                    document.getElementById('toggleTwitter').innerHTML = 'Close tweets';
+                    document.querySelector('#toggleTwitter span').innerHTML = 'Close tweets';
+                    document.getElementById('toggleTwitter').classList.add('button--active');
                 } else {
-                    document.getElementById('toggleTwitter').innerHTML = 'Related tweets';
+                    document.querySelector('#toggleTwitter span').innerHTML = 'Related tweets';
+                    document.getElementById('toggleTwitter').classList.remove('button--active');
                 };
                 
             }, false);

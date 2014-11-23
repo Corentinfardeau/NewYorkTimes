@@ -161,9 +161,19 @@ angular
             setTimeout(function() {
                 animation.discoverBtn.classList.add('fadeIn');
             },1000);
-        }
+        };
+        
+        //Manage the custom select
+        function selectCustom() {
+            [].slice.call( document.querySelectorAll( 'select.select-custom' ) ).forEach( function(el) {	
+                new SelectFx(el);
+            } );
+        };
 
-        $scope.$on('$viewContentLoaded', animate);
+        $scope.$on('$viewContentLoaded', function(){
+            animate();
+            selectCustom();
+        });
 
         //apinyt
         //.getArticlesMostShared('sports', '30');
