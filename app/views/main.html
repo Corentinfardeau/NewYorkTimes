@@ -218,9 +218,9 @@
 	<div class="infobar-bottom-sections">
 		<h3>Filter by sections :</h3>
 		<form>
-			<span class="checkbox-custom {{section | lowercase }}" ng-click='sectionsManage()' ng-repeat='section in sections'>
-			    <input type="checkbox" id="{{section}}" value="{{section}}" checked> 
-			    <label for="{{section}}" class="input-helper input-helper--checkbox"> {{section}} </label>
+			<span class="checkbox-custom {{section | lowercase }}" ng-repeat='section in sections'>
+				<input type="checkbox" id="{{section}}" value="{{section}}" ng-model="isCheck" ng-click="manageSection(section, isCheck)">
+				<label for="{{section}}" class="input-helper input-helper--checkbox"> {{section}} </label>
 			</span>
 		</form>
 	</div>
@@ -283,6 +283,6 @@
 	<div class="phone-screen">
 	    <h3>Enter your code : <span>{{token}}</span></h3>
 	    <p>Or flash this code</p>
-	    <qrcode data="{{ url_mobile }}" size="100"></qrcode>
+	    <qrcode data="{{ urlMobile }}" size="100"></qrcode>
 	</div>
 </div>
