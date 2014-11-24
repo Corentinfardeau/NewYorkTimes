@@ -180,13 +180,13 @@
 			<h2>Most shared</h2>
 
 			<ul>
-				<li ng-repeat="articleMostShared in articlesMostShared | limitTo:5"><a href='{{articleMostShared.url}}' alt='{{articleMostShared.title}}'>{{articleMostShared.title}}</a><br /><span>{{articleMostShared.published_date}} - {{articleMostShared.section}}</span></span></li>
+				<li ng-repeat="articleMostShared in articlesMostShared | limitTo:5"><a target='_blank' href='{{articleMostShared.url}}' alt='{{articleMostShared.title}}'><h3>{{articleMostShared.title}}</h3><span>{{articleMostShared.section}} <span class="date">{{articleMostShared.published_date}}</span></span></a></li>
 			</ul>
 		</div>
         <div class="search-section animated">
         	<h2>Most viewed</h2>
 			<ul>
-				<li ng-repeat="articleMostViewed in articlesMostViewed | limitTo:5"><a href='{{articleMostViewed.url}}' alt='{{articleMostShared.title}}'>{{articleMostViewed.title}}<br /><span>{{articleMostViewed.published_date}} - {{articleMostViewed.des_facet[0]}}</span></a></li>
+				<li ng-repeat="articleMostViewed in articlesMostViewed | limitTo:5"><a target='_blank' href='{{articleMostViewed.url}}' alt='{{articleMostShared.title}}'><h3>{{articleMostViewed.title}}</h3><span>{{articleMostViewed.des_facet[0]}} <span class="date">{{articleMostViewed.published_date}}</span></span></a></li>
 			</ul>
         </div>
         <div class="search-section animated">

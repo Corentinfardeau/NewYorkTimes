@@ -575,24 +575,30 @@ Home
 
 .search-section h2 {
 	font-family: 'itc_cheltenhamregular',georgia,times,serif;
-	font-size:1.5em;
+	font-size:1.8em;
 	margin-bottom:1em;
 }
 
 .search-section li {
 	padding:10px 0;
 	border-bottom:1px solid #eee;
-	font-size:1em;
-}
-
-.search-section li span {
-	color:#E3E3E3;
-	text-transform: uppercase;
-	margin-top:1em;
 	font-size:0.9em;
 }
 
+.search-section li h3 {
+	font-size:1em;
+	line-height: 1.5em;
+	margin-bottom:0.3em;
+}
 
+.search-section li span {
+	color:#888;
+	text-transform: uppercase;
+}
+
+.search-section li .date {
+	color:#aaa;
+}
 
 /*---   Sidebar right   ---*/
 
