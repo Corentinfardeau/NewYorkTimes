@@ -39,7 +39,7 @@ angular.module('newYorkTimesApp')
                 } else {
                     document.querySelector('#toggleTwitter span').innerHTML = 'Related tweets';
                     document.getElementById('toggleTwitter').classList.remove('button--active');
-                };
+                }
                 
             }, false);
       }

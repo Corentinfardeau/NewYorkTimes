@@ -177,16 +177,21 @@
 
     <div ng-if="zoomed" ng-animate class="search-sections">
 		<div class="search-section animated">
+			<h2>Most shared</h2>
+
 			<ul>
-				<li ng-repeat="articleMostShared in articlesMostShared">{{articleMostShared.title}}</li>
+				<li ng-repeat="articleMostShared in articlesMostShared | limitTo:5"><a href='{{articleMostShared.url}}' alt='{{articleMostShared.title}}'>{{articleMostShared.title}}</a><br /><span>{{articleMostShared.published_date}} - {{articleMostShared.section}}</span></span></li>
 			</ul>
 		</div>
         <div class="search-section animated">
+        	<h2>Most viewed</h2>
 			<ul>
-				<li ng-repeat="articleMostViewed in articlesMostViewed">{{articleMostViewed.title}}</li>
+				<li ng-repeat="articleMostViewed in articlesMostViewed | limitTo:5"><a href='{{articleMostViewed.url}}' alt='{{articleMostShared.title}}'>{{articleMostViewed.title}}<br /><span>{{articleMostViewed.published_date}} - {{articleMostViewed.des_facet[0]}}</span></a></li>
 			</ul>
         </div>
-        <div class="search-section animated"></div>
+        <div class="search-section animated">
+        	<h2>Search trends</h2>
+        </div>
     </div>
 </div>
 
@@ -253,11 +258,13 @@
             </svg>
         </span>
     </a>
-    <h2>About the project</h2>
+    <h2>New York Times</h2>
+    <hr>
+    <h3>The idea</h3>
     <p>This website is a datavizualisation project made by 5 students from HETIC, a school located in Paris (France). </p>
     <p>The data and images we use are coming from the official New York Times API</p>
     
-    <h3>Get to know the team</h3>
+    <h3>The team</h3>
     <ul>
         <li>Pierre Le Vaillant</li>
         <li>Corentin Fardeau</li>

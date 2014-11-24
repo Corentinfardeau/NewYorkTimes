@@ -110,7 +110,7 @@ angular
         var deferred = $q.defer();
 
         $http
-        .get('http://www.corsproxy.com/api.nytimes.com/svc/mostpopular/v2/mostshared/'+section+'/'+timePeriod+'.json?api-key='+Config.API_KEY)
+        .get('http://api.nytimes.com/svc/mostpopular/v2/mostshared/'+section+'/'+timePeriod+'.json?api-key='+Config.API_KEY)
             .success(function (data) {
                 var mostShared = [];
                 angular
@@ -137,7 +137,7 @@ angular
         var deferred = $q.defer();
 
         $http
-            .get('http://www.corsproxy.com/api.nytimes.com/svc/mostpopular/v2/'+action+'/'+section+'/'+timePeriod+'.json?api-key='+Config.API_KEY)
+            .get('http://api.nytimes.com/svc/mostpopular/v2/'+action+'/'+section+'/'+timePeriod+'.json?api-key='+Config.API_KEY)
             .success(function (data) {
                 
                 var mostViewed = [];
