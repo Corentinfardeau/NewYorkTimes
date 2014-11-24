@@ -198,7 +198,7 @@ a {
 }
 
 .button-bar {
-    width: 300px;
+    width: 350px;
     height: 40px;
     line-height: 40px;
     background: #e4ff00;
@@ -206,9 +206,6 @@ a {
     text-transform: uppercase;
     text-align: center;
     
-    transition: all 0.2s;
-    -moz-transition: all 0.2s;
-    -webkit-transition: all 0.2s;
 }
 
 .button-bar:hover {
@@ -219,10 +216,6 @@ a {
 .button-bar:hover svg{
     fill: #e4ff00;
     stroke: #e4ff00;
-    
-    transition: all 0.2s;
-    -moz-transition: all 0.2s;
-    -webkit-transition: all 0.2s;
 }
 
 .button-bar svg {
@@ -310,13 +303,13 @@ a {
 
 select {
     display: inline-block;
-    font-size: 1.2rem;
+    font-size: 1rem;
     border: none;
     border-left: 1px solid #ddd;
     border-right: 1px solid #ddd;
     border-radius: 0;
     color: #000;
-    width: 300px;
+    width: 350px;
     height: 50px;
     outline: none;
     padding: 0 1rem;
@@ -498,7 +491,7 @@ Home
     border-right: 1px solid #ddd;
     height: 50px;
     padding: 0 1rem;
-    font-size: 1.2rem;
+    font-size: 1rem;
     line-height: 50px;
 }
 
@@ -640,7 +633,7 @@ aside-article.aside--fullActive {
 }
 
 aside-article .article-container {
-    width: 300px;
+    width: 350px;
     display: table-cell;
     position: relative;
 }
