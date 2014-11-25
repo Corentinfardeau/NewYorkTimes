@@ -9,12 +9,13 @@
  */
 angular
     .module('newYorkTimesApp')
-    .controller('MainCtrl', function ($rootScope, $scope, $http, $interval, googlemapsapi, apinyt, Config, mobile) {
+    .controller('MainCtrl', function ($rootScope, $scope, $http, $filter , $interval, googlemapsapi, apinyt, Config, mobile, $timeout) {
  		
         $scope.popup   = false;
 		$scope.isCheck = true;
 		$scope.removeArticles = [];
 		$scope.removeMarkers  = [];
+		$rootScope.sectionsChecked= [];
 	
         this.socket = io.connect(Config.NODE_SERVER);
         $scope.socket = this.socket;
@@ -59,13 +60,15 @@ angular
         $rootScope.articles = {};
         $rootScope.markers = [];
         $rootScope.sections = [];
+		$rootScope.markersDisplayed = [];
+
 
         // Set the map
         $rootScope.map = {
             control: {},
             center: {
-                latitude: 0,
-                longitude: 0
+                latitude: 39.419221,
+                longitude: -3.515625
             },
             zoom: 3,
             minZoom: 3,
@@ -107,10 +110,23 @@ angular
 			}
         };
 
-        // Set fullscreen for map
-        document.getElementsByClassName('angular-google-map-container')[0].style.height = (window.innerHeight-50)+'px';
+        var mapDiv = document.getElementsByClassName('angular-google-map-container')[0];
+		mapDiv.style.height = (window.innerHeight-50)+'px';
+			
+		function resizeMap() {
+			mapDiv.style.height = (window.innerHeight-50)+'px';
+		}
+
+		document.addEventListener("DOMContentLoaded", resizeMap, false);
+		window.onresize = resizeMap;
         
         var search = function(keywords) {
+			
+			for(var i=0; i<$rootScope.markers.length; i++){
+				$rootScope.markers[i].options.visible = false;
+			}
+			
+			$rootScope.markers = [];
 
             var search = keywords ? keywords : '';
 
@@ -122,7 +138,7 @@ angular
                         var pages = nbArticles/10;
                         var count = pages<Config.REQUESTS_LIMIT ? pages : Config.REQUESTS_LIMIT;
                         var page = 1;
-
+						
                         $interval( function() { 
 
                             apinyt
@@ -131,12 +147,14 @@ angular
                             page++;
 
                         }, 300, count );
-                        
+						                        
                     } else {
                         $rootScope.markers = [];
 						$rootScope.errorMessage = 'Aucun article ne correspond à votre recherche.';
                     }
-                }); 
+                });
+			
+			
             
         };
 
@@ -174,9 +192,8 @@ angular
         
         $scope.searchArticles = function() {
             $rootScope.articles = {};
-            delete $rootScope.errorMessage;
-            $rootScope.sections.length = 0;
-            $rootScope.markers = [];
+            $rootScope.errorMessage = '';
+            $rootScope.sections = [];
 			$rootScope.map.zoom = 3;
             search($scope.keywords);
         };
@@ -299,74 +316,29 @@ angular
 			
 		};
 		
-		
-	
-		$scope.manageSection = function(section, isCheck){
+		$scope.$watch( 'sectionsChecked', function() {
 			
-			if(isCheck){
-
-				//remove article from articles Object
-				angular.forEach($rootScope.articles, function (article) {
-					if(article.section_name === section){
-						
-						//push article into a tmp array
-						$scope.removeArticles.push(article);
-						//delete the article into the articles object
-						delete $rootScope.articles[article._id];
-					}
-				});
-
-				//remove marker from the markers array
-				angular.forEach($rootScope.markers, function (marker) {
-					if(marker.section === section){
-						
-						//push marker into a tmp array
-						$scope.removeMarkers.push(marker);
-						
-						//delete the marker into the marker object
-						var index = $rootScope.markers.indexOf(marker);
-						if (index > -1) {
-							$rootScope.markers.splice(index, 1);
-						}
-					}
-				});
-				
-			}else{
-				
-				//remove articles from the markers array
-				angular.forEach($scope.removeArticles, function (article) {
-					
-					if(article.section_name === section){
-						
-						//push the article into the articles object
-						$rootScope.articles[article._id] = article;
-						
-						//remove the article into the tmp array
-						var index = $scope.removeArticles.indexOf(article);
-						if (index > -1) {
-							$scope.removeArticles.splice(index, 1);
-						}
-						
-					}
-				});
-				
-				//remove marker from the markers array
-				angular.forEach($scope.removeMarkers, function (marker) {
-					if(marker.section === section){
-						
-						//Add the marker in the markers array
-						$rootScope.markers.push(marker);
-						
-						//Remove the marker from the array removeMarkers
-						var index = $scope.removeMarkers.indexOf(marker);
-						if (index > -1) {
-							$scope.removeMarkers.splice(index, 1);
-						}
-					}
-				});
+			for ( var i=0 ; i<$rootScope.markersDisplayed.length ; i++ ) {
+				$rootScope.markersDisplayed[i].options.visible = false;
 			}
-
-		};
-		
+			
+			$rootScope.markersDisplayed = [];
+			
+			for (var i=0 ; i < $rootScope.sectionsChecked.length ; i++ ) {
+				
+				var markersFiltered = $filter("filter")($rootScope.markers , $rootScope.sectionsChecked[i]);
+				
+				for( var j=0; j < markersFiltered.length ; j++ ) { 
+					$rootScope.markersDisplayed.push( markersFiltered[j] );
+				}
+				
+			}
+			
+			for ( var i=0 ; i < $rootScope.markersDisplayed.length ; i++ ) {
+				$rootScope.markersDisplayed[i].options.visible = true;
+			}
+			
+			
+		} , true );
 		
 });

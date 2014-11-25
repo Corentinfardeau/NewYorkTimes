@@ -23,9 +23,8 @@ angular
 					
 					$scope.localStorageArticles = mobile.getArticleInLocalStorage(i, $scope.localStorageArticles);  
 
-					if(!$scope.$$phase) {
-						$scope.$apply();
-					}
+					//$scope.$apply();
+					
 				}	     
 			}   
 		}

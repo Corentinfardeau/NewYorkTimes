@@ -35,6 +35,12 @@ footer, header, hgroup, menu, nav, section {
 body {
     line-height: 1;
     overflow: hidden;
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 ol, ul {
@@ -277,7 +283,7 @@ a {
 .img-container div {
   position: absolute;
   bottom: 2px;
-  font-size:.8rem;
+  font-size:0.9rem;
   left: 0;
   right: 0;
   padding: 0.6rem;
@@ -291,7 +297,7 @@ a {
 }
 
 .img-container div svg{
-  height: 12px;
+  height: 13px;
   vertical-align: middle; 
   margin-bottom: 3px;
 }
@@ -977,17 +983,17 @@ aside-article .twitter-container .tweet-content {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    border: 2px solid #fff;
+    border: 1px solid #fff;
 }
 
 /* Sections colors */
 
 .sports input[type="checkbox"]:checked + label:before {
-	background: green;
+	background: #2e9c2b;
 }
 
 .sports .input-helper--checkbox:before {
-	border-color: green;
+	border-color: #2e9c2b;
 }
 
 .technology input[type="checkbox"]:checked + label:before {
@@ -998,6 +1004,45 @@ aside-article .twitter-container .tweet-content {
 	border-color: gray;
 }
 
+.world input[type="checkbox"]:checked + label:before {
+	background:  #bda15d;
+}
+
+.world .input-helper--checkbox:before {
+	border-color: #bda15d;
+}
+
+.opinion input[type="checkbox"]:checked + label:before {
+	background:  #c889c4;
+}
+
+.opinion .input-helper--checkbox:before {
+	border-color: #c889c4;
+}
+
+.business input[type="checkbox"]:checked + label:before {
+	background:  #3386a8;
+}
+
+.business .input-helper--checkbox:before {
+	border-color: #3386a8;
+}
+
+.region input[type="checkbox"]:checked + label:before {
+	background:  #a83393;
+}
+
+.region .input-helper--checkbox:before {
+	border-color: #a83393;
+}
+
+.health input[type="checkbox"]:checked + label:before {
+	background:  #ecdaed;
+}
+
+.health .input-helper--checkbox:before {
+	border-color: #ecdaed;
+}
 
 /* ------------------------------------------------------------------ *\
 

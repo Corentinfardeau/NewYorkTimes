@@ -30,10 +30,10 @@ angular
 	                    var marker = {  
 	                        id : articleId,
 	                        latitude: data.results[0].geometry.location.lat,
-	                        longitude: data.results[0].geometry.location.lng,
+	                        longitude: parseFloat(data.results[0].geometry.location.lng + Math.random()*0.2 ),
 	                        section:section,
 							options : {},
-//                            icon: new google.maps.MarkerImage('images/location.svg', null, null, null, new google.maps.Size(55,55))
+							//icon: new google.maps.MarkerImage('images/location.svg', null, null, null, new google.maps.Size(55,55))
 	                    };
 
 	                    $rootScope.markers.push(marker);                        

@@ -26,11 +26,12 @@ angular
         $http
             .get(Config.API_URL+'/svc/search/v2/articlesearch.json?'+keyword+'api-key='+Config.API_KEY+p)
             .success( function (data) {
-            
+			
                 angular.forEach(data.response.docs, function (value) {
 
-                    if($rootScope.sections.indexOf(value.section_name) === -1) {
+                    if($rootScope.sections.indexOf(value.section_name) === -1 && value.section_name !== null) {
                         $rootScope.sections.push(value.section_name);
+						$rootScope.sectionsChecked.push(value.section_name);
                     }
 
                     angular.forEach( value.keywords, function (v) {

@@ -19,7 +19,8 @@ angular
     'uiGmapgoogle-maps',
     'angular-loading-bar',
     'hmTouchEvents',
-    'monospaced.qrcode'
+    'monospaced.qrcode',
+	'checklist-model'
   ])
   .config(function ($routeProvider) {
     $routeProvider

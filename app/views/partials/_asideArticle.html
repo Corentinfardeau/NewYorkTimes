@@ -19,7 +19,7 @@
     </div>
     <article>
         <header>
-            <span ng-if='currentArticle.news_desk' class="article-category">{{currentArticle.news_desk}}</span>
+            <span ng-if='currentArticle.news_desk' class="article-category">{{currentArticle.section_name}} / {{currentArticle.news_desk}}</span>
             <span ng-if='currentArticle.pub_date' class="article-date">{{currentArticle.pub_date}}</span>
             <h2>{{currentArticle.headline.main}}</h2>
         </header>

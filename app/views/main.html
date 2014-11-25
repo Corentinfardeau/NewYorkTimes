@@ -216,16 +216,20 @@
 </div>
 
 <ui-gmap-google-map center="map.center" pan="true" zoom="map.zoom" control="map.control" options="map.options" bounds="map.bounds">
-	<ui-gmap-markers models="markers" coords="'self'" icon="'icon'" options="'options'" click="showArticle"></ui-gmap-markers>
+	<ui-gmap-markers models="markersDisplayed" coords="'self'" icon="'icon'" options="'options'" click="showArticle"></ui-gmap-markers>
 </ui-gmap-google-map>
 
 <div class="infobar-bottom">
+	
 	<div class="infobar-bottom-sections">
 		<h3>Filter by sections :</h3>
+		
 		<form>
 			<span class="checkbox-custom {{section | lowercase }}" ng-repeat='section in sections'>
-				<input type="checkbox" id="{{section}}" value="{{section}}" ng-model="isCheck" ng-click="manageSection(section, isCheck)">
-				<label for="{{section}}" class="input-helper input-helper--checkbox"> {{section}} </label>
+				<span ng-if='section'>
+					<input type="checkbox" id="{{section}}" value="{{section}}"  checklist-model="sectionsChecked" checklist-value="section" ng-model="isCheck" ng-click="manageSection(section)">
+					<label for="{{section}}" class="input-helper input-helper--checkbox"> {{section}}</label>
+				</span>
 			</span>
 		</form>
 	</div>
