@@ -11,7 +11,8 @@ angular
     .module('newYorkTimesApp')
     .factory('Config', function () {
         return {
-            API_URL : 'http://api.nytimes.com',
+            APP_URL : 'plevaillant.local:3000',
+			API_URL : 'http://api.nytimes.com',
 			//API_KEY : '10170fe04dc8e39f949526bf76e0820b:9:52396025',
 			API_KEY : 'sample-key',
 			NODE_SERVER : 'http://plevaillant.local:2000',

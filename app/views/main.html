@@ -227,7 +227,7 @@
 		<form>
 			<span class="checkbox-custom {{section | lowercase }}" ng-repeat='section in sections'>
 				<span ng-if='section'>
-					<input type="checkbox" id="{{section}}" value="{{section}}"  checklist-model="sectionsChecked" checklist-value="section" ng-model="isCheck" ng-click="manageSection(section)">
+					<input type="checkbox" id="{{section}}" value="{{section}}"  checklist-model="sectionsChecked" checklist-value="section">
 					<label for="{{section}}" class="input-helper input-helper--checkbox"> {{section}}</label>
 				</span>
 			</span>

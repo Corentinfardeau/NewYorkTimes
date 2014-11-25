@@ -11,36 +11,38 @@ angular
     .module('newYorkTimesApp')
     .controller('MainCtrl', function ($rootScope, $scope, $http, $filter , $interval, googlemapsapi, apinyt, Config, mobile) {
  		
-        $scope.popup   = false;
-		$scope.isCheck = true;
+        $scope.popup = false;
 		$scope.removeArticles = [];
 		$scope.removeMarkers  = [];
 		$rootScope.sectionsChecked= [];
+	    $rootScope.errorMessage = '';
+        $rootScope.articles = {};
+        $rootScope.markers = [];
+        $rootScope.sections = [];
+		$rootScope.markersDisplayed = [];
 	
-        this.socket = io.connect(Config.NODE_SERVER);
+        this.socket = io.connect( Config.NODE_SERVER );
         $scope.socket = this.socket;
     
-        $scope.sendArticle = function(currentArticle){
+        $scope.sendArticle = function (currentArticle) {
 			
+			$scope.urlMobile = Config.APP_URL+'/mobile/';
 			
-			//Url de la page mobile
-			$scope.urlMobile = 'http://192.168.1.11/mobile/';
-			
-            //first connect
+            // First connect
             if(!window.localStorage.getItem('token'))
             {	
 				$scope.popup = true;
 			  	$scope.token = mobile.generateToken();
 				window.localStorage.setItem('token', $scope.token);
 				
-				//create room
+				// Create room
 				$scope.socket.emit('create room', $scope.token);
                 
-              //When the mobile join the room, send the currentArticle
-			  $scope.socket.on('get firstCurrentArticle', function(){
-                  $scope.socket.emit('send firstCurrentArticle', $scope.token, currentArticle);
-				  $rootScope.toggleOverlay('open', 'link');
-				  $scope.popup = false;
+				// When the mobile join the room, send the currentArticle
+				$scope.socket.on('get firstCurrentArticle', function() {
+				$scope.socket.emit('send firstCurrentArticle', $scope.token, currentArticle);
+				$rootScope.toggleOverlay('open', 'link');
+				$scope.popup = false;
 
               });
               
@@ -54,16 +56,7 @@ angular
             
             
         };
-  
-        // Error message
-        $rootScope.errorMessage = '';
-        $rootScope.articles = {};
-        $rootScope.markers = [];
-        $rootScope.sections = [];
-		$rootScope.markersDisplayed = [];
 
-
-        // Set the map
         $rootScope.map = {
             control: {},
             center: {
@@ -160,9 +153,8 @@ angular
 
         search('');
     
-        //Manage animations on landing page
         function animate() {
-            var animation={};
+            var animation = {};
 
             animation.mainTitle=document.getElementsByClassName('landing-title')[0].getElementsByTagName('h1')[0];
             animation.secTitle=document.getElementsByClassName('landing-title')[0].getElementsByTagName('h2')[0];
@@ -174,15 +166,15 @@ angular
 
             setTimeout(function() {
                 animation.mainTitle.classList.add('fadeInUp');
-            },300);
+            }, 400);
 
             setTimeout(function() {
                 animation.secTitle.classList.add('fadeInUp');
-            },500);
+            }, 600);
 
             setTimeout(function() {
                 animation.discoverBtn.classList.add('fadeIn');
-            },1000);
+            }, 1100);
         }
         
 
@@ -223,7 +215,7 @@ angular
         };
     
         $rootScope.toggleOverlay = function(state, target) {
-            if(state === 'open'){
+            if(state === 'open') {
                 switch(target) {
                     case 'landing':
                         document.querySelector('.landing-page').classList.remove('overlay-slide-down--active');
@@ -243,7 +235,7 @@ angular
                     default:
                         document.querySelector('.overlay-slide-down').classList.remove('overlay-slide-down--active');
                 }
-            }else{
+            } else {
                 switch(target) {
                     case 'landing':
                         document.querySelector('.landing-page').classList.add('overlay-slide-down--active');
@@ -265,56 +257,22 @@ angular
 		};
 
 		$scope.zoomOut = function() {
-			if($rootScope.map.zoom > 2){
+			if($rootScope.map.zoom > 2) {
 			   $rootScope.map.zoom -= 1;
             }
 		};
 	
-		//get the articles most shared
 		apinyt
-		.getArticlesMostShared('all-sections',1)
-		.then(function(data){
-			console.log(data);
-			$scope.articlesMostShared = data;
+			.getArticlesMostShared( 'all-sections', 1 )
+			.then(function(mostShared) {
+				$scope.articlesMostShared = mostShared;
 		});
 	
-		//get the articles most shared
 		apinyt
-		.getPopularArticles('all-sections',1,'mostviewed')
-		.then(function(data){
-			console.log(data);
-			$scope.articlesMostViewed = data;
+			.getPopularArticles( 'all-sections', 1, 'mostviewed' )
+			.then(function(mostViewed) {
+				$scope.articlesMostViewed = mostViewed;
 		});
-	
-	
-		//manage filter by section
-		$scope.notSelected = function(event, section){
-			
-			$scope.removeArticles = [];
-			$scope.removeMarkers = [];
-			
-			console.log(event);
-			//remove article from articles Object
-			angular.forEach($rootScope.articles, function (article) {
-				if(article.section_name === section){
-					
-					$scope.removeArticles.push(article);
-					delete $rootScope.articles[article._id];
-				}
-			});
-			
-			//remove marker from the markers array
-			angular.forEach($rootScope.markers, function (marker) {
-				if(marker.section === section){
-					$scope.removeMarkers.push(marker);
-					var index = $rootScope.markers.indexOf(marker);
-					if (index > -1) {
-						$rootScope.markers.splice(index, 1);
-					}
-				}
-			});
-			
-		};
 		
 		$scope.$watch( 'sectionsChecked', function() {
 			
