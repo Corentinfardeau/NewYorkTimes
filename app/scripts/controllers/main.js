@@ -9,7 +9,7 @@
  */
 angular
     .module('newYorkTimesApp')
-    .controller('MainCtrl', function ($rootScope, $scope, $http, $filter , $interval, googlemapsapi, apinyt, Config, mobile, $timeout) {
+    .controller('MainCtrl', function ($rootScope, $scope, $http, $filter , $interval, googlemapsapi, apinyt, Config, mobile) {
  		
         $scope.popup   = false;
 		$scope.isCheck = true;
@@ -117,7 +117,7 @@ angular
 			mapDiv.style.height = (window.innerHeight-50)+'px';
 		}
 
-		document.addEventListener("DOMContentLoaded", resizeMap, false);
+		document.addEventListener('DOMContentLoaded', resizeMap, false);
 		window.onresize = resizeMap;
         
         var search = function(keywords) {
@@ -324,9 +324,9 @@ angular
 			
 			$rootScope.markersDisplayed = [];
 			
-			for (var i=0 ; i < $rootScope.sectionsChecked.length ; i++ ) {
+			for (var k = 0 ; k < $rootScope.sectionsChecked.length ; k++ ) {
 				
-				var markersFiltered = $filter("filter")($rootScope.markers , $rootScope.sectionsChecked[i]);
+				var markersFiltered = $filter('filter')($rootScope.markers , $rootScope.sectionsChecked[k]);
 				
 				for( var j=0; j < markersFiltered.length ; j++ ) { 
 					$rootScope.markersDisplayed.push( markersFiltered[j] );
@@ -334,8 +334,8 @@ angular
 				
 			}
 			
-			for ( var i=0 ; i < $rootScope.markersDisplayed.length ; i++ ) {
-				$rootScope.markersDisplayed[i].options.visible = true;
+			for ( var l = 0 ; l < $rootScope.markersDisplayed.length ; l++ ) {
+				$rootScope.markersDisplayed[l].options.visible = true;
 			}
 			
 			
