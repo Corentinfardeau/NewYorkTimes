@@ -9,7 +9,7 @@
  */
 angular
     .module('newYorkTimesApp')
-    .controller('MainCtrl', function ($rootScope, $scope, $http, $filter , $interval, googlemapsapi, apinyt, Config, mobile) {
+    .controller('MainCtrl', function ($rootScope, $scope, $http, $filter , $interval, googlemapsapi, apinyt, Config, mobile, apiTwitter) {
  		
         $scope.popup = false;
 		$scope.removeArticles = [];
@@ -262,11 +262,18 @@ angular
             }
 		};
 	
+		apiTwitter
+			.getRelatedTweets('New York Times')
+			.then(function(tweets) {
+				$scope.relatedTweets = tweets;
+		});
+	
 		apinyt
 			.getArticlesMostShared( 'all-sections', 1 )
 			.then(function(mostShared) {
 				$scope.articlesMostShared = mostShared;
 		});
+	
 	
 		apinyt
 			.getPopularArticles( 'all-sections', 1, 'mostviewed' )

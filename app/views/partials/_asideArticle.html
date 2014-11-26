@@ -56,93 +56,13 @@
 <div class="twitter-container">
     <h2>Related tweets</h2>
     <ul>
-        <li>
-            <img src="./images/damienbg1.jpg" alt="profile pic">
+        <li ng-repeat='tweet in relatedTweets'>
+            <img ng-show='tweet.user.profile_image_url' src="{{tweet.user.profile_image_url}}" alt="profile pic">
             <div class="tweet-container">
-                <span class="tweet-name">Damien Laurent</span>
-                <span class="tweet-username">@damlau4</span>
-                <p class="tweet-content"> 
-                    Relou y a plus de Ketchup :/ #VDM #Véner #Faustine 
-                </p>
-            </div>
-        </li>
-        <li>
-            <img src="./images/damienbg2.jpg" alt="profile pic">
-            <div class="tweet-container">
-                <span class="tweet-name">Damien Laurent</span>
-                <span class="tweet-username">@damlau4</span>
-                <p class="tweet-content">
-                    Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis.
-                </p>
-            </div>
-        </li>
-        <li>
-            <img src="./images/damienbg2.jpg" alt="profile pic">
-            <div class="tweet-container">
-                <span class="tweet-name">Damien Laurent</span>
-                <span class="tweet-username">@damlau4</span>
-                <p class="tweet-content">
-                    Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa.
-                </p>
-            </div>
-        </li>
-        <li>
-            <img src="./images/damienbg2.jpg" alt="profile pic">
-            <div class="tweet-container">
-                <span class="tweet-name">Damien Laurent</span>
-                <span class="tweet-username">@damlau4</span>
-                <p class="tweet-content">
-                    Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. 
-                </p>
-            </div>
-        </li>
-        <li>
-            <img src="./images/damienbg2.jpg" alt="profile pic">
-            <div class="tweet-container">
-                <span class="tweet-name">Damien Laurent</span>
-                <span class="tweet-username">@damlau4</span>
-                <p class="tweet-content">
-                    Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Mauris iaculis porttitor posuere. 
-                </p>
-            </div>
-        </li>
-        <li>
-            <img src="./images/damienbg2.jpg" alt="profile pic">
-            <div class="tweet-container">
-                <span class="tweet-name">Damien Laurent</span>
-                <span class="tweet-username">@damlau4</span>
-                <p class="tweet-content">
-                    Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Mauris iaculis porttitor posuere. 
-                </p>
-            </div>
-        </li>
-        <li>
-            <img src="./images/damienbg2.jpg" alt="profile pic">
-            <div class="tweet-container">
-                <span class="tweet-name">Damien Laurent</span>
-                <span class="tweet-username">@damlau4</span>
-                <p class="tweet-content">
-                    Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Mauris iaculis porttitor posuere. 
-                </p>
-            </div>
-        </li>
-        <li>
-            <img src="./images/damienbg1.jpg" alt="profile pic">
-            <div class="tweet-container">
-                <span class="tweet-name">Damien Laurent</span>
-                <span class="tweet-username">@damlau4</span>
-                <p class="tweet-content"> 
-                    Relou y a plus de Ketchup :/ #VDM #Véner #Faustine 
-                </p>
-            </div>
-        </li>
-        <li>
-            <img src="./images/damienbg1.jpg" alt="profile pic">
-            <div class="tweet-container">
-                <span class="tweet-name">Damien Laurent</span>
-                <span class="tweet-username">@damlau4</span>
-                <p class="tweet-content"> 
-                    Relou y a plus de Ketchup :/ #VDM #Véner #Faustine 
+                <span ng-show='tweet.user.name' class="tweet-name">{{tweet.user.name}}</span>
+                <span ng-show='tweet.user.screen_name' class="tweet-username">@{{tweet.user.screen_name}}</span>
+                <p ng-show='tweet.text' class="tweet-content"> 
+                    {{tweet.text}}
                 </p>
             </div>
         </li>
