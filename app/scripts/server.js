@@ -75,6 +75,16 @@ var server={
       server.io.in(roomID).emit('add article', article);
     });
     
+    //Ask to mobile array of articles store in mobile local storage
+    socket.on('isSaved',function(roomID){
+      server.io.in(roomID).emit('getSavedArticles');
+    });
+    
+    //Send to desk the array of articles store in mobile local storage
+    socket.on('sendSavedArticles', function(roomID, savedArticles){
+      server.io.in(roomID).emit('getAllArticlesSaved', savedArticles);
+    });
+    
     
   }
 };

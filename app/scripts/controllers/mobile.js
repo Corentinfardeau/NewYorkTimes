@@ -12,6 +12,7 @@ angular
     .controller('MobileCtrl', function ($rootScope, $scope, Config, mobile) {
         
 		$scope.localStorageArticles  = [];
+		
 	
 		// Render the articles list
 		function refreshList(){
@@ -23,7 +24,7 @@ angular
 					
 					$scope.localStorageArticles = mobile.getArticleInLocalStorage(i, $scope.localStorageArticles);  
 
-					//$scope.$apply();
+					$scope.$apply();
 					
 				}	     
 			}   
@@ -32,6 +33,14 @@ angular
       this.socket = io.connect(Config.NODE_SERVER);
     
       $scope.socket = this.socket;
+	
+		
+	  
+	  $scope.socket.on('getSavedArticles',function(){
+		// Send array of article in local storage to desk
+	  	$scope.socket.emit('sendSavedArticles', window.localStorage.getItem('token') ,$scope.localStorageArticles);
+			
+	  });
   
       if(!window.localStorage.getItem('token'))
       {
