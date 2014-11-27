@@ -165,12 +165,11 @@ a {
 
 .button {
   display: inline-block;
-  padding: 0.4rem 1.2rem;
-  margin: 1em 0;
+  padding: 0.4rem 1rem;
+  margin: 2em 0;
   position: relative;
   text-decoration: none;
   text-transform: uppercase;
-  
   color: #000;
   font-size:.8em;
 }
@@ -180,22 +179,25 @@ a {
 }
 
 .button:before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  border: 1px solid #000;
-  -webkit-transform: perspective(350px) rotateX(0deg);
-          transform: perspective(350px) rotateX(0deg);
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    border: 1px solid #000;
+    -webkit-transform: perspective(350px) rotateX(0deg);
+    -moz-transform: perspective(350px) rotateX(0deg);
+    transform: perspective(350px) rotateX(0deg);
 }
 
 .button:hover:before {
-  -webkit-transition: 0.35s ease all;
-          transition: 0.35s ease all;
-  -webkit-transform: perspective(350px) rotateX(-180deg);
-          transform: perspective(350px) rotateX(-180deg);
+    -webkit-transition: 0.35s ease all;
+    -moz-transition: 0.35s ease all;
+    transition: 0.35s ease all;
+    -webkit-transform: perspective(350px) rotateX(-180deg);
+    -moz-transform: perspective(350px) rotateX(-180deg);
+    transform: perspective(350px) rotateX(-180deg);
 }
 
 .button svg {
@@ -232,7 +234,7 @@ a {
 }
 
 .button-bar--fixed {
-    position: fixed;
+    position: absolute;
     bottom: 0;
     left: 0;
 }
@@ -269,37 +271,6 @@ a {
     stroke-width: 5px;
     stroke-dashoffset: 0;
     stroke-dasharray: 760;
-}
-
-.img-container {
-  position: relative;
-}
-
-.img-container img{
-  width: 100%;
-  height: auto;
-}
-
-.img-container div {
-  position: absolute;
-  bottom: 2px;
-  font-size:0.9rem;
-  left: 0;
-  right: 0;
-  padding: 0.6rem;
-  color: #fff;
-  background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65)));
-  background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
-  background: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); 
-  background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); 
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=0 ); 
-}
-
-.img-container div svg{
-  height: 13px;
-  vertical-align: middle; 
-  margin-bottom: 3px;
 }
 
 .hidden{
@@ -362,7 +333,7 @@ Landing page
 }
 
 .landing .landing-title h1 #logo {
-    max-height: 80px;
+    max-height: 90px;
     min-height: 60px;
     display: block;
 }
@@ -753,6 +724,53 @@ aside-article .twitter-container .tweet-content {
     margin-top: 3px;
 }
 
+.img-container {
+    position: relative;
+    height: 230px;
+    overflow: hidden;
+}
+
+aside-article:hover .full-img {
+    -ms-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.img-container .full-img {
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -webkit-transition: all 1s ease-in-out;
+}
+
+.img-container div {
+  position: absolute;
+  bottom: 0;
+  font-size:0.9rem;
+  left: 0;
+  right: 0;
+  padding: 0.6rem;
+  color: #fff;
+  background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65)));
+  background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
+  background: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); 
+  background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); 
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=0 ); 
+}
+
+.img-container div svg{
+  height: 13px;
+  vertical-align: middle; 
+  margin-bottom: 3px;
+}
+
 /*---   Popup   ---*/
 
 .popup {
@@ -853,8 +871,10 @@ aside-article .twitter-container .tweet-content {
 }
 
 .infobar-bottom-sections {
-  padding: 1rem;
-  width: 50%;
+    padding: 1rem;
+    width: 50%;
+    height: 100%;
+    overflow-y: scroll;
 }
 
 .infobar-bottom-articles {
@@ -957,7 +977,7 @@ aside-article .twitter-container .tweet-content {
 
 .checkbox-custom {
     margin: 2px 20px 0 0;
-    min-width: 80px;
+    min-width: 110px;
     display: inline-block;
 }
 
@@ -1194,7 +1214,8 @@ Overlays and popups
 .link-page .phone-screen qrcode {
     display: block;
     position: absolute;
-    top: 370px;
+    top: 400px;
+    left: calc(50% - 50px);
 }
 
 /* ------------------------------------------------------------------ *\
@@ -1613,4 +1634,11 @@ Mobile
 	height:40px;
 }
 
-.map-controls{position:absolute;top:0;left:0;margin:70px 0 0 20px;z-index: 100;}
+.map-controls {
+    position:absolute;
+    top:0;
+    left:0;
+    margin:70px 0 0 20px;
+    z-index: 100;
+    cursor: pointer;
+}

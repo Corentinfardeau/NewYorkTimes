@@ -1,10 +1,8 @@
 <div class="article-container">
     <a class="btn-close"><span>×</span></a>
     <div class="img-container">
-
-        <img ng-show="currentArticle.multimedia" src="http://www.nytimes.com/{{currentArticle.multimedia[1].url}}" alt="une photo">
-        <img ng-hide="currentArticle.multimedia" src="../images/defaut.jpg" alt="une photo">
-
+       <span class="full-img" ng-show='currentArticle.multimedia' style="background-image: url('http://www.nytimes.com/{{ currentArticle.multimedia[1].url }}');"></span>
+       <span class="full-img" ng-hide='currentArticle.multimedia' style="background-image: url('/images/defaut.jpg');"></span>
         <div>
             <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                  viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
@@ -17,6 +15,7 @@
             <span>{{currentArticle.location}}</span>
         </div>
     </div>
+
     <article>
         <header>
             <span ng-if='currentArticle.news_desk' class="article-category">{{currentArticle.section_name}} / {{currentArticle.news_desk}}</span>

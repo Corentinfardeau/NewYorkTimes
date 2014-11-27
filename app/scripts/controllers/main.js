@@ -11,7 +11,6 @@ angular
     .module('newYorkTimesApp')
     .controller('MainCtrl', function ($rootScope, $scope, $http, $filter , $interval, googlemapsapi, apinyt, Config, mobile, apiTwitter) {
  		
-        $scope.popup = false;
 		$scope.removeArticles = [];
 		$scope.removeMarkers  = [];
 		$rootScope.sectionsChecked= [];
@@ -31,7 +30,6 @@ angular
             // First connect
             if(!window.localStorage.getItem('token'))
             {	
-				$scope.popup = true;
 			  	$scope.token = mobile.generateToken();
 				window.localStorage.setItem('token', $scope.token);
 				
@@ -42,7 +40,6 @@ angular
 				$scope.socket.on('get firstCurrentArticle', function() {
 				$scope.socket.emit('send firstCurrentArticle', $scope.token, currentArticle);
 				$rootScope.toggleOverlay('open', 'link');
-				$scope.popup = false;
 
               });
               
@@ -51,6 +48,10 @@ angular
             {
 				$scope.socket.emit('send currentArticle', window.localStorage.getItem('token'), currentArticle);
 				$scope.token = window.localStorage.getItem('token');
+                $scope.socket.on('success joined',function(data){
+                    alert('joined');
+                    
+                });
 				console.log($scope.popup + 'Token deja créé');
             }
             
