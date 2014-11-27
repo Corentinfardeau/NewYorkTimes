@@ -13,46 +13,77 @@ angular
  		
 		$scope.removeArticles = [];
 		$scope.removeMarkers  = [];
+		$scope.messageMobile = 'Save to mobile';
 		$rootScope.sectionsChecked= [];
 	    $rootScope.errorMessage = '';
         $rootScope.articles = {};
         $rootScope.markers = [];
         $rootScope.sections = [];
 		$rootScope.markersDisplayed = [];
-	
+		
         this.socket = io.connect( Config.NODE_SERVER );
         $scope.socket = this.socket;
-    
+    	
+		if(window.localStorage.getItem('token'))
+		{
+			$scope.socket.emit('join room', window.localStorage.getItem('token'));
+		}
+	
         $scope.sendArticle = function (currentArticle) {
 			
-			$scope.urlMobile = Config.APP_URL+'/mobile/';
+			$scope.urlMobile = Config.APP_URL+'/#/mobile/';
 			
             // First connect
             if(!window.localStorage.getItem('token'))
             {	
 			  	$scope.token = mobile.generateToken();
-				window.localStorage.setItem('token', $scope.token);
 				
 				// Create room
 				$scope.socket.emit('create room', $scope.token);
                 
+				//If success
+				$scope.socket.on('success joined',function(data){
+					window.localStorage.setItem('token', $scope.token);
+					document.querySelector('.link-page').parentNode.removeChild(document.querySelector('.link-page'));
+				});
+				
 				// When the mobile join the room, send the currentArticle
 				$scope.socket.on('get firstCurrentArticle', function() {
 				$scope.socket.emit('send firstCurrentArticle', $scope.token, currentArticle);
-				$rootScope.toggleOverlay('open', 'link');
 
               });
+				
+				//When article is added to mobile
+				$scope.socket.on('add firstArticle', function(article){
+						$scope.messageMobile = 'Saved';
+						//Sound when is saved
+						var audio = new Audio('../sons/beep.wav');
+						audio.volume=0.1;
+						audio.play();
+						$scope.$apply();
+				});
               
             }
             else
             {
-				$scope.socket.emit('send currentArticle', window.localStorage.getItem('token'), currentArticle);
 				$scope.token = window.localStorage.getItem('token');
-                $scope.socket.on('success joined',function(data){
-                    alert('joined');
-                    
-                });
-				console.log($scope.popup + 'Token deja créé');
+				
+				//Remove the popup with the QRCODE
+				if(document.querySelector('.link-page')){
+					document.querySelector('.link-page').parentNode.removeChild(document.querySelector('.link-page'));
+				}
+				
+				$scope.socket.emit('send currentArticle', window.localStorage.getItem('token'), currentArticle);
+				
+				//When article is added to mobile
+				$scope.socket.on('add article', function(article){
+					$scope.messageMobile = 'Saved';
+					//Sound when is saved
+					var audio = new Audio('../sons/beep.wav');
+					audio.volume=0.1;
+					audio.play();
+				});
+				
             }
             
             
@@ -79,6 +110,22 @@ angular
         };
 
         $scope.showArticle = function(e, article){
+			
+			//Watch if the article is saved
+			$scope.socket.emit('isSaved', window.localStorage.getItem('token'));
+			$scope.socket.on('getAllArticlesSaved', function(savedArticles){
+				for(var i = 0; i < savedArticles.length; i++){
+					if(savedArticles[i]._id === article._id){
+						$scope.messageMobile = 'Saved';
+						break;
+					}
+					else{
+						$scope.messageMobile = 'Save to mobile';
+					}
+				}
+			});
+			
+			
 			
 			//Sound when opening
 			var audio = new Audio('../sons/opened.mp3');
@@ -245,7 +292,9 @@ angular
                         document.querySelector('.about-page').classList.add('overlay-slide-down--active');
                         break;
                     case 'link':
-                        document.querySelector('.link-page').classList.add('overlay-fade--active');
+						if(document.querySelector('.link-page')){
+							document.querySelector('.link-page').classList.add('overlay-fade--active');	
+						}
                         break;
                     default:
                         document.querySelector('.overlay-slide-down').classList.remove('overlay-slide-down--active');
