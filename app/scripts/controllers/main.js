@@ -248,6 +248,7 @@ angular
     
         $scope.toggleFullSearch = function(state) {
             if(state === 'zoomed'){
+                document.querySelector('.info-bar').classList.add('hidden');
                 document.querySelector('.search-period').classList.add('hidden');
                 document.querySelector('.topBar').style.height='100%';
                 document.querySelector('.topBar .btn-close').classList.remove('hidden');
@@ -261,6 +262,10 @@ angular
                 $scope.zoomed = false;
             }
         };
+    
+        $scope.closeInfoBar = function() {
+            document.querySelector('.info-bar').classList.add('hidden');
+        }
     
         $rootScope.toggleOverlay = function(state, target) {
             if(state === 'open') {
