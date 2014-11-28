@@ -13,7 +13,6 @@ angular
         
 		$scope.localStorageArticles  = [];
 		
-	
 		// Render the articles list
 		function refreshList(){
 			$scope.localStorageArticles = [];
@@ -31,10 +30,7 @@ angular
 		}
 	
       this.socket = io.connect(Config.NODE_SERVER);
-    
       $scope.socket = this.socket;
-	
-		
 	  
 	  $scope.socket.on('getSavedArticles',function(){
 		// Send array of article in local storage to desk
@@ -47,7 +43,7 @@ angular
 		  
 		  do
 		  {
-			$scope.saisie = prompt('Met ton code', 'code');
+			$scope.saisie = prompt('Insert your code', 'code');
 		  } 
 		  while ($scope.saisie === null);
 
@@ -64,7 +60,8 @@ angular
 
 		  //callback if room is not joined
 		  this.socket.on('error joined', function(){
-			 console.log('error'); 
+			  alert("It's a wrong code");
+			  window.location.reload();
 		  });
 
 		  //get the last article from desk

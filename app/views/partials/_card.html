@@ -1,5 +1,5 @@
-<div class="card-container">
-	<div class="card" data-id="{{article._id}}" hm-panmove="onHammer" hm-panend="onHammerEnd">
+<div class="card-container" ng-click="toggleState()">
+	<div class="card" ng-show="state" data-id="{{article._id}}" hm-panmove="onHammer" hm-panend="onHammerEnd">
 		<div class="cardImage" ng-show="article.multimedia" style="background: url('http://www.nytimes.com/{{article.multimedia[1].url}}');background-position: center center; background-size: cover;">
 		</div>
 		<div class="cardImage" ng-hide="article.multimedia" style="background: url('../images/defaut.jpg');background-position: center center; background-size: cover;"></div>
@@ -8,9 +8,44 @@
 			<h1>{{article.headline.main}}</h1>
 		</div>
 	</div>
+	
 	<div class="remove-card">
 		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
 			<path d="M10 1h4q1.242 0 2.121 0.879t0.879 2.121v1h4q0.414 0 0.707 0.293t0.293 0.707-0.293 0.707-0.707 0.293h-1v12q0 1.242-0.879 2.121t-2.121 0.879h-10q-1.242 0-2.121-0.879t-0.879-2.121v-12h-1q-0.414 0-0.707-0.293t-0.293-0.707 0.293-0.707 0.707-0.293h4v-1q0-1.242 0.879-2.121t2.121-0.879zM18 19v-12h-12v12q0 0.414 0.293 0.707t0.707 0.293h10q0.414 0 0.707-0.293t0.293-0.707zM14 3h-4q-0.414 0-0.707 0.293t-0.293 0.707v1h6v-1q0-0.414-0.293-0.707t-0.707-0.293z" fill="#fff"></path>
 		</svg>
+	</div>
+	
+	<div class="card--extended" ng-hide="state" data-id="{{article._id}}">
+		<div class="cardImage" ng-show="article.multimedia" style="background: url('http://www.nytimes.com/{{article.multimedia[1].url}}');background-position: center center; background-size: cover;">
+			<div>
+				<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+					 viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
+					<path fill="#FFFFFF"  id="location-2-icon" d="M255.05,55.058c59.955,0,108.732,48.777,108.732,108.732c0,69.179-72.138,182.12-108.732,243.736
+																  C193.115,303.24,146.318,223.547,146.318,163.79C146.318,103.835,195.095,55.058,255.05,55.058 M255.05,7
+																  C168.458,7,98.26,77.197,98.26,163.79S166.878,351.017,255.05,502c88.171-150.982,156.79-251.617,156.79-338.21S341.644,7,255.05,7
+																  L255.05,7z M255.05,107.848c-30.123,0-54.543,24.42-54.543,54.541s24.42,54.541,54.543,54.541s54.541-24.418,54.541-54.541
+																  S285.173,107.848,255.05,107.848L255.05,107.848z"/>
+				</svg>
+				<span>{{article.location}}</span>
+			</div>
+		</div>
+		<div class="cardImage" ng-hide="article.multimedia" style="background: url('../images/defaut.jpg');background-position: center center; background-size: cover;">
+			<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+				 viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
+				<path fill="#FFFFFF"  id="location-2-icon" d="M255.05,55.058c59.955,0,108.732,48.777,108.732,108.732c0,69.179-72.138,182.12-108.732,243.736
+															  C193.115,303.24,146.318,223.547,146.318,163.79C146.318,103.835,195.095,55.058,255.05,55.058 M255.05,7
+															  C168.458,7,98.26,77.197,98.26,163.79S166.878,351.017,255.05,502c88.171-150.982,156.79-251.617,156.79-338.21S341.644,7,255.05,7
+															  L255.05,7z M255.05,107.848c-30.123,0-54.543,24.42-54.543,54.541s24.42,54.541,54.543,54.541s54.541-24.418,54.541-54.541
+															  S285.173,107.848,255.05,107.848L255.05,107.848z"/>
+			</svg>
+			<span>{{article.location}}</span>
+		</div>
+		<div class="cardContent">
+			<h2>{{article.news_desk}}<span class="cardDate"> - {{article.pub_date}}</span></h2>
+			<h1>{{article.headline.main}}</h1>
+			<p>{{article.snippet}}</p>
+		</div>
+
+		<a target='_blank' href="{{article.web_url}}" class="readMore">Read More</a>
 	</div>
 </div>

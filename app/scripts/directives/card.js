@@ -12,14 +12,27 @@ angular
 		return {
 		  templateUrl: 'views/partials/_card.html',
 		  restrict: 'E',
-		  link: function postLink(scope) {
+		  link: function postLink($scope) {
 
 
 				var width = document.getElementsByClassName('card-container')[0].offsetWidth+20;
 				var limit = width/2;
+			  
+			  	$scope.state = true;
+			  	$scope.toggleState = function toggleState(){
 
+					if($scope.state){
+						$scope.state = false;
+					}
+					else
+					{
+						$scope.state = true;
+					}
+					
+				}
+				
 				// On dragmove event
-				scope.onHammer = function onHammer (event) {
+				$scope.onHammer = function onHammer (event) {
 
 					// If gesture is left
 					if(event.deltaX<=0)
@@ -73,7 +86,7 @@ angular
 
 				};
 				// On dragend event
-				scope.onHammerEnd = function onHammerEnd (event) {
+				$scope.onHammerEnd = function onHammerEnd (event) {
 
 					// Get the target of the event
 					var card = event.target.parentNode;
@@ -106,7 +119,7 @@ angular
 						removeCard.style.msTransform = 'translateX(-'+width*2+'px)';	
 						removeCard.style.transform = 'translateX(-'+width*2+'px)';
 
-
+						
 						var mobileContainer = document.getElementById('mobile-container');
 
 						// Get the directive in the HTML
@@ -120,9 +133,7 @@ angular
 						},300);
 
 						setTimeout(function(){
-
 							card.style.height = '0px';
-
 						},200);
 
 					}

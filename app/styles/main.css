@@ -70,6 +70,13 @@ table {
   box-sizing: border-box;
 }
 
+input[type=text]::-ms-clear {  display: none; width : 0; height: 0; }
+input[type=text]::-ms-reveal {  display: none; width : 0; height: 0; }
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration { display: none; }
+
 /* ------------------------------------------------------------------ *\
 
 FONTS
@@ -213,7 +220,17 @@ a {
     color: #000;
     text-transform: uppercase;
     text-align: center;
-    
+}
+
+.button-bar--active{
+    background: #000;
+    color: #e4ff00;  
+    cursor: auto;
+}
+
+.button-bar--active svg{
+    fill: #e4ff00 !important;
+    stroke: #e4ff00 !important;
 }
 
 .button-bar:hover {
@@ -1504,7 +1521,8 @@ Mobile
 #mobile{
   background-color: #f4f4f4;
   overflow-x: hidden;
-  height: 100%;
+  min-height: 100%;
+  height: auto;
 }
 
 #mobile-header{
@@ -1525,6 +1543,7 @@ Mobile
   overflow-y: scroll; /* has to be scroll, not auto */
   -webkit-overflow-scrolling: touch;
   padding: 4.4rem 1.5rem 1.5rem 1.5rem;
+    height: auto;
 }
 
 #instruction{
@@ -1535,7 +1554,7 @@ Mobile
 }
 
 #instruction p {
-	padding-top:5px;
+  padding-top:5px;
 }
 
 #gesture-icon{
@@ -1554,26 +1573,26 @@ Mobile
   -webkit-transition: all 0.2s ease-out;
   -moz-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
-  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 .card{
   width: 100%;
   height: 100px;
-  background-color:#fff;
-	
+  background-color:#fff;	
 }
 
-.card h1{
-  font-size: 1.1rem;
-    font-family: 'itc_cheltenhamregular';
+.card h1, .card--extended h1{
+  font-size: 15px;
+  font-family: 'itc_cheltenhamregular'; 
 }
 
-.card h2{
-  font-size: 0.9rem;
+.card h2, .card--extended h2{
+  font-size: 12px;
   color:  #5e5e5e;
-	margin-bottom:5px;
-	text-transform: uppercase;
+  margin-bottom:5px;
+  text-transform: uppercase;
 }
 
 .card>div{
@@ -1611,8 +1630,109 @@ Mobile
 }
 
 .smoothEffect{
-    -webkit-transition-duration: 0.3s; /* Safari */
-    transition-duration: 0.3s;
+  -webkit-transition-duration: 0.3s; /* Safari */
+  transition-duration: 0.3s;
+}
+
+.card--extended{
+  background-color: #fff;
+  height: auto;
+  overflow-y: hidden;
+}
+
+.card--extended .cardContent{
+    width: 100%;
+    padding: 0.6rem;  
+    margin-bottom: 20px;
+} 
+
+.card--extended p{
+    color:#999999;  
+    font-size: 14px;
+    font-weight:lighter;
+}
+
+.card--extended h1{
+    font-size: 26px;
+    margin:10px 0px; 
+}
+
+.card--extended h2{
+    color: #1d1d1d;
+}
+
+.cardDate{
+    color: #999999;
+}
+
+.cardImage svg{
+    width: 18px;    
+}
+
+.cardImage span{
+    color: #fff;
+}
+
+.cardImage>div{
+    position: absolute;
+    bottom: 0;
+    font-size: 0.9rem;
+    left: 0;
+    right: 0;
+    padding-bottom: 0.6rem;
+    padding-left: 0.6rem;
+    color: #FFF;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%,rgba(0, 0, 0, 1) 100%);
+}
+
+.card--extended .readMore{
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    display: block;
+    background-color: #000;
+    color: #fff;
+}
+
+.card--extended>.cardImage{
+  width: 100%; 
+  height: 150px;
+}
+
+.mobile-search {
+    background: #000;
+    width: 100%;
+    z-index: 1;
+    position: fixed;
+    -webkit-transform:translateZ(1px);
+    -moz-transform:translateZ(1px);
+    -o-transform:translateZ(1px);
+    transform:translateZ(1px);
+    bottom:0;
+    left:0;
+    box-shadow: 20px 20px 20px 20px rgba(0, 0, 0, 0.3);
+}
+
+.mobile-search input {
+    width: 100%;
+    background: none;
+    border:0;
+    padding:1.2rem;
+    font-size:16px;
+    outline: none;
+    color:#fff;
+}
+
+.mobile-search ::-webkit-input-placeholder { color:#fff; }
+.mobile-search ::-moz-placeholder { color:#fff; } /* firefox 19+ */
+.mobile-search :-ms-input-placeholder { color:#fff; } /* ie */
+.mobile-search input:-moz-placeholder { color:#fff; }
+
+
+.mobile-search button {
+    float: right;
+    height:40px;
 }
 
 #loading-bar .bar {
@@ -1672,36 +1792,6 @@ Mobile
 @keyframes loading-bar-spinner {
   0%   { transform: rotate(0deg);   transform: rotate(0deg); }
   100% { transform: rotate(360deg); transform: rotate(360deg); }
-}
-
-.mobile-search {
-	background: #000;
-	width: 100%;
-	position: fixed;
-	bottom:0;
-	left:0;
-	box-shadow: 20px 20px 20px 20px rgba(0, 0, 0, 0.3);
-}
-
-.mobile-search input {
-	width: 100%;
-	background: none;
-	border:0;
-	padding:1.2rem;
-	font-size:1rem;
-	outline: none;
-	color:#fff;
-}
-
-.mobile-search ::-webkit-input-placeholder { color:#fff; }
-.mobile-search ::-moz-placeholder { color:#fff; } /* firefox 19+ */
-.mobile-search :-ms-input-placeholder { color:#fff; } /* ie */
-.mobile-search input:-moz-placeholder { color:#fff; }
-
-
-.mobile-search button {
-	float: right;
-	height:40px;
 }
 
 .map-controls {
