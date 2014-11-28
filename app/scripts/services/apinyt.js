@@ -21,10 +21,12 @@ angular
 	        
         var deferred = $q.defer();
         var keyword = keyword ? ('fq='+keyword+'&') : '';
+		var begin_date = begin_date ? ('&begin_date='+begin_date) : '';
+		var end_date = end_date ? ('&end_date='+end_date) : '';
         var p = page ? ('&page='+page) : '';
 
         $http
-            .get(Config.API_URL+'/svc/search/v2/articlesearch.json?'+keyword+'api-key='+Config.API_KEY+p)
+            .get(Config.API_URL+'/svc/search/v2/articlesearch.json?'+keyword+'api-key='+Config.API_KEY+p+begin_date+end_date)
             .success( function (data) {
 			
                 angular.forEach(data.response.docs, function (value) {
@@ -40,7 +42,8 @@ angular
                             
                             if ( count === 0 ) {
                                 value.location = v.value;
-                                value.headline.main = decodeURI(value.headline.main);
+								value.visible = true;
+                                value.headline.main = value.headline.main;
                                 value.snippet = decodeURI(value.snippet);
                                 value.pub_date = value.pub_date.split('T')[0];
                                 $rootScope.articles[value._id] = value;

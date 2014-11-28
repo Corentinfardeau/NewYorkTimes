@@ -1,4 +1,4 @@
-<div class="card-container" ng-click="toggleState()">
+<div class="card-container" ng-click="toggleState(); $event.stopPropagation();">
 	<div class="card" ng-show="state" data-id="{{article._id}}" hm-panmove="onHammer" hm-panend="onHammerEnd">
 		<div class="cardImage" ng-show="article.multimedia" style="background: url('http://www.nytimes.com/{{article.multimedia[1].url}}');background-position: center center; background-size: cover;">
 		</div>

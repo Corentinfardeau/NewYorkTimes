@@ -11,7 +11,7 @@ angular
     .module('newYorkTimesApp')
     .factory('Config', function () {
         return {
-			APP_URL : 'http://macbook-corentinf.local:3000',
+			APP_URL : 'http://plevaillant.local:3000',
 			API_URL : 'http://api.nytimes.com',
 			//API_KEY : '10170fe04dc8e39f949526bf76e0820b:9:52396025',
 			API_KEY : 'sample-key',

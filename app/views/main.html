@@ -437,11 +437,11 @@
 		<div class="scroll-view">
 			<ul>
 				<li ng-repeat="article in articles">
-					<a ng-show='article.multimedia' ng-click="showArticle('', article )">
+					<a ng-show='article.multimedia' ng-if='article.visible == true' ng-click="showArticle('', article )">
                         <span style="background-image: url('http://www.nytimes.com/{{ article.multimedia[1].url }}');"></span>
 					    <span>{{ article.headline.main }}</span>
 					</a>
-					<a ng-hide='article.multimedia' ng-click="showArticle('', article )">                          
+					<a ng-hide='article.multimedia' ng-if='article.visible == true' ng-click="showArticle('', article )">                          
                          <span style="background-image: url('/images/defaut.jpg');"></span>
 					     <span>{{ article.headline.main }}</span>
 					</a>
