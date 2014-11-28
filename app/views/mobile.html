@@ -25,7 +25,7 @@
 	</div>
 
 	<div id="mobile-container">
-		<div id="instruction">
+		<div id="instruction" ng-show='localStorageArticles'>
 			<svg version="1.1" id="gesture-icon" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
 				 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 				 viewBox="0 0 45 30" enable-background="new 0 0 45 30" xml:space="preserve">
@@ -51,11 +51,15 @@
 			<p>Swipe left to delete an article</p>
 		</div>
 		
+		<div id="instruction" ng-hide='localStorageArticles'>No articles saved for the moment.</div>
+		
 		<card ng-repeat="article in localStorageArticles | filter:query"></card>
-				
-		<form class="mobile-search">
-			<input ng-model='query' type="text" placeholder="Search an article...">
-		</form>
+			
 
 	<div>
 </div>
+
+
+<form class="mobile-search">
+	<input ng-model='query' type="text" placeholder="Search an article...">
+</form>

@@ -9,7 +9,7 @@
  */
 angular
     .module('newYorkTimesApp')
-    .controller('MainCtrl', function ($rootScope, $scope, $http, $filter , $interval, googlemapsapi, apinyt, Config, mobile, apiTwitter) {
+    .controller('MainCtrl', function ($rootScope, $scope, $http, $filter , $interval, googlemapsapi, apinyt, Config, mobile, apiTwitter, $location) {
  		
 		$scope.removeArticles = [];
 		$scope.removeMarkers  = [];
@@ -20,6 +20,10 @@ angular
         $rootScope.markers = [];
         $rootScope.sections = [];
 		$rootScope.markersDisplayed = [];
+
+		if (screen.width <= 800) {
+			$location.path('/mobile');
+		}
 		
         this.socket = io.connect( Config.NODE_SERVER );
         $scope.socket = this.socket;
