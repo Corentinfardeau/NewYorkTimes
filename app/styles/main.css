@@ -239,38 +239,72 @@ a {
     left: 0;
 }
 
-.btn-animated {
+.button-round:before {
+    content: "";
+    position: absolute;
+    left: -1px;
+    top: -1px;
+    height: 100%;
+    width: 100%;
+    -moz-border-radius: 80px;
+    -webkit-border-radius: 80px;
+    border-radius: 80px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -moz-transition: -moz-transform 200ms cubic-bezier(0.715,0,.265,2);
+    -o-transition: -o-transform 200ms cubic-bezier(0.715,0,.265,2);
+    -webkit-transition: -webkit-transform 200ms cubic-bezier(0.715,0,.265,2);
+    transition: transform 200ms cubic-bezier(0.715,0,.265,2);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+
+.button-round {
+    position: relative;
+    display: block;
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-    margin: 0 auto;
-    width: 150px;  
+    vertical-align: middle;
+    
+    -moz-transition: all 200ms ease-in-out;
+    -o-transition: all 200ms ease-in-out;
+    -webkit-transition: all 200ms ease-in-out;
+    transition: all 200ms ease-in-out;
 }
 
-.btn-animated .shape {
-    width: 320px;
-    height: 60px;
-    stroke-dasharray: 60 560;
-    stroke-dashoffset: -235;
-    stroke-width: 5px;
-    fill: transparent;
-    stroke: #000;
-    border-bottom: 5px solid #000;
-    transition: stroke-width 1s, stroke-dashoffset 1s, stroke-dasharray 1s;
+.button-round:hover:before {
+    -moz-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    -o-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+    border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-.btn-animated .text {
-    line-height: 40px;
-    top: -45px;
-    position: relative;
-}
-
-.btn-animated:hover .shape {
-    stroke-width: 5px;
-    stroke-dashoffset: 0;
-    stroke-dasharray: 760;
+.button-round span {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    display: block;
+    width: 90px;
+    height: 90px;
+    padding-top: 35px;
+    border: 2px solid #323232;
+    -moz-border-radius: 77px;
+    -webkit-border-radius: 77px;
+    border-radius: 77px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .hidden{
