@@ -13,6 +13,7 @@ angular
 		  templateUrl: 'views/partials/_asideArticle.html',
 		  restrict: 'E',
 		  link: function() {
+
 				document.querySelector('aside-article .btn-close').addEventListener('click', function(e){
 					e.preventDefault();
 					//Sound when opening

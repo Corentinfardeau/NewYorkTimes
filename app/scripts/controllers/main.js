@@ -56,6 +56,7 @@ angular
 				//When article is added to mobile
 				$scope.socket.on('add firstArticle', function(article){
 						$scope.messageMobile = 'Saved';
+						document.getElementsByClassName('button-bar')[0].classList.add('button-bar--active');
 						//Sound when is saved
 						var audio = new Audio('../sons/beep.wav');
 						audio.volume=0.1;
@@ -78,10 +79,12 @@ angular
 				//When article is added to mobile
 				$scope.socket.on('add article', function(article){
 					$scope.messageMobile = 'Saved';
+					document.getElementsByClassName('button-bar')[0].classList.add('button-bar--active');
 					//Sound when is saved
 					var audio = new Audio('../sons/beep.wav');
 					audio.volume=0.1;
 					audio.play();
+					$scope.$apply();
 				});
 				
             }
@@ -117,15 +120,15 @@ angular
 				for(var i = 0; i < savedArticles.length; i++){
 					if(savedArticles[i]._id === article._id){
 						$scope.messageMobile = 'Saved';
+						document.getElementsByClassName('button-bar')[0].classList.add('button-bar--active');
 						break;
 					}
 					else{
 						$scope.messageMobile = 'Save to mobile';
+						document.getElementsByClassName('button-bar')[0].classList.remove('button-bar--active');
 					}
 				}
 			});
-			
-			
 			
 			//Sound when opening
 			var audio = new Audio('../sons/opened.mp3');
