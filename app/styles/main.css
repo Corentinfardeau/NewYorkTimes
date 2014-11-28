@@ -936,11 +936,18 @@ aside-article:hover .full-img {
   box-sizing: border-box; 
 }
 
-.infobar-bottom > div {
+.infobar-bottom .infobar-bottom-sections {
   display: inline-block;
-  width: 50%;
+  width: 60%;
   vertical-align: top;
 }
+
+.infobar-bottom .infobar-bottom-articles {
+  display: inline-block;
+  width: 40%;
+  vertical-align: top;
+}
+
 
 .infobar-bottom h3 {
   display: block;

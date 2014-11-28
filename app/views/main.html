@@ -342,13 +342,6 @@
 	<div class="search-period">
         <select class="select-custom" ng-model="searchPeriod" ng-init="searchPeriod = searchPeriods[0]" ng-options="searchPeriod as searchPeriod.name for searchPeriod in searchPeriods">
         </select>
-            
-        <div ng-if="searchPeriod.id == 'custom'" class="search-period-custom">
-            <span>From</span>
-            <input type="number" step="1" value="1914" min="1914" max="2014"> 
-            <span>To</span>
-            <input type="number" step="1" value="2014" min="1914" max="2014"> 
-        </div>
 	</div>
 	
 	<a class="btn-close hidden" ng-click="toggleFullSearch('unzoomed')">
@@ -377,6 +370,9 @@
         </div>
         <div class="search-section animated">
         	<h2>Search trends</h2>
+        	<ul>
+				<li ng-repeat="articleMostViewed in articlesMostViewed | limitTo:5">{{articleMostViewed.des_facet[0]}}</li>
+			</ul>
         </div>
     </div>
 </div>

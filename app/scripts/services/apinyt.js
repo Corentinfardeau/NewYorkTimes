@@ -17,7 +17,7 @@ angular
      * @methodOf core.Services.apinyt
      * @return {object} Returns a promise object
      */
-	this.getArticles = function (keyword, page) {
+	this.getArticles = function (keyword, page, begin_date, end_date) {
 	        
         var deferred = $q.defer();
         var keyword = keyword ? ('fq='+keyword+'&') : '';
@@ -111,7 +111,7 @@ angular
         var deferred = $q.defer();
 
         $http
-        .get(Config.API_URL+'/svc/mostpopular/v2/mostshared/'+section+'/'+timePeriod+'.json?api-key='+Config.API_KEY)
+        .get('https://jsonp.nodejitsu.com/?url='+Config.API_URL+'/svc/mostpopular/v2/mostshared/'+section+'/'+timePeriod+'.json?api-key='+Config.API_KEY)
             .success(function (data) {
                 var mostShared = [];
                 angular
@@ -138,7 +138,7 @@ angular
         var deferred = $q.defer();
 
         $http
-            .get(Config.API_URL+'/svc/mostpopular/v2/'+action+'/'+section+'/'+timePeriod+'.json?api-key='+Config.API_KEY)
+            .get('https://jsonp.nodejitsu.com/?url='+Config.API_URL+'/svc/mostpopular/v2/'+action+'/'+section+'/'+timePeriod+'.json?api-key='+Config.API_KEY)
             .success(function (data) {
                 
                 var mostViewed = [];

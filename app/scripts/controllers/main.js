@@ -168,7 +168,12 @@ angular
 		document.addEventListener('DOMContentLoaded', resizeMap, false);
 		window.onresize = resizeMap;
         
-        var search = function(keywords) {
+        var search = function(keywords, begin, end) {
+			
+			$rootScope.articles = {};
+            $rootScope.errorMessage = '';
+            $rootScope.sections = [];
+			$rootScope.map.zoom = 3;
 			
 			for(var i=0; i<$rootScope.markers.length; i++){
 				$rootScope.markers[i].options.visible = false;
@@ -206,7 +211,7 @@ angular
             
         };
 
-        search('');
+        search('', '', '');
     
         function animate() {
             var animation = {};
@@ -238,10 +243,6 @@ angular
         });
         
         $scope.searchArticles = function() {
-            $rootScope.articles = {};
-            $rootScope.errorMessage = '';
-            $rootScope.sections = [];
-			$rootScope.map.zoom = 3;
             search($scope.keywords);
         };
     
@@ -249,8 +250,7 @@ angular
             { id: 'all',    name: 'All time' },
             { id: 'week',   name: 'Last week' },
             { id: 'month',  name: 'Last month' },
-            { id: 'year',   name: 'Last year' },
-            { id: 'custom', name: 'Custom period' }
+            { id: 'year',   name: 'Last year' }
         ];
     
         $scope.toggleFullSearch = function(state) {
@@ -324,12 +324,6 @@ angular
             }
 		};
 	
-		apiTwitter
-			.getRelatedTweets('New York Times')
-			.then(function(tweets) {
-				$scope.relatedTweets = tweets;
-		});
-	
 		apinyt
 			.getArticlesMostShared( 'all-sections', 1 )
 			.then(function(mostShared) {
@@ -367,5 +361,41 @@ angular
 			
 			
 		} , true );
+	
+	apiTwitter
+		.getRelatedTweets('The new york times')
+		.then(function(tweets) {
+			$scope.relatedTweets = tweets;
+	});
+	
+	$scope.$watch( 'searchPeriod' , function() {
 		
+		var period = $scope.searchPeriod.id;
+		
+		var s = '';
+		if($scope.keywords !== undefined) {
+			s = $scope.keywords;
+		}
+		
+		switch(period) {
+			case 'month':
+				search(s, '20121101', '20131101');
+				break;
+			case 'week':
+				search(s, '', '20141101');
+				break;
+			case 'year':
+				search(s, '', '20131101');
+				break;
+		}
+	});
+	
+	$scope.$watch( 'keywords' , function() {
+		apiTwitter
+			.getRelatedTweets($scope.keywords)
+			.then(function(tweets) {
+				$scope.relatedTweets = tweets;
+		});
+	});
+
 });
