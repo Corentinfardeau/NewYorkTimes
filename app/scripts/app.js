@@ -32,14 +32,6 @@ angular
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl'
       })
-      .when('/trends', {
-        templateUrl: 'views/trends.html',
-        controller: 'TrendsCtrl'
-      })
-      .when('/mobile', {
-        templateUrl: 'views/mobile.html',
-        controller: 'MobileCtrl'
-      })
       .otherwise({
         redirectTo: '/'
       });

@@ -9,93 +9,16 @@
  */
 angular
     .module('newYorkTimesApp')
-    .controller('MainCtrl', function ($rootScope, $scope, $http, $filter , $interval, googlemapsapi, apinyt, Config, mobile, apiTwitter, $location) {
+    .controller('MainCtrl', function ($rootScope, $scope, $http, $filter , $interval, googlemapsapi, apinyt, Config, apiTwitter, $location) {
  		
 		$scope.removeArticles = [];
 		$scope.removeMarkers  = [];
-		$scope.messageMobile = 'Save to mobile';
 		$rootScope.sectionsChecked= [];
 		$rootScope.errorMessage = '';
 		$rootScope.articles = {};
 		$rootScope.markers = [];
 		$rootScope.sections = [];
 		$rootScope.markersDisplayed = [];
-
-		if (screen.width <= 800) {
-			$location.path('/mobile');
-		}
-
-		this.socket = io.connect( Config.NODE_SERVER );
-		$scope.socket = this.socket;
-
-		if(window.localStorage.getItem('token'))
-		{
-			$scope.socket.emit('join room', window.localStorage.getItem('token'));
-		}
-
-		// Function to send an article to mobile
-		$scope.sendArticle = function (currentArticle) {
-
-		$scope.urlMobile = Config.APP_URL+'/#/mobile/';
-
-		// First connect
-		if(!window.localStorage.getItem('token'))
-		{	
-			$scope.token = mobile.generateToken();
-
-			// Create room
-			$scope.socket.emit('create room', $scope.token);
-
-			//If success
-			$scope.socket.on('success joined',function(data){
-				window.localStorage.setItem('token', $scope.token);
-				document.querySelector('.link-page').parentNode.removeChild(document.querySelector('.link-page'));
-			});
-
-			// When the mobile join the room, send the currentArticle
-			$scope.socket.on('get firstCurrentArticle', function() {
-			$scope.socket.emit('send firstCurrentArticle', $scope.token, currentArticle);
-
-		  });
-
-			//When article is added to mobile
-			$scope.socket.on('add firstArticle', function(article){
-					$scope.messageMobile = 'Saved';
-					document.getElementsByClassName('button-bar')[0].classList.add('button-bar--active');
-					//Sound when is saved
-					var audio = new Audio('../sons/beep.wav');
-					audio.volume=0.1;
-					audio.play();
-					$scope.$apply();
-			});
-
-		}
-		else
-		{
-			$scope.token = window.localStorage.getItem('token');
-
-			//Remove the popup with the QRCODE
-			if(document.querySelector('.link-page')){
-				document.querySelector('.link-page').parentNode.removeChild(document.querySelector('.link-page'));
-			}
-
-			$scope.socket.emit('send currentArticle', window.localStorage.getItem('token'), currentArticle);
-
-			//When article is added to mobile
-			$scope.socket.on('add article', function(article){
-				$scope.messageMobile = 'Saved';
-				document.getElementsByClassName('button-bar')[0].classList.add('button-bar--active');
-				//Sound when is saved
-				var audio = new Audio('../sons/beep.wav');
-				audio.volume=0.1;
-				audio.play();
-				$scope.$apply();
-			});
-
-		}
-
-
-		};
 
 		// MAP CONFIGURATION
 		$rootScope.map = {
@@ -115,29 +38,11 @@ angular
 			streetViewControl:false,
 			panControl:false,
 			disableDefaultUI: true
-		}
+			}
 		};
 
 		// Function to show an article on the right side
 		$scope.showArticle = function(e, article){
-
-		//Watch if the article is saved
-		$scope.socket.emit('isSaved', window.localStorage.getItem('token'));
-		document.querySelector('.info-bar').classList.add('hidden');
-		$scope.socket.on('getAllArticlesSaved', function(savedArticles){
-			for(var i = 0; i < savedArticles.length; i++){
-				if(savedArticles[i]._id === article._id){
-					$scope.messageMobile = 'Saved';
-					document.getElementsByClassName('button-bar')[0].classList.add('button-bar--active');
-					break;
-				}
-				else{
-					$scope.messageMobile = 'Save to mobile';
-					document.getElementsByClassName('button-bar')[0].classList.remove('button-bar--active');
-				}
-			}
-		});
-
 		// Sound when opening
 		var audio = new Audio('../sons/opened.mp3');
 		audio.volume=0.1;
@@ -146,9 +51,12 @@ angular
 		if($rootScope.activeMarker) {
 			$rootScope.activeMarker.options.animation = 0;
 		}
-
-		$rootScope.map.center = {latitude: (e!==''?e.position.k:article.coordinates.lat), longitude: (e!==''?e.position.B:article.coordinates.lng)};
+			
 		$scope.currentArticle = $scope.articles[e!==''?e.key:article._id];  
+		
+		if( $scope.currentArticle.coordinates !== undefined ){
+			$rootScope.map.center = {latitude: $scope.currentArticle.coordinates.lat, longitude:$scope.currentArticle.coordinates.lng};
+		}
 
 		document.querySelector('aside-article').classList.add('aside--halfActive');
 
@@ -212,38 +120,35 @@ angular
 					$rootScope.errorMessage = 'Aucun article ne correspond à votre recherche.';
 				}
 			});
-
-
-
 		};
 
 		// Manage function
 		function animate() {
-		var animation = {};
+			var animation = {};
 
-		animation.mainTitle=document.getElementsByClassName('landing-title')[0].getElementsByTagName('h1')[0];
-		animation.secTitle=document.getElementsByClassName('landing-title')[0].getElementsByTagName('h2')[0];
-		animation.discoverBtn=document.getElementsByClassName('landing-discover')[0];
+			animation.mainTitle=document.getElementsByClassName('landing-title')[0].getElementsByTagName('h1')[0];
+			animation.secTitle=document.getElementsByClassName('landing-title')[0].getElementsByTagName('h2')[0];
+			animation.discoverBtn=document.getElementsByClassName('landing-discover')[0];
 
-		animation.mainTitle.style.opacity = '0';
-		animation.secTitle.style.opacity = '0';
-		animation.discoverBtn.style.opacity = '0';
+			animation.mainTitle.style.opacity = '0';
+			animation.secTitle.style.opacity = '0';
+			animation.discoverBtn.style.opacity = '0';
 
-		setTimeout(function() {
-			animation.mainTitle.classList.add('fadeInUp');
-		}, 400);
+			setTimeout(function() {
+				animation.mainTitle.classList.add('fadeInUp');
+			}, 400);
 
-		setTimeout(function() {
-			animation.secTitle.classList.add('fadeInUp');
-		}, 600);
+			setTimeout(function() {
+				animation.secTitle.classList.add('fadeInUp');
+			}, 600);
 
-		setTimeout(function() {
-			animation.discoverBtn.classList.add('fadeIn');
-		}, 1100);
+			setTimeout(function() {
+				animation.discoverBtn.classList.add('fadeIn');
+			}, 1100);
 		}
 
 		$scope.$on('$viewContentLoaded', function(){
-		animate();
+			animate();
 		});
 
 		// Search function
@@ -261,26 +166,20 @@ angular
 
 		// Show / Hide the search page
 		$scope.toggleFullSearch = function(state) {
-		if(state === 'zoomed'){
-			document.querySelector('.info-bar').classList.add('hidden');
-			document.querySelector('.search-period').classList.add('hidden');
-			document.querySelector('.topBar').style.height='100%';
-			document.querySelector('.topBar .btn-close').classList.remove('hidden');
-			document.querySelector('.topBar .search').classList.add('zoomed');
-			$scope.zoomed = true;
-		}else{
-			document.querySelector('.search-period').classList.remove('hidden');
-			document.querySelector('.topBar').style.height='50px';
-			document.querySelector('.topBar .btn-close').classList.add('hidden');
-			document.querySelector('.topBar .search').classList.remove('zoomed');
-			$scope.zoomed = false;
-		}
+			if(state === 'zoomed'){
+				document.querySelector('.search-period').classList.add('hidden');
+				document.querySelector('.topBar').style.height='100%';
+				document.querySelector('.topBar .btn-close').classList.remove('hidden');
+				document.querySelector('.topBar .search').classList.add('zoomed');
+				$scope.zoomed = true;
+			}else{
+				document.querySelector('.search-period').classList.remove('hidden');
+				document.querySelector('.topBar').style.height='50px';
+				document.querySelector('.topBar .btn-close').classList.add('hidden');
+				document.querySelector('.topBar .search').classList.remove('zoomed');
+				$scope.zoomed = false;
+			}
 		};
-
-		// Close the info bar
-		$scope.closeInfoBar = function() {
-		document.querySelector('.info-bar').classList.add('hidden');
-		}
 
 		// Manage animations
 		$rootScope.toggleOverlay = function(state, target) {

@@ -25,38 +25,17 @@
         <p>
             {{currentArticle.snippet}}
         </p>
-        <a ng-show='currentArticle.web_url' target='_blank' href="{{currentArticle.web_url}}" class="button">Read more</a>
-        <a class="button" id="toggleTwitter">
-            <svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                 viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
-                <path id="twitter-icon" d="M462,128.223c-15.158,6.724-31.449,11.269-48.547,13.31c17.449-10.461,30.854-27.025,37.164-46.764
-                c-16.333,9.687-34.422,16.721-53.676,20.511c-15.418-16.428-37.386-26.691-61.698-26.691c-54.56,0-94.668,50.916-82.337,103.787
-                c-70.25-3.524-132.534-37.177-174.223-88.314c-22.142,37.983-11.485,87.691,26.158,112.85c-13.854-0.438-26.891-4.241-38.285-10.574
-                c-0.917,39.162,27.146,75.781,67.795,83.949c-11.896,3.237-24.926,3.978-38.17,1.447c10.754,33.58,41.972,58.018,78.96,58.699
-                C139.604,378.282,94.846,390.721,50,385.436c37.406,23.982,81.837,37.977,129.571,37.977c156.932,0,245.595-132.551,240.251-251.435
-                C436.339,160.061,450.668,145.174,462,128.223z"/>
-            </svg>
-            <span>Related tweets</span>
-        </a>
+        <nav class="aside-navigation">
+			<a ng-show='currentArticle.web_url' target='_blank' href="{{currentArticle.web_url}}" data-hover="Read more">Read more</a>
+			<a href="#" id="toggleTwitter" data-hover="Related tweets">Related tweets</a>
+		</nav>
     </article>
-    <a class="button-bar button-bar--fixed" ng-click="sendArticle(currentArticle); toggleOverlay('close', 'link')">
-        {{messageMobile}}
-        <svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-            viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
-            <path id="smartphone-4-icon" d="M327.023,2H132.047c-22.54,0-40.809,18.27-40.809,40.809v427.881
-                c0,22.539,18.269,40.809,40.809,40.809h194.975c22.54,0,40.809-18.27,40.809-40.809V42.809C367.832,20.27,349.563,2,327.023,2z
-                 M207.894,39.374h45.756c2.732,0,4.947,2.215,4.947,4.947c0,2.732-2.215,4.947-4.947,4.947h-45.756
-                c-2.732,0-4.947-2.215-4.947-4.947C202.947,41.589,205.162,39.374,207.894,39.374z M230.774,488.073
-                c-10.93,0-19.786-8.858-19.786-19.786c0-10.928,8.857-19.786,19.786-19.786c10.925,0,19.786,8.858,19.786,19.786
-                C250.56,479.215,241.699,488.073,230.774,488.073z M336.814,427.099H122.258V86.401h214.556V427.099z"/>
-        </svg>
-    </a>
 </div>
 <div class="twitter-container">
     <h2>Related tweets</h2>
     <ul>
         <li ng-repeat='tweet in relatedTweets'>
-            <img ng-show='tweet.user.profile_image_url' src="{{tweet.user.profile_image_url}}" alt="profile pic">
+            
             <div class="tweet-container">
                 <span ng-show='tweet.user.name' class="tweet-name">{{tweet.user.name}}</span>
                 <span ng-show='tweet.user.screen_name' class="tweet-username">@{{tweet.user.screen_name}}</span>

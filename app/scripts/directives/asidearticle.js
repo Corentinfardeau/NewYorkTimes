@@ -21,11 +21,11 @@ angular
 					audio.volume=0.1;
 					audio.play();
 					document.querySelector('aside-article').classList.remove('aside--halfActive', 'aside--fullActive');
-					document.querySelector('#toggleTwitter span').innerHTML = 'Related tweets';
 					document.getElementById('toggleTwitter').classList.remove('button--active');
-					$rootScope.activeMarker.options.animation = 0;
+					if($rootScope.activeMarker) {
+						$rootScope.activeMarker.options.animation = 0;
+					}
 					$rootScope.$apply();
-
 				}, false);
 
 				document.getElementById('toggleTwitter').addEventListener('click', function(e){  
@@ -33,10 +33,8 @@ angular
 					document.querySelector('aside-article').classList.toggle('aside--fullActive');
 
 					if (document.querySelector('aside-article').classList.contains('aside--fullActive')) {
-						document.querySelector('#toggleTwitter span').innerHTML = 'Close tweets';
 						document.getElementById('toggleTwitter').classList.add('button--active');
 					} else {
-						document.querySelector('#toggleTwitter span').innerHTML = 'Related tweets';
 						document.getElementById('toggleTwitter').classList.remove('button--active');
 					}
 
